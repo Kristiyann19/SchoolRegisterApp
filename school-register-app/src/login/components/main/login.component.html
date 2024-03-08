@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="col-xl-4">
+      <div class="card p-5">
+        <h2 class="text-uppercase text-center mb-5">Влезте в акаунта си</h2>
+        <form class="text-center mb-5"
+              #loginForm="ngForm"
+              (ngSubmit)="onLogin()">
+          <input class="form-control"
+                 name="userName"
+                 [(ngModel)]="loginDto.userName"
+                 required
+                 type="text">
+  
+          <input class="form-control"
+                 name="password"
+                 [(ngModel)]="loginDto.password"
+                 required
+                 type="password">
+  
+          <button class="btn btn-primary"
+                  type="submit"
+                  [disabled]="!loginForm.valid">Login</button>
+  
+          <p class="text-center text-muted mt-5 mb-0">
+            Регистрирай се?
+            <a routerLink="/register"
+               class="fw-bold text-body"><u>Влез от тук</u></a>
+          </p>
+  
+        </form>
+  
+  
+      </div>
+    </div>
+  </div>
