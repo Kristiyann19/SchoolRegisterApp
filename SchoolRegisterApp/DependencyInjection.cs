@@ -13,7 +13,8 @@ namespace SchoolRegisterApp
         {
             services
                 .AddScoped<ILoginService, LoginService>()
-                .AddScoped<IRegisterService, RegisterService>();
+                .AddScoped<IRegisterService, RegisterService>()
+                .AddScoped<IUserService, UserService>();
 
             return services;
         }
