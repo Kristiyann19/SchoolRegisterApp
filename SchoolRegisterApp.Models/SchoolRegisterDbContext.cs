@@ -20,7 +20,7 @@ namespace SchoolRegisterApp.Models
 
         public DbSet<PersonHistory> PersonHistories { get; set; }
 
-        public DbSet<PersonSchool> personSchools { get; set; }
+        public DbSet<PersonSchool> PersonSchools { get; set; }
 
         public DbSet<Settlement> Settlements { get; set; }
 
