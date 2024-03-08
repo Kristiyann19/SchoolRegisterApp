@@ -1,4 +1,6 @@
-﻿using SchoolRegisterApp.Models.Enums;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Models.Entities
 {
@@ -20,4 +22,20 @@ namespace SchoolRegisterApp.Models.Entities
 
         public DateTime EndDate { get; set; }
     }
+    public class PersonSchoolConfiguration : IEntityTypeConfiguration<PersonSchool>
+    {
+        public void Configure(EntityTypeBuilder<PersonSchool> builder)
+        {
+            builder.HasKey(b => new { b.PersonId, b.SchoolId });
+
+            builder
+                .Property(b => b.Position)
+                .IsRequired();
+
+            builder
+                .Property(b => b.StartDate)
+                .IsRequired();
+        }
+    }
+
 }
