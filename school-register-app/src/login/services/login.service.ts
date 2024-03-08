@@ -18,7 +18,7 @@ export class LoginService {
   initializeUser(): Promise<{}> {
     return new Promise((resolve) => {
       return this.http
-        .get<UserDto>("http://localhost:12123/api/Users/CurrentUser")
+        .get<UserDto>("http://localhost:12123/api/User/CurrentUser")
         .subscribe((userData) => {
           this.currentUser = userData;
           resolve(true);
