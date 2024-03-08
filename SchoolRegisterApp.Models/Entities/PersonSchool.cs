@@ -10,10 +10,11 @@ namespace SchoolRegisterApp.Models.Entities
 
         public int PersonId { get; set; }
 
-        //public Person Person { get; set; }
+        public Person Person { get; set; }
+
         public int SchoolId { get; set; }
 
-        //public School School { get; set; }
+        public School School { get; set; }
 
         public DateTime StartDate { get; set; }
 

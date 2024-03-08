@@ -1,4 +1,6 @@
-﻿namespace SchoolRegisterApp.Models.Entities
+﻿using SchoolRegisterApp.Models.Enums;
+
+namespace SchoolRegisterApp.Models.Entities
 {
     public class PersonHistory
     {
@@ -10,12 +12,12 @@
 
         public int UserId { get; set; }
 
-        //public User User { get; set; }
+        public Users User { get; set; }
 
         public DateTime ActionDate { get; set; }
 
-        // public DataModified DataModified { get; set; }
+        public DataModified DataModified { get; set; }
 
-        //public ModificationType ModificationType { get; set; }
+        public ModificationType ModificationType { get; set; }
     }
 }
