@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Repositories.Services;
 
 namespace SchoolRegisterApp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly UserService userService;
 
@@ -14,7 +15,8 @@ namespace SchoolRegisterApp.Controllers
             userService = _userService;
         }
 
-        [HttpGet("CurrentData")]
+        [AllowAnonymous]
+        [HttpGet("CurrentUser")]
         public async Task<IActionResult> GetUserData()
         {
             return Ok(await userService
