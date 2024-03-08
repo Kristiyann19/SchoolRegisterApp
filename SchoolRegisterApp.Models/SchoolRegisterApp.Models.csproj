@@ -26,8 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Entities\" />
     <Folder Include="Dtos\" />
   </ItemGroup>
 
