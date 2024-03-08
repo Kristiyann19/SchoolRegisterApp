@@ -14,7 +14,7 @@ namespace SchoolRegisterApp.Models.Entities
 
         public int SettlementId { get; set; }
 
-        //public Settlement Settlement { get; set; }
+        public Settlement Settlement { get; set; }
 
         public bool IsActive { get; set; }
     }

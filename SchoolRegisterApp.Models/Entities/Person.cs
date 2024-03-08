@@ -1,4 +1,6 @@
-﻿using SchoolRegisterApp.Models.Enums;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Models.Entities
 {
@@ -20,6 +22,15 @@ namespace SchoolRegisterApp.Models.Entities
 
         public int BirthPlaceId { get; set; }
 
-        //public Settlement BirthPlace { get; set; }
+        public Settlement BirthPlace { get; set; }
+    }
+
+    public class PersonConfiguration : IEntityTypeConfiguration<Person>
+    {
+        public void Configure(EntityTypeBuilder<Person> builder)
+        {
+
+        }
     }
 }
+

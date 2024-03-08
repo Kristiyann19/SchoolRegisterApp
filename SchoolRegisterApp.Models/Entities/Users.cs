@@ -14,7 +14,7 @@
 
         public int SchoolId { get; set; }
 
-        //public School School { get; set; }
+        public School School { get; set; }
 
         public bool IsActive { get; set; }
     }
