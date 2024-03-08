@@ -1,4 +1,7 @@
-﻿namespace SchoolRegisterApp.Models.Entities
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+
+namespace SchoolRegisterApp.Models.Entities
 {
     public class Users
     {
@@ -17,5 +20,36 @@
         public School School { get; set; }
 
         public bool IsActive { get; set; }
+    }
+
+    public class UsersConfiguration : IEntityTypeConfiguration<Users>
+    {
+        public void Configure(EntityTypeBuilder<Users> builder)
+        {
+            builder
+                .Property(b => b.Username)
+                .IsRequired();
+
+            builder
+                .HasIndex(b => b.Username)
+                .IsUnique();
+
+            builder
+                .Property(b => b.Phone)
+                .IsRequired();
+
+            builder
+                .Property(b => b.PasswordHash)
+                .IsRequired();
+
+            builder
+                .Property(b => b.PasswordSalt)
+                .IsRequired();
+
+            builder
+                .Property(b => b.IsActive)
+                .IsRequired()
+                .HasDefaultValue(true);
+        }
     }
 }
