@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SchoolRegisterApp;
 using SchoolRegisterApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +13,11 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddSwaggerGen();
+builder.Services.AddSchoolRegisterServices();
+builder.Services.ConfigureJwtAuthenticationServices();
 
 var app = builder.Build();
 
