@@ -29,7 +29,29 @@ namespace SchoolRegisterApp.Models.Entities
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {
+            builder
+                .Property(x => x.FirstName)
+                .IsRequired();
 
+            builder
+                .Property(x => x.LastName)
+                .IsRequired();
+
+            builder
+                .Property(x => x.Uic)
+                .IsRequired();
+
+            builder
+                .Property(x => x.BirthDate)
+                .IsRequired();
+
+            builder
+                .Property(x => x.Gender)
+                .IsRequired();
+
+            builder
+                .Property(x => x.Gender)
+                .IsRequired();
         }
     }
 }
