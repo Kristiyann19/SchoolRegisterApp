@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
 
@@ -6,7 +7,7 @@ namespace SchoolRegisterApp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         private readonly ILoginService loginService;
 
@@ -15,6 +16,7 @@ namespace SchoolRegisterApp.Controllers
             loginService = _loginService;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {

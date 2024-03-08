@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
 
@@ -6,7 +7,7 @@ namespace SchoolRegisterApp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RegisterController : Controller
+    public class RegisterController : BaseController
     {
         private readonly IRegisterService registerService;
 
@@ -15,6 +16,7 @@ namespace SchoolRegisterApp.Controllers
             registerService = _registerService;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Register([FromBody] RegisterDto register)
         {
