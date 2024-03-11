@@ -21,7 +21,7 @@ export class LoginService {
   logout(): Observable<void> {
     this.currentUser = null;
     localStorage.clear();
-    this.router.navigate(["/"]);
+    this.router.navigate(["/login"]);
     return;
   }
 }
