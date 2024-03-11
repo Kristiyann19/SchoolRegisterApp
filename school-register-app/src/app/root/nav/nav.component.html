@@ -2,7 +2,7 @@
   <div class="buttons d-flex justify-content-end nav-bar-right">
     <div class="ml-auto p-2">
       <button
-        *ngIf="loginService.currentUser == null"
+        *ngIf="userService.currentUser == null"
         routerLink="/login"
         class="btn btn-outline-success"
         type="button"
@@ -10,7 +10,7 @@
         Вход
       </button>
       <button
-        *ngIf="loginService.currentUser == null"
+        *ngIf="userService.currentUser == null"
         routerLink="/registration"
         class="btn btn-outline-primary"
         type="button"
@@ -18,8 +18,8 @@
         Регистриране
       </button>
       <button
-        *ngIf="loginService.currentUser != null"
-        (click)="userService.logout()"
+        *ngIf="userService.currentUser != null"
+        (click)="loginService.logout()"
         class="btn-logout btn-hover btn-center-text"
       >
         Изход

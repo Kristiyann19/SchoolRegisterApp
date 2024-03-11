@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { LoginService } from "../../services/login.service";
 import { Router } from "@angular/router";
 import { UserLoginDto } from "../../../user/dtos/user-login-dto";
+import { UserService } from "../../../user/services/user.service";
 
 @Component({
   selector: "app-login",
@@ -11,13 +12,17 @@ import { UserLoginDto } from "../../../user/dtos/user-login-dto";
 export class LoginComponent {
   loginDto: UserLoginDto = new UserLoginDto();
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private userServicec: UserService,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     this.loginService.login(this.loginDto).subscribe((response: any) => {
       if (response?.token) {
         localStorage.setItem("token", response.token);
-        this.loginService.initializeUser();
+        this.userServicec.initializeUser();
         this.router.navigate(["/"]);
       }
     });
