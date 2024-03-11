@@ -19,6 +19,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSchoolRegisterServices();
 builder.Services.ConfigureJwtAuthenticationServices();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

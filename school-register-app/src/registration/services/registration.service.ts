@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 export class RegistrationService {
   private baseUrl = "http://localhost:12123";
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   register(userDto: UserRegistrationDto): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/api/Register`, userDto);

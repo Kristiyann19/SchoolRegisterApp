@@ -1,22 +1,24 @@
 import { APP_INITIALIZER, NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { FormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModule } from "@angular/common";
+import { ToastrModule } from "ngx-toastr";
 import { LoginComponent } from "../login/components/main/login.component";
 import { RegistrationComponent } from "../registration/components/registration.component";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { UserComponent } from "../user/components/user.component";
 import { LoginService } from "../login/services/login.service";
 import { NavComponent } from "./root/nav/nav.component";
-import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
-import { ToastrModule } from "ngx-toastr";
-import { RouterModule } from "@angular/router";
+import { RegistrationService } from "../registration/services/registration.service";
+import { UserService } from "../user/services/user.service";
 
-export function appInitializer(loginService: LoginService) {
-  return () => loginService.initializeUser();
+export function appInitializer(userService: UserService) {
+  return () => userService.initializeUser();
 }
 
 @NgModule({
@@ -32,10 +34,10 @@ export function appInitializer(loginService: LoginService) {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule,
     NgbModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -43,9 +45,11 @@ export function appInitializer(loginService: LoginService) {
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
       multi: true,
-      deps: [LoginService],
+      deps: [UserService],
     },
     LoginService,
+    RegistrationService,
+    UserService,
   ],
   bootstrap: [AppComponent],
 })

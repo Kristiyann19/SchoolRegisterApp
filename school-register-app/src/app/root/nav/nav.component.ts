@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { LoginService } from "../../../login/services/login.service";
-import { RegistrationService } from "../../../registration/services/registration.service";
+import { UserService } from "../../../user/services/user.service";
 
 @Component({
   selector: "app-nav",
@@ -9,7 +9,7 @@ import { RegistrationService } from "../../../registration/services/registration
 })
 export class NavComponent {
   constructor(
-    public loginService: LoginService,
-    public registrationService: RegistrationService
+    public userService: UserService,
+    public loginService: LoginService
   ) {}
 }
