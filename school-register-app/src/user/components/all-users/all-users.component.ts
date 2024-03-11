@@ -6,8 +6,8 @@ import { catchError, throwError } from "rxjs";
 
 @Component({
   selector: "app-user",
-  templateUrl: "./user.component.html",
-  styleUrl: "./user.component.css",
+  templateUrl: "./all-users.component.html",
+  styleUrl: "./all-users.component.css",
 })
 export class AllUsersComponent {
   users: UserDto[];
@@ -22,6 +22,20 @@ export class AllUsersComponent {
   get() {
     this.userService
       .getAll()
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      )
+      .subscribe((res) => {
+        debugger;
+        this.users = res;
+      });
+  }
+
+  getFiltered(userDto: UserFilterDto) {
+    this.userService
+      .getFiltered(userDto)
       .pipe(
         catchError((err) => {
           return throwError(() => err);
