@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Controllers
@@ -28,6 +29,14 @@ namespace SchoolRegisterApp.Controllers
         {
             return Ok(await userService
                 .GetAllUsersAsync());
+        }
+
+        [HttpGet("Filter")]
+        public async Task<IActionResult> GetFilteredAsync([FromQuery] UserFilterDto userDto)
+        {
+            List<UserDto> users = await userService.GetFilteredUsersAsync(userDto);
+
+            return Ok(users);
         }
     }
 }

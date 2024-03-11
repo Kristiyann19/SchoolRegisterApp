@@ -15,7 +15,7 @@ import { LoginService } from "../login/services/login.service";
 import { NavComponent } from "./root/nav/nav.component";
 import { RegistrationService } from "../registration/services/registration.service";
 import { UserService } from "../user/services/user.service";
-import { AllUsersComponent } from "../user/components/all-users/user.component";
+import { AllUsersComponent } from "../user/components/all-users/all-users.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
