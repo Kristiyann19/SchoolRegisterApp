@@ -10,7 +10,7 @@ import { catchError, throwError } from "rxjs";
   styleUrl: "./all-users.component.css",
 })
 export class AllUsersComponent {
-  users: UserDto[];
+  users: UserDto[] = [];
   userDto: UserFilterDto = new UserFilterDto();
 
   constructor(public userService: UserService) {}

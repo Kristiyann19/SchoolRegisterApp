@@ -6,10 +6,10 @@ namespace SchoolRegisterApp.Models.Dtos
 {
     public class UserFilterDto : IFilter<Users>
     {
-        public string? Username { get; set; }
+        public string Username { get; set; }
 
-        public string? School { get; set; }
-        public string? Phone { get; set; }
+        public string School { get; set; }
+        public string Phone { get; set; }
 
         public IQueryable<Users> WhereBuilder(IQueryable<Users> query)
         {

@@ -17,7 +17,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet]   
         public async Task<IActionResult> GetAllSchools()
         {
             return Ok(await schoolService
