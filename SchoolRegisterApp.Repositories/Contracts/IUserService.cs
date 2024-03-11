@@ -6,5 +6,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
     public interface IUserService
     {
         Task<UserDto> GetUserDataAsync(HttpContext httpContext);
+
+        Task<List<UserDto>> GetAllUsersAsync();
     }
 }

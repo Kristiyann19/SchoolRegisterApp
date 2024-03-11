@@ -38,7 +38,16 @@ namespace SchoolRegisterApp.Repositories.Services
             }
 
             return null;
+        }
 
+        public async Task<List<UserDto>> GetAllUsersAsync()
+        {
+            var users = await context.Users
+                .Include(u => u.School)
+                .ProjectTo<UserDto>(mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return users;
         }
     }
 }
