@@ -40,7 +40,11 @@ export function appInitializer(userService: UserService) {
     BrowserAnimationsModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptor, 
+      multi: true 
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
