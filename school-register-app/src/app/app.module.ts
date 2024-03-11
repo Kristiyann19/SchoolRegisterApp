@@ -11,11 +11,11 @@ import { ToastrModule } from "ngx-toastr";
 import { LoginComponent } from "../login/components/main/login.component";
 import { RegistrationComponent } from "../registration/components/registration.component";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
-import { UserComponent } from "../user/components/user.component";
 import { LoginService } from "../login/services/login.service";
 import { NavComponent } from "./root/nav/nav.component";
 import { RegistrationService } from "../registration/services/registration.service";
 import { UserService } from "../user/services/user.service";
+import { AllUsersComponent } from "../user/components/all-users/user.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -26,7 +26,7 @@ export function appInitializer(userService: UserService) {
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    UserComponent,
+    AllUsersComponent,
     NavComponent,
   ],
   imports: [
@@ -40,10 +40,10 @@ export function appInitializer(userService: UserService) {
     BrowserAnimationsModule,
   ],
   providers: [
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: AuthInterceptor, 
-      multi: true 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     },
     {
       provide: APP_INITIALIZER,
