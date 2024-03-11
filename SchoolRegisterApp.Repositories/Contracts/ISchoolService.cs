@@ -6,6 +6,6 @@ namespace SchoolRegisterApp.Repositories.Contracts
     {
         Task<IEnumerable<SchoolDto>> GetAllSchoolsAsync();
 
-        Task<IEnumerable<SchoolDto>> 
+        Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter); 
     }
 }

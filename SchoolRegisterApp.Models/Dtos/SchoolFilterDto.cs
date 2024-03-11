@@ -1,8 +1,10 @@
-﻿using SchoolRegisterApp.Models.Enums;
+﻿using SchoolRegisterApp.Models.Common;
+using SchoolRegisterApp.Models.Entities;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Models.Dtos
 {
-    public class SchoolFilterDto
+    public class SchoolFilterDto : IFilter<School>
     {
         public string Name { get; set; }
 
@@ -10,7 +12,11 @@ namespace SchoolRegisterApp.Models.Dtos
 
         public SchoolTypeEnum Type { get; set; }
 
-        public int SettlementId { get; set; }
+        public string Settlement { get; set; }
 
+        public IQueryable<School> WhereBuilder(IQueryable<School> query)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
