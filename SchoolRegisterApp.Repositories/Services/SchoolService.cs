@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
-using SchoolRegisterApp.Models.Entities;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -25,12 +24,14 @@ namespace SchoolRegisterApp.Repositories.Services
                .ToListAsync();
         
 
-        public Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter)
+        public async Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter)
         {
-            IQueryable<SchoolDto> query = context.Schools
-               .ProjectTo<SchoolDto>(mapper.ConfigurationProvider);
+            var schools = await schoolFilter
+                .WhereBuilder(context.Schools.AsQueryable())
+                .ProjectTo<SchoolDto>(mapper.ConfigurationProvider)
+                .ToListAsync();
 
-
+            return schools;
         }
     }
 }
