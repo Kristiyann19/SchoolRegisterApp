@@ -1,5 +1,4 @@
-export class UserDto {
-  id: number;
+export class UserFilterDto {
   username: string;
   phone: string;
   school: string;

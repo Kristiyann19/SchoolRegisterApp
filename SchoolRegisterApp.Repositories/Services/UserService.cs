@@ -1,11 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
-using System.Security.Claims;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -46,6 +48,16 @@ namespace SchoolRegisterApp.Repositories.Services
                 .Include(u => u.School)
                 .ProjectTo<UserDto>(mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            return users;
+        }
+
+        public async Task<List<UserDto>> GetFilteredUsersAsync(UserFilterDto filter)
+        {
+            var users = await filter
+               .WhereBuilder(context.Users.Include(u => u.School).AsQueryable())
+               .ProjectTo<UserDto>(mapper.ConfigurationProvider)
+               .ToListAsync();
 
             return users;
         }
