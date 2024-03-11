@@ -3,69 +3,52 @@
     <div class="card card-body p-5">
       <h2 class="text-uppercase text-center mb-5">Създайте акаунт</h2>
 
-      <form
-        class="text-center mb-5"
-        #registerForm="ngForm"
-        (ngSubmit)="onRegister()"
-      >
-        <input
-          type="text"
-          placeholder="UserName"
-          class="form-control"
-          name="userName"
-          required
-          [(ngModel)]="register.username"
-        />
+      <form class="text-center mb-5"
+            #registerForm="ngForm"
+            (ngSubmit)="onRegister()">
+        <input type="text"
+               placeholder="UserName"
+               class="form-control"
+               name="userName"
+               required
+               [(ngModel)]="register.username" />
 
-        <input
-          type="text"
-          placeholder="phone"
-          class="form-control"
-          name="phone"
-          required
-          [(ngModel)]="register.phone"
-        />
+        <input type="text"
+               placeholder="phone"
+               class="form-control"
+               name="phone"
+               required
+               [(ngModel)]="register.phone" />
 
-        <input
-          type="password"
-          placeholder="password"
-          class="form-control"
-          name="password"
-          required
-          [(ngModel)]="register.password"
-        />
+        <input type="password"
+               placeholder="password"
+               class="form-control"
+               name="password"
+               required
+               [(ngModel)]="register.password" />
 
-        <input
-          type="password"
-          placeholder="confirmPassword"
-          class="form-control"
-          required
-          name="confirmPassword"
-          [(ngModel)]="register.confirmPassword"
-        />
+        <input type="password"
+               placeholder="confirmPassword"
+               class="form-control"
+               required
+               name="confirmPassword"
+               [(ngModel)]="register.confirmPassword" />
 
-        <div
-          *ngIf="register.password !== register.confirmPassword"
-          class="text-danger"
-        >
+        <div *ngIf="register.password !== register.confirmPassword"
+             class="text-danger">
           Паролите не съвпадат.
         </div>
 
-        <select
-          [(ngModel)]="register.schoolId"
-          class="form-control"
-          id="schoolId"
-        >
+        <select [(ngModel)]="register.schoolId"
+                class="form-control"
+                name="schoolId">
           <option></option>
           <option value="1">Езикова</option>
-          <option value="2">Матевски</option>
         </select>
 
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="!registerForm.valid"
-        >
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="!registerForm.valid">
           Register
         </button>
       </form>
