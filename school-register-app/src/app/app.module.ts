@@ -31,7 +31,7 @@ export function appInitializer(userService: UserService) {
     AllUsersComponent,
     NavComponent,
     AllSchoolsComponent,
-    AllPeopleComponent
+    AllPeopleComponent,
   ],
   imports: [
     BrowserModule,

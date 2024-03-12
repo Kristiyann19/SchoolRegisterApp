@@ -29,7 +29,7 @@ namespace SchoolRegisterApp
                 .ForMember(m => m.FirstName, cfg => cfg.MapFrom(src => src.FirstName))
                 .ForMember(m => m.LastName, cfg => cfg.MapFrom(src => src.LastName))
                 .ForMember(m => m.BirthDate, cfg => cfg.MapFrom(src => src.BirthDate))
-                .ForMember(m => m.BirthPlace, cfg => cfg.MapFrom(src => src.BirthPlace))
+                .ForMember(m => m.BirthPlace, cfg => cfg.MapFrom(src => src.BirthPlace.Name))
                 .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic));     
 
         }
