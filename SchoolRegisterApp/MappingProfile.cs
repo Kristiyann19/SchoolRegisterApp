@@ -14,6 +14,7 @@ namespace SchoolRegisterApp
                .ForMember(m => m.Username, cfg => cfg.MapFrom(src => src.Username))
                .ForMember(m => m.Phone, cfg => cfg.MapFrom(src => src.Phone));
 
+
             CreateMap<School, SchoolDto>()
                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
                .ForMember(m => m.Name, cfg => cfg.MapFrom(src => src.Name))
@@ -21,6 +22,15 @@ namespace SchoolRegisterApp
                .ForMember(m => m.Type, cfg => cfg.MapFrom(src => src.Type))
                .ForMember(m => m.Settlement, cfg => cfg.MapFrom(src => src.Settlement.Name))
                .ForMember(m => m.IsActive, cfg => cfg.MapFrom(src => src.IsActive));
+
+
+            CreateMap<Person, PersonDto>()
+                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
+                .ForMember(m => m.FirstName, cfg => cfg.MapFrom(src => src.FirstName))
+                .ForMember(m => m.LastName, cfg => cfg.MapFrom(src => src.LastName))
+                .ForMember(m => m.BirthDate, cfg => cfg.MapFrom(src => src.BirthDate))
+                .ForMember(m => m.BirthPlace, cfg => cfg.MapFrom(src => src.BirthPlace))
+                .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic));     
 
         }
     }
