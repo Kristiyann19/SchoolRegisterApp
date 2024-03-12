@@ -1,0 +1,16 @@
+.container {
+  margin-top: 6rem;
+  width: 30%;
+  background-color: #e6e9ed;
+  padding: 2rem;
+  border-radius: 1%;
+}
+
+.registration-btn {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}

@@ -1,43 +1,37 @@
-<div class="container">
-  <div class="col-xl-4">
-    <div class="card p-5">
-      <h2 class="text-uppercase text-center mb-5">Влезте в акаунта си</h2>
-      <form
-        class="text-center mb-5"
-        #loginForm="ngForm"
-        (ngSubmit)="onSubmit()"
+<div class="container col-xl-4">
+  <div class="card p-5">
+    <h2 class="text-uppercase text-center mb-5">Влезте в акаунта си</h2>
+    <form class="text-center form" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <input
+        class="form-control"
+        name="userName"
+        [(ngModel)]="loginDto.username"
+        placeholder="Потребителско име"
+        required
+        type="text"
+      />
+
+      <input
+        class="form-control"
+        name="password"
+        [(ngModel)]="loginDto.password"
+        placeholder="Парола"
+        required
+        type="password"
+      />
+
+      <button
+        class="btn btn-primary login-btn"
+        type="submit"
+        [disabled]="!loginForm.valid"
       >
-        <input
-          class="form-control"
-          name="userName"
-          [(ngModel)]="loginDto.username"
-          required
-          type="text"
-        />
+        Вход
+      </button>
 
-        <input
-          class="form-control"
-          name="password"
-          [(ngModel)]="loginDto.password"
-          required
-          type="password"
-        />
-
-        <button
-          class="btn btn-primary"
-          type="submit"
-          [disabled]="!loginForm.valid"
-        >
-          Login
-        </button>
-
-        <p class="text-center text-muted mt-5 mb-0">
-          Регистрирай се?
-          <a routerLink="/register" class="fw-bold text-body"
-            ><u>Влез от тук</u></a
-          >
-        </p>
-      </form>
-    </div>
+      <p>
+        Ако все още нямате регистрация, може да го направите
+        <a class="registration-link" routerLink="/registration" href="">тук</a>
+      </p>
+    </form>
   </div>
 </div>

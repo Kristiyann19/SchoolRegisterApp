@@ -1,0 +1,17 @@
+.container {
+  margin-top: 6rem;
+  width: 30%;
+  background-color: #e6e9ed;
+  padding: 2rem;
+  border-radius: 1%;
+}
+
+.login-btn {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}

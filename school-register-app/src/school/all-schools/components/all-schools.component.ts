@@ -31,7 +31,6 @@ export class AllSchoolsComponent {
         })
       )
       .subscribe((res) => {
-        debugger;
         this.schools = res;
       });
   }
@@ -45,10 +44,8 @@ export class AllSchoolsComponent {
         })
       )
       .subscribe((res) => {
+        debugger;
         this.schools = res;
       });
   }
-
-
-  
 }
