@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
 
@@ -27,6 +29,24 @@ namespace SchoolRegisterApp.Controllers
         {
             return Ok(await personService
                 .GetFilteredPeopleAsync(filter));
+        }
+
+        [HttpGet("{id:int}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetDetailsById([FromRoute] int id)
+        {
+            return Ok(await personService
+                .GetPersonDetailsAsync(id));
+        }
+
+        [HttpPut("{id:int}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdatePerson([FromRoute] int id, [FromBody] PersonDetailsDto updatedPerson)
+        {
+            await personService
+                .UpdatePersonAsync(id, updatedPerson);
+
+            return Ok();
         }
     }
 }

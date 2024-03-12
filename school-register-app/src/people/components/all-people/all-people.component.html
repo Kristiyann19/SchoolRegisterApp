@@ -1,50 +1,43 @@
 <div class="container">
-  <form #filterForm="ngForm" (ngSubmit)="getFiltered(personDto)">
+  <form #filterForm="ngForm"
+        (ngSubmit)="getFiltered(personDto)">
     <div class="form-group">
       <label for="firstName">Име: </label>
 
-      <input
-        type="text"
-        name="firstName"
-        class="form-control"
-        id="firstName"
-        [(ngModel)]="personDto.firstName"
-      />
+      <input type="text"
+             name="firstName"
+             class="form-control"
+             id="firstName"
+             [(ngModel)]="personDto.firstName" />
     </div>
 
     <div class="form-group">
       <label for="lastName">Фамилия: </label>
 
-      <input
-        type="text"
-        name="lastName"
-        class="form-control"
-        id="lastName"
-        [(ngModel)]="personDto.lastName"
-      />
+      <input type="text"
+             name="lastName"
+             class="form-control"
+             id="lastName"
+             [(ngModel)]="personDto.lastName" />
     </div>
 
     <div class="form-group">
       <label for="uic">ЕГН: </label>
 
-      <input
-        type="text"
-        name="uic"
-        class="form-control"
-        id="uic"
-        [(ngModel)]="personDto.uic"
-      />
+      <input type="text"
+             name="uic"
+             class="form-control"
+             id="uic"
+             [(ngModel)]="personDto.uic" />
     </div>
 
     <div class="form-group">
       <label for="gender">Пол: </label>
 
-      <select
-        [(ngModel)]="personDto.gender"
-        class="form-control"
-        name="gender"
-        id="gender"
-      >
+      <select [(ngModel)]="personDto.gender"
+              class="form-control"
+              name="gender"
+              id="gender">
         <option></option>
         <option value="1">Мъж</option>
         <option value="2">Жена</option>
@@ -54,16 +47,15 @@
     <div class="form-group">
       <label for="birthPlace">Месторождение: </label>
 
-      <input
-        type="text"
-        name="birthPlace"
-        class="form-control"
-        id="birthPlace"
-        [(ngModel)]="personDto.birthPlace"
-      />
+      <input type="text"
+             name="birthPlace"
+             class="form-control"
+             id="birthPlace"
+             [(ngModel)]="personDto.birthPlace" />
     </div>
 
-    <button class="btn btn-primary" type="submit">
+    <button class="btn btn-primary"
+            type="submit">
       <i class="fa-solid fa-magnifying-glass"></i>
       Търси
     </button>
@@ -86,6 +78,8 @@
         <td>{{ person.lastName }}</td>
         <td>{{ person.birthPlace }}</td>
         <td>{{ person.birthDate | date }}</td>
+        <button class="btn btn-primary"
+                [routerLink]="['/person',person.id]">Детайли</button>
       </tr>
     </tbody>
   </table>

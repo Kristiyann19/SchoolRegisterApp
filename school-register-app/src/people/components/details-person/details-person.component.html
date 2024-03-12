@@ -1,0 +1,76 @@
+<div class="container">
+  <form (ngSubmit)="updatePerson()"
+        #updateForm="ngForm">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ЕГН</th>
+          <th scope="col">Име</th>
+          <th scope="col">Презиме</th>
+          <th scope="col">Фамилия</th>
+          <th scope="col">Дата на раждане</th>
+          <th scope="col">Пол</th>
+          <th scope="col">Месторождение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input type="text"
+                   id="uic"
+                   [(ngModel)]="person.uic"
+                   name="uic"
+                   class="form-control"
+                   required>
+          </td>
+          <td><input type="text"
+                   id="firstName"
+                   [(ngModel)]="person.firstName"
+                   name="firstName"
+                   class="form-control"
+                   required></td>
+
+          <td><input type="text"
+                   id="middleName"
+                   [(ngModel)]="person.middleName"
+                   name="middleName"
+                   class="form-control"
+                   required></td>
+
+          <td><input type="text"
+                   id="lastName"
+                   [(ngModel)]="person.lastName"
+                   name="lastName"
+                   class="form-control"
+                   required></td>
+
+          <td><input type="text"
+                   id="birthDate"
+                   [(ngModel)]="person.birthDate"
+                   name="birthDate"
+                   class="form-control"
+                   required></td>
+
+          <td> <select id="gender"
+                    [(ngModel)]="person.gender"
+                    name="gender"
+                    class="form-select">
+              <option [ngValue]="1">Мъж</option>
+              <option [ngValue]="2">Жена</option>
+            </select></td>
+
+          <td><input type="text"
+                   id="birthPlace"
+                   [(ngModel)]="person.birthPlace"
+                   name="birthPlace"
+                   class="form-control"
+                   required></td>
+
+        </tr>
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="!updateForm.valid">Редактирай</button>
+      </tbody>
+    </table>
+  </form>
+</div>

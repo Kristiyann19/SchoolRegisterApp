@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Repositories.Services
@@ -29,10 +30,19 @@ namespace SchoolRegisterApp.Repositories.Services
                   .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
                   .ToListAsync();
 
+        public async Task<PersonDetailsDto> GetPersonDetailsAsync(int id)
+            => await context.People
+                  .ProjectTo<PersonDetailsDto>(mapper.ConfigurationProvider)    
+                  .FirstOrDefaultAsync(x => x.Id == id);
 
+        public async Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson)
+        {
+            var existingPerson = await context.People
+                .FirstOrDefaultAsync(x => x.Id == id);
 
+            mapper.Map(updatedPerson, existingPerson);
 
-
-       
+            await context.SaveChangesAsync();
+        }
     }
 }
