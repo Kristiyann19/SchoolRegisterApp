@@ -1,42 +1,38 @@
 <div class="container">
-  <form #filterForm="ngForm" (ngSubmit)="getFiltered(userDto)">
+  <form #filterForm="ngForm"
+        (ngSubmit)="getFiltered(userDto)">
     <div class="form-group">
       <label for="username"> Потребителско име: </label>
 
-      <input
-        type="text"
-        name="username"
-        class="form-control"
-        id="username"
-        [(ngModel)]="userDto.username"
-      />
+      <input type="text"
+             name="username"
+             class="form-control"
+             id="username"
+             [(ngModel)]="userDto.username" />
     </div>
 
     <div class="form-group">
       <label for="phone"> Телефонен номер: </label>
 
-      <input
-        type="text"
-        name="phone"
-        class="form-control"
-        id="phone"
-        [(ngModel)]="userDto.phone"
-      />
+      <input type="text"
+             name="phone"
+             class="form-control"
+             id="phone"
+             [(ngModel)]="userDto.phone" />
     </div>
 
     <div class="form-group">
       <label for="school"> Училище: </label>
 
-      <input
-        type="text"
-        name="school"
-        class="form-control"
-        id="school"
-        [(ngModel)]="userDto.school"
-      />
+      <input type="text"
+             name="school"
+             class="form-control"
+             id="school"
+             [(ngModel)]="userDto.school" />
     </div>
 
-    <button class="btn btn-primary" type="submit">
+    <button class="btn btn-primary"
+            type="submit">
       <i class="fa-solid fa-magnifying-glass"></i>
       Търси
     </button>
