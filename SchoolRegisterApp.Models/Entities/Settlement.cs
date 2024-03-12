@@ -14,6 +14,11 @@ namespace SchoolRegisterApp.Models.Entities
         public string NameAlt { get; set; }
 
         public bool IsActive { get; set; }
+
+        internal object ToLower()
+        {
+            throw new NotImplementedException();
+        }
     }
     public class SettlementConfiguration : IEntityTypeConfiguration<Settlement>
     {
