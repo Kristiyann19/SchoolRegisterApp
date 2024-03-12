@@ -1,0 +1,13 @@
+nav {
+  background-color: #e6e9ed;
+}
+
+button {
+  font-weight: bold;
+}
+
+.nav-bar-right {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

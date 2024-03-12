@@ -1,57 +1,67 @@
-<div class="container">
-  <div class="col-xl-5">
-    <div class="card card-body p-5">
-      <h2 class="text-uppercase text-center mb-5">Създайте акаунт</h2>
+<div class="col-xl-5 container">
+  <div class="card card-body p-5">
+    <h2 class="text-uppercase text-center mb-5">Създайте акаунт</h2>
 
-      <form class="text-center mb-5"
-            #registerForm="ngForm"
-            (ngSubmit)="onRegister()">
-        <input type="text"
-               placeholder="UserName"
-               class="form-control"
-               name="userName"
-               required
-               [(ngModel)]="register.username" />
+    <form class="text-center" #registerForm="ngForm" (ngSubmit)="onRegister()">
+      <input
+        type="text"
+        placeholder="Потребителско име"
+        class="form-control"
+        name="userName"
+        required
+        [(ngModel)]="register.username"
+      />
 
-        <input type="text"
-               placeholder="phone"
-               class="form-control"
-               name="phone"
-               required
-               [(ngModel)]="register.phone" />
+      <input
+        type="text"
+        placeholder="Телефонен номер"
+        class="form-control"
+        name="phone"
+        required
+        [(ngModel)]="register.phone"
+      />
 
-        <input type="password"
-               placeholder="password"
-               class="form-control"
-               name="password"
-               required
-               [(ngModel)]="register.password" />
+      <input
+        type="password"
+        placeholder="Парола"
+        class="form-control"
+        name="password"
+        required
+        [(ngModel)]="register.password"
+      />
 
-        <input type="password"
-               placeholder="confirmPassword"
-               class="form-control"
-               required
-               name="confirmPassword"
-               [(ngModel)]="register.confirmPassword" />
+      <input
+        type="password"
+        placeholder="Потвърждение на парола"
+        class="form-control"
+        required
+        name="confirmPassword"
+        [(ngModel)]="register.confirmPassword"
+      />
 
-        <div *ngIf="register.password !== register.confirmPassword"
-             class="text-danger">
-          Паролите не съвпадат.
-        </div>
+      <div
+        *ngIf="register.password !== register.confirmPassword"
+        class="text-danger"
+      >
+        Паролите не съвпадат.
+      </div>
 
-        <select [(ngModel)]="register.schoolId"
-                class="form-control"
-                name="schoolId">
-          <option></option>
-          <option value="1">Езикова</option>
-        </select>
+      <select
+        [(ngModel)]="register.schoolId"
+        class="form-control"
+        name="schoolId"
+      >
+        <option></option>
+        <option value="1">Езикова</option>
+      </select>
 
-        <button type="submit"
-                class="btn btn-primary"
-                [disabled]="!registerForm.valid">
-          Register
-        </button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        class="btn btn-primary registration-btn"
+        [disabled]="!registerForm.valid"
+      >
+        Регистриране
+      </button>
+    </form>
   </div>
 </div>

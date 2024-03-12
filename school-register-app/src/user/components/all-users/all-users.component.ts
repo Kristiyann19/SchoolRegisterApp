@@ -28,7 +28,6 @@ export class AllUsersComponent {
         })
       )
       .subscribe((res) => {
-        debugger;
         this.users = res;
       });
   }
