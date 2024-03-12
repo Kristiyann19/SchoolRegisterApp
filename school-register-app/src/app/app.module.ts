@@ -18,7 +18,11 @@ import { UserService } from "../user/services/user.service";
 import { AllUsersComponent } from "../user/components/all-users/all-users.component";
 import { AllSchoolsComponent } from "../school/all-schools/components/all-schools.component";
 import { AllPeopleComponent } from "../people/components/all-people/all-people.component";
+
 import { DetailsPersonComponent } from "../people/components/details-person/details-person.component";
+
+import { AddPersonComponent } from "../people/components/add-person/add-person.component";
+import { SettlementService } from "../settlement/services/settlement.service";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -33,7 +37,11 @@ export function appInitializer(userService: UserService) {
     NavComponent,
     AllSchoolsComponent,
     AllPeopleComponent,
-    DetailsPersonComponent
+
+    DetailsPersonComponent,
+
+    AddPersonComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -60,6 +68,7 @@ export function appInitializer(userService: UserService) {
     LoginService,
     RegistrationService,
     UserService,
+    SettlementService,
   ],
   bootstrap: [AppComponent],
 })

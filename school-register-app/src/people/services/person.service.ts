@@ -3,7 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PersonFilterDto } from "../dtos/person-filter-dto";
 import { PersonDto } from "../dtos/person-dto";
+
 import { PersonDetailsDto } from "../dtos/person-details-dto";
+
+import { PersonAddDto } from "../dtos/person-add-dto";
+
 
 @Injectable({
   providedIn: "root",
@@ -23,6 +27,7 @@ export class PersonService {
     );
   }
 
+
   updatePerson(id: number, updatedPerson: PersonDetailsDto) : Observable<any>{
     return this.http.put(this.baseUrl + `/${id}`, updatedPerson)
   }
@@ -30,6 +35,11 @@ export class PersonService {
   getById(id: number) : Observable<PersonDetailsDto> {
     debugger;
     return this.http.get<PersonDetailsDto>(`${this.baseUrl}/${id}`)
+
+  }
+  add(personAddDto: PersonAddDto): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/Add`, personAddDto);
+
   }
 
   composeQueryString(personDto: PersonFilterDto): string {

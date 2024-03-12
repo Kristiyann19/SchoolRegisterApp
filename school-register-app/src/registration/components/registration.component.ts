@@ -9,21 +9,23 @@ import { RegistrationService } from "../services/registration.service";
   styleUrl: "./registration.component.css",
 })
 export class RegistrationComponent {
-
   //schools: SchoolDto[] = [];
-  
+
   register: UserRegistrationDto = new UserRegistrationDto();
-  
-  constructor(private registerService: RegistrationService, private router: Router, ) { }
-  onRegister() : void {
+
+  constructor(
+    private registerService: RegistrationService,
+    private router: Router
+  ) {}
+  onRegister(): void {
     this.registerService.register(this.register).subscribe(
       () => {
-        console.log('User registered successfuly');
-        this.router.navigate(['/login']);
+        console.log("User registered successfuly");
+        this.router.navigate(["/login"]);
       },
       (error) => {
-        console.error('Register failed.', error)
+        console.error("Register failed.", error);
       }
-    )
+    );
   }
 }

@@ -5,7 +5,11 @@ import { RegistrationComponent } from "../registration/components/registration.c
 import { AllUsersComponent } from "../user/components/all-users/all-users.component";
 import { AllSchoolsComponent } from "../school/all-schools/components/all-schools.component";
 import { AllPeopleComponent } from "../people/components/all-people/all-people.component";
+
 import { DetailsPersonComponent } from "../people/components/details-person/details-person.component";
+
+import { AddPersonComponent } from "../people/components/add-person/add-person.component";
+
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -13,7 +17,11 @@ const routes: Routes = [
   { path: "all-users", component: AllUsersComponent },
   { path: "all-schools", component: AllSchoolsComponent },
   { path: "all-people", component: AllPeopleComponent },
-  { path: "person/:id", component: DetailsPersonComponent}
+
+  { path: "person/:id", component: DetailsPersonComponent},
+
+  { path: "add-person", component: AddPersonComponent },
+
 ];
 
 @NgModule({

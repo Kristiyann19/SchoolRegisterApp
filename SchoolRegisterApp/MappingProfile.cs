@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Models.Entities;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp
 {
@@ -42,6 +43,7 @@ namespace SchoolRegisterApp
                 .ForMember(m => m.BirthDate, cfg => cfg.MapFrom(src => src.BirthDate))
                 .ForMember(m => m.BirthPlace, cfg => cfg.MapFrom(src => src.BirthPlace.Name))
                 .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic));
+<<<<<<< HEAD
 
             CreateMap<Person, PersonDetailsDto>()
                 .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
@@ -52,7 +54,21 @@ namespace SchoolRegisterApp
                 .ForMember(m => m.BirthPlace, cfg => cfg.MapFrom(src => src.BirthPlace.Name))
                 .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic))
                 .ForMember(m => m.Gender, cfg => cfg.MapFrom(src => src.Gender));
+=======
+>>>>>>> 4ede17321f1a302f9e3a1a52a445dcf64322833c
 
+            CreateMap<PersonAddDto, Person>()
+                .ForMember(m => m.FirstName, cfg => cfg.MapFrom(src => src.FirstName))
+                .ForMember(m => m.MiddleName, cfg => cfg.MapFrom(src => src.MiddleName))
+                .ForMember(m => m.LastName, cfg => cfg.MapFrom(src => src.LastName))
+                .ForMember(m => m.BirthDate, cfg => cfg.MapFrom(src => src.BirthDate))
+                .ForMember(m => m.BirthPlaceId, cfg => cfg.MapFrom(src => src.BirthPlaceId))
+                .ForMember(m => m.Gender, cfg => cfg.MapFrom(src => src.Gender))
+                .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic));
+
+        CreateMap<Settlement, SettlementDto>()
+                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
+                .ForMember(m => m.Name, cfg => cfg.MapFrom(src => src.Name));
         }
     }
 }
