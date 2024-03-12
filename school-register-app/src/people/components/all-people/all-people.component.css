@@ -1,0 +1,12 @@
+.container {
+  margin-top: 10rem;
+}
+
+input {
+  margin-bottom: 1rem;
+}
+
+button {
+  display: block;
+  margin: 2rem auto;
+}
