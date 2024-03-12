@@ -17,8 +17,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
 
-        [HttpGet]
-        [AllowAnonymous] //Remove later
+        [HttpGet]   
         public async Task<IActionResult> GetAllSchools()
         {
             return Ok(await schoolService
@@ -26,7 +25,6 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet("Search")]
-        [AllowAnonymous] //Remove later
         public async Task<IActionResult> GetFilteredSchools([FromQuery] SchoolFilterDto schoolFilter)
         {
             return Ok(await schoolService

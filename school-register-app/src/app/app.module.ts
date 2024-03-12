@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModule } from "@angular/common";
 import { ToastrModule } from "ngx-toastr";
-import { LoginComponent } from "../login/components/main/login.component";
+import { LoginComponent } from "../login/components/login.component";
 import { RegistrationComponent } from "../registration/components/registration.component";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { LoginService } from "../login/services/login.service";
@@ -16,6 +16,7 @@ import { NavComponent } from "./root/nav/nav.component";
 import { RegistrationService } from "../registration/services/registration.service";
 import { UserService } from "../user/services/user.service";
 import { AllUsersComponent } from "../user/components/all-users/all-users.component";
+import { AllSchoolsComponent } from "../school/all-schools/components/all-schools.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -28,6 +29,7 @@ export function appInitializer(userService: UserService) {
     RegistrationComponent,
     AllUsersComponent,
     NavComponent,
+    AllSchoolsComponent
   ],
   imports: [
     BrowserModule,
