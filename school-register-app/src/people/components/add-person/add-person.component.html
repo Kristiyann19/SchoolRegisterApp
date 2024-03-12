@@ -40,11 +40,13 @@
       <label for="uic">ЕГН: </label>
 
       <input
+        #uicInput="ngModel"
         type="text"
         name="uic"
         class="form-control"
         id="uic"
         [(ngModel)]="personAddDto.uic"
+        (ngModelChange)="decodeUic(personAddDto)"
       />
     </div>
 
@@ -72,8 +74,9 @@
         name="birthDate"
         class="form-control"
         id="birthDate"
-        [(ngModel)]="personAddDto.birthDate"
+        (ngModel)="(personAddDto.birthDate)"
         disabled
+        value="{{ personAddDto.birthDate | date }}"
       />
     </div>
 
