@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PersonFilterDto } from "../dtos/person-filter-dto";
 import { PersonDto } from "../dtos/person-dto";
+import { PersonAddDto } from "../dtos/person-add-dto";
 
 @Injectable({
   providedIn: "root",
@@ -20,6 +21,10 @@ export class PersonService {
     return this.http.get<PersonDto[]>(
       `${this.baseUrl}/Filter?${this.composeQueryString(personDto)}`
     );
+  }
+
+  add(personAddDto: PersonAddDto): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/Add`, personAddDto);
   }
 
   composeQueryString(personDto: PersonFilterDto): string {

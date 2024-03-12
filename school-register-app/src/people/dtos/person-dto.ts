@@ -1,5 +1,5 @@
 export class PersonDto {
-  if: number;
+  id: number;
   firstName: string;
   lastName: string;
   uic: string;

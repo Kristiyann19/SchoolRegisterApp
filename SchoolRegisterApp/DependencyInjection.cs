@@ -15,7 +15,8 @@ namespace SchoolRegisterApp
                 .AddScoped<IRegisterService, RegisterService>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<ISchoolService, SchoolService>()
-                .AddScoped<IPersonService, PersonService>();
+                .AddScoped<IPersonService, PersonService>()
+                .AddScoped<ISettlementService, SettlementService>();
 
             return services;
         }
