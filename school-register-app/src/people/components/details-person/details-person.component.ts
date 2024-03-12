@@ -3,6 +3,9 @@ import { PersonService } from "../../services/person.service";
 import { PersonDetailsDto } from "../../dtos/person-details-dto";
 import { GenderEnumLocalization } from "../../../enums/gender.enum";
 import { ActivatedRoute, Router } from "@angular/router";
+import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
+import { catchError, throwError } from "rxjs";
+import { SettlementService } from "../../../settlement/services/settlement.service";
 
 @Component({
   selector: "app-details-person",
@@ -12,9 +15,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class DetailsPersonComponent {
   genderEnumLocalization = GenderEnumLocalization;
   person: PersonDetailsDto = new PersonDetailsDto();
-
+  settlements: SettlementDto[] = [];
   personId: number;
-  constructor(private route: ActivatedRoute, private personService: PersonService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private personService: PersonService, private router: Router, private settlementService: SettlementService) {}
 
 
 
@@ -22,9 +25,24 @@ export class DetailsPersonComponent {
     this.route.params.subscribe((params) => {
       this.personId = +params['id'];
       this.fetchCarDetails(); 
+      this.getSettlements();
     });
   }
 
+
+
+  getSettlements() {
+    this.settlementService
+      .getAll()
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      )
+      .subscribe((res) => {
+        this.settlements = res;
+      });
+  }
 
   fetchCarDetails(): void {
     this.personService.getById(this.personId).subscribe((person) => {

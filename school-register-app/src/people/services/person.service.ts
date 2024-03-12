@@ -33,7 +33,6 @@ export class PersonService {
   }
 
   getById(id: number) : Observable<PersonDetailsDto> {
-    debugger;
     return this.http.get<PersonDetailsDto>(`${this.baseUrl}/${id}`)
 
   }

@@ -19,6 +19,6 @@ namespace SchoolRegisterApp.Models.Dtos
 
         public GenderEnum Gender { get; set; }
 
-        public string BirthPlace { get; set; }
+        public int BirthPlaceId { get; set; }
     }
 }
