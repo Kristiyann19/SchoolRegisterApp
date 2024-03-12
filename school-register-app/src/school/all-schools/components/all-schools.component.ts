@@ -3,7 +3,7 @@ import { catchError, throwError } from "rxjs";
 import { SchoolDto } from "../dtos/school-dto";
 import { SchoolFilterDto } from "../dtos/school-filter-dto";
 import { SchoolService } from "../services/school.service";
-import { SchoolTypeEnumLocalization } from "../../../enums/school-type.enum";
+import { SchoolTypeEnum, SchoolTypeEnumLocalization } from "../../../enums/school-type.enum";
 
 @Component({
   selector: "app-user",
@@ -14,6 +14,7 @@ export class AllSchoolsComponent {
   schools: SchoolDto[] = [];
   school: SchoolFilterDto = new SchoolFilterDto();
 
+  type = SchoolTypeEnum;
   schoolTypeEnumLocalization = SchoolTypeEnumLocalization;
 
   constructor(public schoolService: SchoolService) {}
@@ -44,7 +45,6 @@ export class AllSchoolsComponent {
         })
       )
       .subscribe((res) => {
-        debugger;
         this.schools = res;
       });
   }
