@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Repositories.Services
@@ -17,6 +18,11 @@ namespace SchoolRegisterApp.Repositories.Services
             context = _context;
             mapper = _mapper;
 
+        }
+
+        public async Task AddPersonSchoolAsync(PersonSchoolAddDto personSchoolAddDto)
+        {
+            PersonSchool personSchool = new PersonSchool();
         }
 
         public async Task<List<PersonSchoolDto>> GetPersonSchoolByPersonIdAsync(int id)
