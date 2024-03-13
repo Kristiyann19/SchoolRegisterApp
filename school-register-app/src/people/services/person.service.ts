@@ -28,7 +28,6 @@ export class PersonService {
     );
   }
 
-
   updatePerson(id: number, updatedPerson: PersonDetailsDto) : Observable<any>{
     return this.http.put(this.baseUrl + `/${id}`, updatedPerson)
   }
