@@ -1,6 +1,6 @@
 ﻿namespace SchoolRegisterApp.Models.Enums
 {
-    public enum Position
+    public enum PositionEnum
     {
         Mathematics = 1,
         Geography = 2,
