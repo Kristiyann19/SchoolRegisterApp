@@ -27,10 +27,11 @@ export class PersonService {
     );
   }
 
-  updatePerson(id: number, updatedPerson: PersonDetailsDto): Observable<any> {
-    return this.http.put(this.baseUrl + `/${id}`, updatedPerson);
-  }
 
+  updatePerson(id: number, updatedPerson: PersonDetailsDto) : Observable<any>{
+    return this.http.put(this.baseUrl + `/${id}`, updatedPerson)
+
+  }
   getById(id: number): Observable<PersonDetailsDto> {
     return this.http.get<PersonDetailsDto>(`${this.baseUrl}/${id}`);
   }
