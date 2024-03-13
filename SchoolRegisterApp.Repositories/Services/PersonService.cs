@@ -136,11 +136,11 @@ namespace SchoolRegisterApp.Repositories.Services
 
             DateTime birthDate = new DateTime(year, month, date);
 
-            int lastUicDigit = int.Parse(personAddDto.Uic.Substring(9, 1));
+            int digitForGender = int.Parse(personAddDto.Uic.Substring(8, 1));
 
-            GenderEnum gender = lastUicDigit % 2 == 0 
-                ? GenderEnum.Female 
-                : GenderEnum.Male;
+            GenderEnum gender = digitForGender % 2 == 0 
+                ? GenderEnum.Male 
+                : GenderEnum.Female;
 
             if (personAddDto.Gender != gender || personAddDto.BirthDate != birthDate)
             {

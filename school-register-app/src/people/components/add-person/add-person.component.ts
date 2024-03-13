@@ -83,9 +83,10 @@ export class AddPersonComponent {
 
     const birthDate = new Date(year, month - 1, date);
 
-    const lastUicDigit = parseInt(personAddDto.uic.substring(9, 10));
+    const digitForGender = parseInt(personAddDto.uic.substring(8, 10));
 
-    const gender = lastUicDigit % 2 === 0 ? GenderEnum.female : GenderEnum.male;
+    const gender =
+      digitForGender % 2 === 0 ? GenderEnum.male : GenderEnum.female;
 
     personAddDto.birthDate = birthDate;
     personAddDto.gender = gender;
