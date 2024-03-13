@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
 using SchoolRegisterApp.Repositories.Services;
 using System.Text;
@@ -16,7 +17,9 @@ namespace SchoolRegisterApp
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<ISchoolService, SchoolService>()
                 .AddScoped<IPersonService, PersonService>()
-                .AddScoped<ISettlementService, SettlementService>();
+                .AddScoped<ISettlementService, SettlementService>()
+                .AddScoped<IPersonHistoryService, PersonHistoryService>()
+                .AddScoped<IPersonSchoolService, PersonSchoolService>();
 
             return services;
         }

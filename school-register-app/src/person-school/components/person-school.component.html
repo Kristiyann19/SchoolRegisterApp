@@ -1,0 +1,33 @@
+<div class="container">
+  <nav>
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <button class="btn btn-hover"
+                [routerLink]="['/person',personSchools]"> Основни данни</button>
+
+        <button [routerLink]="['/person-history', personSchools]"
+                class="btn btn-hover"
+                type="button">
+          История на промени
+        </button>
+      </li>
+    </ul>
+  </nav>
+  <hr>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Дата на модификация</th>
+        <th scope="col">Действие</th>
+        <th scope="col">Обект</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let personSchool of personSchools">
+        <td>{{ personSchool.actionDate | date : 'medium'}}</td>
+        <td>{{ modificationTypeEnumLocalization[personSchool.modificationType] }}</td>
+        <td>{{dataModifiedEnumLocalization[personHistory.dataModified]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

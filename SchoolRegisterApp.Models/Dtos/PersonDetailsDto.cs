@@ -22,3 +22,5 @@ namespace SchoolRegisterApp.Models.Dtos
         public int BirthPlaceId { get; set; }
     }
 }
+
+

@@ -8,7 +8,7 @@ namespace SchoolRegisterApp.Models.Entities
     {
         public int Id { get; set; }
 
-        public Position Position { get; set; }
+        public PositionEnum Position { get; set; }
 
         public int PersonId { get; set; }
 
@@ -26,7 +26,10 @@ namespace SchoolRegisterApp.Models.Entities
     {
         public void Configure(EntityTypeBuilder<PersonSchool> builder)
         {
-            builder.HasKey(b => new { b.PersonId, b.SchoolId });
+            //builder.HasKey(b => new { b.PersonId, b.SchoolId });
+
+            builder
+                .HasKey(b => b.Id);
 
             builder
                 .Property(b => b.Position)

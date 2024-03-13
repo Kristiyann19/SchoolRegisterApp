@@ -23,6 +23,8 @@ import { DetailsPersonComponent } from "../people/components/details-person/deta
 
 import { AddPersonComponent } from "../people/components/add-person/add-person.component";
 import { SettlementService } from "../settlement/services/settlement.service";
+import { PersonHistoryComponent } from "../person-history/components/person-history.component";
+import { PersonSchoolComponent } from "../person-school/components/person-school.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -37,10 +39,10 @@ export function appInitializer(userService: UserService) {
     NavComponent,
     AllSchoolsComponent,
     AllPeopleComponent,
-
     DetailsPersonComponent,
-
     AddPersonComponent,
+    PersonHistoryComponent,
+    PersonSchoolComponent
 
   ],
   imports: [
