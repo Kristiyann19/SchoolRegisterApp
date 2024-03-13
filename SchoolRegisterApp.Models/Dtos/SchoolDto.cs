@@ -13,7 +13,7 @@ namespace SchoolRegisterApp.Models.Dtos
 
         public SchoolTypeEnum Type { get; set; }
 
-        public string Settlement { get; set; }
+        public Settlement Settlement { get; set; }
 
         //public Settlement Settlement { get; set; }
 

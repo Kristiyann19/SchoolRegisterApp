@@ -17,25 +17,26 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Дата на модификация</th>
-        <th scope="col">Действие</th>
-        <th scope="col">Обект</th>
+        <th scope="col">Училище</th>
+        <th scope="col">Длъжност</th>
+        <th scope="col">От дата:</th>
+        <th scope="col">До дата:</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let personSchool of personSchools">
-        <td>{{ personSchool.actionDate | date : 'medium'}}</td>
-        <td><select [(ngModel)]="personHistory.schoolId"
-                  class="form-control"
-                  name="schoolId"
-                  id="schoolId">
-            <option></option>
-            <option *ngFor="let settlement of settlements"
-                    [ngValue]="settlement.id">
-              {{ settlement.name }}
-            </option>
-          </select></td>
-        <td>{{dataModifiedEnumLocalization[personHistory.dataModified]}}</td>
+
+        <td [(ngModel)]="personSchool.schoolId"
+            name="schoolId"
+            id="schoolId"
+            disabled="disabled"
+            *ngFor="let school of schools"
+            [ngValue]="school.id">{{ school.name }}</td>
+
+        <td>Преподавател по {{positionEnumLocalization[personSchool.position]}}</td>
+        <td>{{personSchool.startDate | date: 'medium'}}</td>
+        <td>{{personSchool.endDate | date: 'medium'}}</td>
+
       </tr>
     </tbody>
   </table>

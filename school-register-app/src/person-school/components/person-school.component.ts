@@ -6,6 +6,8 @@ import { PersonSchoolService } from "../service/person-school.service";
 import { SettlementService } from "../../settlement/services/settlement.service";
 import { catchError, throwError } from "rxjs";
 import { SettlementDto } from "../../settlement/dtos/settlement-dto";
+import { SchoolService } from "../../school/all-schools/services/school.service";
+import { SchoolDto } from "../../school/all-schools/dtos/school-dto";
 
 @Component({
   selector: "app-person-school",
@@ -15,20 +17,20 @@ import { SettlementDto } from "../../settlement/dtos/settlement-dto";
 export class PersonSchoolComponent {
   personSchools: PersonSchoolDto[] = [];
   positionEnumLocalization = PositionEnumLocalization;
-  settlements: SettlementDto[] = [];
+  schools: SchoolDto[] = [];
 
-  constructor (private personSchoolService: PersonSchoolService, private route: ActivatedRoute, private settlementService: SettlementService) {}
+  constructor (private personSchoolService: PersonSchoolService, private route: ActivatedRoute, private schoolService: SchoolService) {}
 
   ngOnInit (): void{
     const id = parseInt(this.route.snapshot.paramMap.get('id')!)
     this.personSchoolService.getPersonSchoolById(id).subscribe((personSchools: PersonSchoolDto[]) => {
       this.personSchools = personSchools;
-      this.getSettlements();
+      this.get();
     })
   } 
 
-  getSettlements() {
-    this.settlementService
+  get() {
+    this.schoolService
       .getAll()
       .pipe(
         catchError((err) => {
@@ -36,7 +38,7 @@ export class PersonSchoolComponent {
         })
       )
       .subscribe((res) => {
-        this.settlements = res;
+        this.schools = res;
       });
   }
 }
