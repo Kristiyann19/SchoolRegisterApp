@@ -5,5 +5,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
     public interface IPersonSchoolService
     {
         Task<List<PersonSchoolDto>> GetPersonSchoolByPersonIdAsync(int id);
+
+        Task AddPersonSchoolAsync(PersonSchoolAddDto personSchoolAddDto);
     }
 }
