@@ -75,12 +75,13 @@ export class PersonService {
     dateAsString = dateDigits.toString();
 
     const year = parseInt(yearAsString);
-    const month = parseInt(monthAsString.replace("0", ""));
-    const date = parseInt(dateAsString.replace("0", ""));
+    const month = parseInt(monthAsString);
+    const date = parseInt(dateAsString);
 
     const birthDate = new Date(year, month - 1, date);
 
-    const digitForGender = parseInt(personAddDto.uic.substring(9, 10));
+    const digitForGender = parseInt(personAddDto.uic.substring(8, 9));
+    debugger;
 
     const gender =
       digitForGender % 2 === 0 ? GenderEnum.male : GenderEnum.female;
