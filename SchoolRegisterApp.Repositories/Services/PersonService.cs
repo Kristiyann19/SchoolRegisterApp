@@ -50,7 +50,7 @@ namespace SchoolRegisterApp.Repositories.Services
                 BirthPlaceId = personAddDto.BirthPlaceId
             };
 
-            await context.AddAsync(person);
+            await context.AddAsync<Person>(person);
             await context.SaveChangesAsync();
 
             var personHistory = new PersonHistory
@@ -62,7 +62,7 @@ namespace SchoolRegisterApp.Repositories.Services
                 ModificationType = ModificationType.Created
             };
 
-            await context.AddAsync(personHistory);
+            await context.AddAsync<PersonHistory>(personHistory);
             await context.SaveChangesAsync();
         }
 
@@ -153,8 +153,8 @@ namespace SchoolRegisterApp.Repositories.Services
             dateAsString = dateDigits.ToString();
 
             int year = int.Parse(yearAsString);
-            int month = int.Parse(monthAsString.Replace("0", ""));
-            int date = int.Parse(dateAsString.Replace("0", ""));
+            int month = int.Parse(monthAsString);
+            int date = int.Parse(dateAsString);
 
             DateTime birthDate = new DateTime(year, month, date);
 
@@ -164,15 +164,8 @@ namespace SchoolRegisterApp.Repositories.Services
                 ? GenderEnum.Male 
                 : GenderEnum.Female;
 
-
-            //Взима времето със секундите и дава грешка
-            //if (personAddDto.Gender != gender || personAddDto.BirthDate != birthDate)
-            //{
-            //    throw new Exception("Invalid uic");
-            //}
-
-            personAddDto.BirthDate = birthDate;
-            personAddDto.Gender = gender;
+            personAddDto.BirthDate = personAddDto.BirthDate;
+            personAddDto.Gender = personAddDto.Gender;
 
         }
     }
