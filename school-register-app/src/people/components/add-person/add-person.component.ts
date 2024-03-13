@@ -4,7 +4,6 @@ import { catchError, throwError } from "rxjs";
 import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { PersonAddDto } from "../../dtos/person-add-dto";
 import { PersonService } from "../../services/person.service";
-import { GenderEnum } from "../../../enums/gender.enum";
 
 @Component({
   selector: "app-add-person",
@@ -37,7 +36,7 @@ export class AddPersonComponent {
       });
   }
 
-  add(personAddDto: PersonAddDto) {
+  addPerson(personAddDto: PersonAddDto) {
     this.personService
       .add(personAddDto)
       .pipe(
