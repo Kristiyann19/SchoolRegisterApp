@@ -65,7 +65,7 @@
       <tr *ngFor="let school of schools">
         <td>{{ school.name }}</td>
         <td>{{ school.nameAlt }}</td>
-        <td>{{ school.settlement }}</td>
+        <td>{{ school.settlement.name }}</td>
         <td>{{ schoolTypeEnumLocalization[school.type] }}</td>
       </tr>
     </tbody>
