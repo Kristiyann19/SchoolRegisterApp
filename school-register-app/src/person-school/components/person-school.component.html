@@ -25,7 +25,16 @@
     <tbody>
       <tr *ngFor="let personSchool of personSchools">
         <td>{{ personSchool.actionDate | date : 'medium'}}</td>
-        <td>{{ modificationTypeEnumLocalization[personSchool.modificationType] }}</td>
+        <td><select [(ngModel)]="personHistory.schoolId"
+                  class="form-control"
+                  name="schoolId"
+                  id="schoolId">
+            <option></option>
+            <option *ngFor="let settlement of settlements"
+                    [ngValue]="settlement.id">
+              {{ settlement.name }}
+            </option>
+          </select></td>
         <td>{{dataModifiedEnumLocalization[personHistory.dataModified]}}</td>
       </tr>
     </tbody>
