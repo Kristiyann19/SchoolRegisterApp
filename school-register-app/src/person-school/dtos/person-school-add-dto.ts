@@ -1,7 +1,6 @@
 import { PositionEnum } from "../../enums/position.enum";
 
-export class PersonSchoolDto {
-  id: number;
+export class PersonSchoolAddDto {
   position: PositionEnum;
   personId: number;
   schoolId: number;

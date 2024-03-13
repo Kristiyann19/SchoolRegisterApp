@@ -1,4 +1,5 @@
-﻿using SchoolRegisterApp.Models.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using SchoolRegisterApp.Models.Dtos;
 
 namespace SchoolRegisterApp.Repositories.Contracts
 {
@@ -6,6 +7,8 @@ namespace SchoolRegisterApp.Repositories.Contracts
     {
         Task<IEnumerable<SchoolDto>> GetAllSchoolsAsync();
 
-        Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter); 
+        Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter);
+
+        Task<SchoolIdAndNameDto> GetSchoolByUserAsync(HttpContext httpContext);
     }
 }
