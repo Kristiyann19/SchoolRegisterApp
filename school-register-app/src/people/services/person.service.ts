@@ -9,7 +9,6 @@ import { PersonDetailsDto } from "../dtos/person-details-dto";
 import { PersonAddDto } from "../dtos/person-add-dto";
 import { GenderEnum } from "../../enums/gender.enum";
 
-
 @Injectable({
   providedIn: "root",
 })
@@ -28,18 +27,15 @@ export class PersonService {
     );
   }
 
-
-  updatePerson(id: number, updatedPerson: PersonDetailsDto) : Observable<any>{
-    return this.http.put(this.baseUrl + `/${id}`, updatedPerson)
+  updatePerson(id: number, updatedPerson: PersonDetailsDto): Observable<any> {
+    return this.http.put(this.baseUrl + `/${id}`, updatedPerson);
   }
 
-  getById(id: number) : Observable<PersonDetailsDto> {
-    return this.http.get<PersonDetailsDto>(`${this.baseUrl}/${id}`)
-
+  getById(id: number): Observable<PersonDetailsDto> {
+    return this.http.get<PersonDetailsDto>(`${this.baseUrl}/${id}`);
   }
   add(personAddDto: PersonAddDto): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/Add`, personAddDto);
-
   }
 
   composeQueryString(personDto: PersonFilterDto): string {
@@ -84,9 +80,10 @@ export class PersonService {
 
     const birthDate = new Date(year, month - 1, date);
 
-    const lastUicDigit = parseInt(personAddDto.uic.substring(9, 10));
+    const digitForGender = parseInt(personAddDto.uic.substring(9, 10));
 
-    const gender = lastUicDigit % 2 === 0 ? GenderEnum.female : GenderEnum.male;
+    const gender =
+      digitForGender % 2 === 0 ? GenderEnum.male : GenderEnum.female;
 
     personAddDto.birthDate = birthDate;
     personAddDto.gender = gender;
