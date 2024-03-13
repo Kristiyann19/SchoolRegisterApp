@@ -8,10 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Models.Entities;
-<<<<<<< HEAD
-=======
+
 using SchoolRegisterApp.Models.Enums;
->>>>>>> 4ede17321f1a302f9e3a1a52a445dcf64322833c
+
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Repositories.Services
@@ -80,7 +79,7 @@ namespace SchoolRegisterApp.Repositories.Services
                   .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
                   .ToListAsync();
 
-<<<<<<< HEAD
+
         public async Task<PersonDetailsDto> GetPersonDetailsAsync(int id)
             => await context.People
                   .ProjectTo<PersonDetailsDto>(mapper.ConfigurationProvider)    
@@ -94,7 +93,10 @@ namespace SchoolRegisterApp.Repositories.Services
             mapper.Map(updatedPerson, existingPerson);
 
             await context.SaveChangesAsync();
-=======
+
+        }
+
+
         private void DecodeUic(PersonAddDto personAddDto)
         {
             const int numberToSubtractFromMonth = 40;
@@ -147,7 +149,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
             personAddDto.BirthDate = birthDate;
             personAddDto.Gender = gender;
->>>>>>> 4ede17321f1a302f9e3a1a52a445dcf64322833c
+
         }
     }
 }

@@ -54,24 +54,20 @@
              [(ngModel)]="personDto.birthPlace" />
     </div>
 
-<<<<<<< HEAD
-    <button class="btn btn-primary"
-            type="submit">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      Търси
-    </button>
-=======
+
     <div class="buttons">
-      <button class="btn btn-primary" type="submit">
+      <button class="btn btn-primary"
+              type="submit">
         <i class="fa-solid fa-magnifying-glass"></i>
         Търси
       </button>
-      <button class="btn btn-outline-primary" routerLink="/add-person">
+      <button class="btn btn-outline-primary"
+              routerLink="/add-person">
         <i class="fa-solid fa-plus"></i>
         Добави
       </button>
     </div>
->>>>>>> 4ede17321f1a302f9e3a1a52a445dcf64322833c
+
   </form>
 
   <table class="table table-striped">
@@ -89,7 +85,7 @@
         <td>{{ person.uic }}</td>
         <td>{{ person.firstName }}</td>
         <td>{{ person.lastName }}</td>
-        <td>{{ person.birthPlace }}</td>
+        <td>{{ person.birthPlace.name }}</td>
         <td>{{ person.birthDate | date }}</td>
         <button class="btn btn-primary"
                 [routerLink]="['/person',person.id]">Детайли</button>

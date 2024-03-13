@@ -14,6 +14,6 @@ namespace SchoolRegisterApp.Models.Dtos
 
         public DateTime BirthDate { get; set; }
 
-        public string BirthPlace { get; set; }
+        public Settlement BirthPlace { get; set; }
     }
 }

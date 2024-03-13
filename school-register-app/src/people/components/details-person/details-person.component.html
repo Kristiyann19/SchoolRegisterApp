@@ -59,12 +59,17 @@
               <option [ngValue]="2">Жена</option>
             </select></td>
 
-          <td><input type="text"
-                   id="birthPlace"
-                   [(ngModel)]="person.birthPlace"
-                   name="birthPlace"
-                   class="form-control"
-                   required></td>
+          <td><select [(ngModel)]="person.birthPlaceId"
+                    class="form-control"
+                    name="birthPlace"
+                    id="birthPlace">
+              <option></option>
+              <option *ngFor="let settlement of settlements"
+                      [ngValue]="settlement.id">
+                {{ settlement.name }}
+              </option>
+            </select></td>
+
 
         </tr>
         <button type="submit"
