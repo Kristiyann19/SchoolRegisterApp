@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
@@ -50,7 +48,7 @@ namespace SchoolRegisterApp.Repositories.Services
                 BirthPlaceId = personAddDto.BirthPlaceId
             };
 
-            await context.AddAsync<Person>(person);
+            await context.People.AddAsync(person);
             await context.SaveChangesAsync();
 
             var personHistory = new PersonHistory
@@ -58,11 +56,11 @@ namespace SchoolRegisterApp.Repositories.Services
                 PersonId = person.Id,
                 UserId = userId,
                 ActionDate = DateTime.UtcNow,
-                DataModified =DataModified.Person,
+                DataModified = DataModified.Person,
                 ModificationType = ModificationType.Created
             };
 
-            await context.AddAsync<PersonHistory>(personHistory);
+            await context.PersonHistories.AddAsync(personHistory);
             await context.SaveChangesAsync();
         }
 

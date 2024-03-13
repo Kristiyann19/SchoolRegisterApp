@@ -37,6 +37,7 @@ export class PersonService {
     return this.http.get<PersonDetailsDto>(`${this.baseUrl}/${id}`)
 
   }
+
   add(personAddDto: PersonAddDto): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/Add`, personAddDto);
 
@@ -84,9 +85,11 @@ export class PersonService {
 
     const birthDate = new Date(year, month - 1, date);
 
-    const lastUicDigit = parseInt(personAddDto.uic.substring(9, 10));
 
-    const gender = lastUicDigit % 2 === 0 ? GenderEnum.female : GenderEnum.male;
+    const digitForGender = parseInt(personAddDto.uic.substring(8, 9));
+
+
+    const gender = digitForGender % 2 === 0 ? GenderEnum.female : GenderEnum.male;
 
     personAddDto.birthDate = birthDate;
     personAddDto.gender = gender;
