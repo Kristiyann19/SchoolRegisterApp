@@ -9,6 +9,7 @@ import { AllPeopleComponent } from "../people/components/all-people/all-people.c
 import { DetailsPersonComponent } from "../people/components/details-person/details-person.component";
 
 import { AddPersonComponent } from "../people/components/add-person/add-person.component";
+import { PersonHistoryComponent } from "../person-history/components/person-history.component";
 
 
 const routes: Routes = [
@@ -17,10 +18,9 @@ const routes: Routes = [
   { path: "all-users", component: AllUsersComponent },
   { path: "all-schools", component: AllSchoolsComponent },
   { path: "all-people", component: AllPeopleComponent },
-
   { path: "person/:id", component: DetailsPersonComponent},
-
   { path: "add-person", component: AddPersonComponent },
+  { path: "person-history/:id", component: PersonHistoryComponent}
 
 ];
 

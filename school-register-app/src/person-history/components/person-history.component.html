@@ -1,0 +1,42 @@
+<div class="container">
+  <nav>
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <button class="btn btn-hover"
+                [routerLink]="['/person',personHistory.personId]"> Основни данни</button>
+
+        <button [routerLink]="['/person-history', personHistory.personId]"
+                class="btn btn-hover"
+                type="button">
+          История на промени
+        </button>
+      </li>
+    </ul>
+  </nav>
+  <hr>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Дата на модификация</th>
+        <th scope="col">Действие</th>
+        <th scope="col">Обект</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let personHistory of personHistories">
+        <td>{{ personHistory.actionDate | date : 'medium'}}</td>
+        <td><select [(ngModel)]="personHistory.schoolId"
+                  class="form-control"
+                  name="schoolId"
+                  id="schoolId">
+            <option></option>
+            <option *ngFor="let school of settlements"
+                    [ngValue]="settlement.id">
+              {{ settlement.name }}
+            </option>
+          </select></td>
+        <td>{{dataModifiedEnumLocalization[personHistory.dataModified]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

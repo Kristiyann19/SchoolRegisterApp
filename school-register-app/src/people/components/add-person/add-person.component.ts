@@ -48,46 +48,5 @@ export class AddPersonComponent {
       .subscribe((res) => {});
   }
 
-  public decodeUic(personAddDto: PersonAddDto) {
-    const numberToSubtractFromMonth = 40;
-
-    const bornBefore2000 = "19";
-    const bornAfter2000 = "20";
-
-    const lastTwoDigitsOfYear = personAddDto.uic.substring(0, 2);
-    const monthDigits = personAddDto.uic.substring(2, 4);
-    const dateDigits = personAddDto.uic.substring(4, 6);
-
-    const firstDigitOfMonthDigits = monthDigits.substring(0, 1);
-
-    let yearAsString = "";
-    let monthAsString = "";
-    let dateAsString = "";
-
-    if (firstDigitOfMonthDigits === "4" || firstDigitOfMonthDigits === "5") {
-      yearAsString = bornAfter2000 + lastTwoDigitsOfYear;
-
-      const monthAsDigit = parseInt(monthDigits) - numberToSubtractFromMonth;
-      monthAsString = monthAsDigit.toString();
-    } else {
-      yearAsString = bornBefore2000 + lastTwoDigitsOfYear;
-
-      monthAsString = monthDigits.toString();
-    }
-
-    dateAsString = dateDigits.toString();
-
-    const year = parseInt(yearAsString);
-    const month = parseInt(monthAsString.replace("0", ""));
-    const date = parseInt(dateAsString.replace("0", ""));
-
-    const birthDate = new Date(year, month - 1, date);
-
-    const lastUicDigit = parseInt(personAddDto.uic.substring(9, 10));
-
-    const gender = lastUicDigit % 2 === 0 ? GenderEnum.female : GenderEnum.male;
-
-    personAddDto.birthDate = birthDate;
-    personAddDto.gender = gender;
-  }
+  
 }

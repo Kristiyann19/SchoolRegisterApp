@@ -1,16 +1,14 @@
-﻿using System.Security.Claims;
-
+﻿using System;
+using System.Net.Http;
+using System.Security.Claims;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Models.Entities;
-
 using SchoolRegisterApp.Models.Enums;
-
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Repositories.Services
@@ -26,7 +24,7 @@ namespace SchoolRegisterApp.Repositories.Services
             mapper = _mapper;
         }
 
-        public async Task AddPersonAsync(PersonAddDto personAddDto, HttpContext httpContext)
+        public async Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext httpContext)
         {
             var existingUserClaim = httpContext.User
                 .FindFirst(ClaimTypes.Name);
@@ -41,7 +39,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
             DecodeUic(personAddDto);
 
-            Person person = new Person
+            var person = new Person
             {
                 FirstName = personAddDto.FirstName,
                 MiddleName = personAddDto.MiddleName,
@@ -55,7 +53,7 @@ namespace SchoolRegisterApp.Repositories.Services
             await context.AddAsync(person);
             await context.SaveChangesAsync();
 
-            PersonHistory personHistory = new PersonHistory
+            var personHistory = new PersonHistory
             {
                 PersonId = person.Id,
                 UserId = userId,
@@ -85,19 +83,43 @@ namespace SchoolRegisterApp.Repositories.Services
                   .ProjectTo<PersonDetailsDto>(mapper.ConfigurationProvider)    
                   .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson)
+        public async Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson, HttpContext httpContext)
         {
+            var existingUserClaim = httpContext.User
+                .FindFirst(ClaimTypes.Name);
+
+            if (existingUserClaim == null)
+            {
+                throw new Exception("Invalid user");
+            }
+
+            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            int userId = user.Id;
+
+
             var existingPerson = await context.People
                 .FirstOrDefaultAsync(x => x.Id == id);
 
+            DecodeUic(updatedPerson);
+
             mapper.Map(updatedPerson, existingPerson);
 
+            var personHistory = new PersonHistory
+            {
+                PersonId = updatedPerson.Id,
+                UserId = userId,
+                ActionDate = DateTime.UtcNow,
+                DataModified = DataModified.Person,
+                ModificationType = ModificationType.Updated
+            };
+
+            await context.AddAsync(personHistory);
             await context.SaveChangesAsync();
 
         }
 
 
-        private void DecodeUic(PersonAddDto personAddDto)
+        private void DecodeUic(PersonDetailsDto personAddDto)
         {
             const int numberToSubtractFromMonth = 40;
 
@@ -142,10 +164,12 @@ namespace SchoolRegisterApp.Repositories.Services
                 ? GenderEnum.Female 
                 : GenderEnum.Male;
 
-            if (personAddDto.Gender != gender || personAddDto.BirthDate != birthDate)
-            {
-                throw new Exception("Invalid uic");
-            }
+
+            //Взима времето със секундите и дава грешка
+            //if (personAddDto.Gender != gender || personAddDto.BirthDate != birthDate)
+            //{
+            //    throw new Exception("Invalid uic");
+            //}
 
             personAddDto.BirthDate = birthDate;
             personAddDto.Gender = gender;

@@ -17,7 +17,7 @@ export class DetailsPersonComponent {
   person: PersonDetailsDto = new PersonDetailsDto();
   settlements: SettlementDto[] = [];
   personId: number;
-  constructor(private route: ActivatedRoute, private personService: PersonService, private router: Router, private settlementService: SettlementService) {}
+  constructor(private route: ActivatedRoute, public personService: PersonService, private router: Router, private settlementService: SettlementService) {}
 
 
 

@@ -53,6 +53,22 @@ namespace SchoolRegisterApp
                 .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic))
                 .ForMember(m => m.Gender, cfg => cfg.MapFrom(src => src.Gender));
 
+            CreateMap<PersonHistory, PersonHistoryDto>()
+                .ForMember(m => m.UserId, cfg => cfg.MapFrom(src => src.UserId))
+                .ForMember(m => m.PersonId, cfg => cfg.MapFrom(src => src.PersonId))
+                .ForMember(m => m.DataModified, cfg => cfg.MapFrom(src => src.DataModified))
+                .ForMember(m => m.ActionDate, cfg => cfg.MapFrom(src => src.ActionDate))
+                .ForMember(m => m.ModificationType, cfg => cfg.MapFrom(src => src.ModificationType))
+                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id));
+
+            CreateMap<PersonSchool, PersonSchoolDto>()
+                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
+                .ForMember(m => m.PersonId, cfg => cfg.MapFrom(src => src.PersonId))
+                .ForMember(m => m.SchoolId, cfg => cfg.MapFrom(src => src.SchoolId))
+                .ForMember(m => m.Position, cfg => cfg.MapFrom(src => src.Position))
+                .ForMember(m => m.StartDate, cfg => cfg.MapFrom(src => src.StartDate))
+                .ForMember(m => m.EndDate, cfg => cfg.MapFrom(src => src.EndDate));
+
             CreateMap<PersonDetailsDto, Person>()
                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
                .ForMember(m => m.FirstName, cfg => cfg.MapFrom(src => src.FirstName))

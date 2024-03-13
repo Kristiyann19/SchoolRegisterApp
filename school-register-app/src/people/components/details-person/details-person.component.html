@@ -1,4 +1,20 @@
 <div class="container">
+  <nav>
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <button class="btn btn-hover"
+                [routerLink]="['/person',person.id]"> Основни данни</button>
+
+        <button [routerLink]="['/person-history', person.id]"
+                class="btn btn-hover"
+                type="button">
+          История на промени
+        </button>
+
+      </li>
+    </ul>
+  </nav>
+  <hr>
   <form (ngSubmit)="updatePerson()"
         #updateForm="ngForm">
     <table class="table table-striped">
@@ -21,6 +37,7 @@
                    [(ngModel)]="person.uic"
                    name="uic"
                    class="form-control"
+                   (ngModelChange)="personService.decodeUic(person)"
                    required>
           </td>
           <td><input type="text"
@@ -46,14 +63,16 @@
 
           <td><input type="text"
                    id="birthDate"
-                   [(ngModel)]="person.birthDate"
+                   value="{{ person.birthDate | date }}"
                    name="birthDate"
                    class="form-control"
+                   disabled="disabled"
                    required></td>
 
           <td> <select id="gender"
                     [(ngModel)]="person.gender"
                     name="gender"
+                    disabled="disabled"
                     class="form-select">
               <option [ngValue]="1">Мъж</option>
               <option [ngValue]="2">Жена</option>

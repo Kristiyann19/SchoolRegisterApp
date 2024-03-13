@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SchoolRegisterApp.Models;
@@ -11,9 +12,11 @@ using SchoolRegisterApp.Models;
 namespace SchoolRegisterApp.Models.Migrations
 {
     [DbContext(typeof(SchoolRegisterDbContext))]
-    partial class SchoolRegisterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240313094722_idPrimaryKey")]
+    partial class idPrimaryKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,30 +98,25 @@ namespace SchoolRegisterApp.Models.Migrations
 
             modelBuilder.Entity("SchoolRegisterApp.Models.Entities.PersonSchool", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int>("PersonId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Position")
                         .HasColumnType("integer");
 
                     b.Property<int>("SchoolId")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
+                    b.HasKey("PersonId", "SchoolId");
 
                     b.HasIndex("SchoolId");
 

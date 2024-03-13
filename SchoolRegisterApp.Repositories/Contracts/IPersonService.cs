@@ -11,9 +11,9 @@ namespace SchoolRegisterApp.Repositories.Contracts
 
         Task<PersonDetailsDto> GetPersonDetailsAsync(int id);
 
-        Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson);
+        Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson, HttpContext httpContext);
 
-        Task AddPersonAsync(PersonAddDto personAddDto, HttpContext htppContext);
+        Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext htppContext);
 
     }
 }

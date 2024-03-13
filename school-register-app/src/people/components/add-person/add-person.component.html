@@ -1,65 +1,56 @@
 <div class="container">
-  <form #filterForm="ngForm" (ngSubmit)="add(personAddDto)">
+  <form #filterForm="ngForm"
+        (ngSubmit)="add(personAddDto)">
     <div class="form-group">
       <label for="firstName">Първо име: </label>
 
-      <input
-        type="text"
-        name="firstName"
-        class="form-control"
-        id="firstName"
-        [(ngModel)]="personAddDto.firstName"
-      />
+      <input type="text"
+             name="firstName"
+             class="form-control"
+             id="firstName"
+             [(ngModel)]="personAddDto.firstName" />
     </div>
 
     <div class="form-group">
       <label for="middleName">Презиме: </label>
 
-      <input
-        type="text"
-        name="middleName"
-        class="form-control"
-        id="middleName"
-        [(ngModel)]="personAddDto.middleName"
-      />
+      <input type="text"
+             name="middleName"
+             class="form-control"
+             id="middleName"
+             [(ngModel)]="personAddDto.middleName" />
     </div>
 
     <div class="form-group">
       <label for="lastName">Фамилия: </label>
 
-      <input
-        type="text"
-        name="lastName"
-        class="form-control"
-        id="lastName"
-        [(ngModel)]="personAddDto.lastName"
-      />
+      <input type="text"
+             name="lastName"
+             class="form-control"
+             id="lastName"
+             [(ngModel)]="personAddDto.lastName" />
     </div>
 
     <div class="form-group">
       <label for="uic">ЕГН: </label>
 
-      <input
-        #uicInput="ngModel"
-        type="text"
-        name="uic"
-        class="form-control"
-        id="uic"
-        [(ngModel)]="personAddDto.uic"
-        (ngModelChange)="decodeUic(personAddDto)"
-      />
+      <input #uicInput="ngModel"
+             type="text"
+             name="uic"
+             class="form-control"
+             id="uic"
+             [(ngModel)]="personAddDto.uic"
+             (ngModelChange)="personService.decodeUic(personAddDto)" />
     </div>
 
     <div class="form-group">
       <label for="gender">Пол: </label>
 
-      <select
-        [(ngModel)]="personAddDto.gender"
-        class="form-control"
-        name="gender"
-        id="gender"
-        disabled
-      >
+      <select [(ngModel)]="personAddDto.gender"
+              class="form-control"
+              name="gender"
+              id="gender"
+              disabled>
         <option></option>
         <option value="1">Мъж</option>
         <option value="2">Жена</option>
@@ -69,38 +60,33 @@
     <div class="form-group">
       <label for="birthDate">Дата на раждане: </label>
 
-      <input
-        type="text"
-        name="birthDate"
-        class="form-control"
-        id="birthDate"
-        (ngModel)="(personAddDto.birthDate)"
-        disabled
-        value="{{ personAddDto.birthDate | date }}"
-      />
+      <input type="text"
+             name="birthDate"
+             class="form-control"
+             id="birthDate"
+             (ngModel)="(personAddDto.birthDate)"
+             disabled
+             value="{{ personAddDto.birthDate | date }}" />
     </div>
 
     <div class="form-group">
       <label for="birthPlaceId">Месторождение: </label>
 
-      <select
-        [(ngModel)]="personAddDto.birthPlaceId"
-        class="form-control"
-        name="birthPlaceId"
-        id="birthPlaceId"
-      >
+      <select [(ngModel)]="personAddDto.birthPlaceId"
+              class="form-control"
+              name="birthPlaceId"
+              id="birthPlaceId">
         <option></option>
-        <option
-          *ngFor="let settlement of settlements"
-          [ngValue]="settlement.id"
-        >
+        <option *ngFor="let settlement of settlements"
+                [ngValue]="settlement.id">
           {{ settlement.name }}
         </option>
       </select>
     </div>
 
     <div class="buttons">
-      <button class="btn btn-primary" (click)="add(personAddDto)">
+      <button class="btn btn-primary"
+              (click)="add(personAddDto)">
         Добави
       </button>
     </div>

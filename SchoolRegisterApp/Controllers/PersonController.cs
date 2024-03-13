@@ -32,7 +32,7 @@ namespace SchoolRegisterApp.Controllers
 
 
         [HttpGet("{id:int}")]
-        [AllowAnonymous]
+        [AllowAnonymous]//Remove after done testing
         public async Task<IActionResult> GetDetailsById([FromRoute] int id)
         {
             return Ok(await personService
@@ -40,18 +40,18 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [AllowAnonymous]
+        [AllowAnonymous]//Remove after done testing
         public async Task<IActionResult> UpdatePerson([FromRoute] int id, [FromBody] PersonDetailsDto updatedPerson)
         {
             await personService
-                .UpdatePersonAsync(id, updatedPerson);
+                .UpdatePersonAsync(id, updatedPerson, HttpContext);
 
             return Ok();
         }
 
         [HttpPost("Add")]
-        [AllowAnonymous]
-        public async Task<IActionResult> AddPersonAsync([FromBody] PersonAddDto personAddDto)
+        [AllowAnonymous]//Remove after done testing
+        public async Task<IActionResult> AddPersonAsync([FromBody] PersonDetailsDto personAddDto)
         {
             await personService
                 .AddPersonAsync(personAddDto, HttpContext);
