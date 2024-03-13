@@ -1,18 +1,25 @@
 <div class="container">
+
   <nav>
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
         <button class="btn btn-hover"
-                [routerLink]="['/person',personSchools]"> Основни данни</button>
+                [routerLink]="['/person',person.id]"> Основни данни</button>
 
-        <button [routerLink]="['/person-history', personSchools]"
+        <button [routerLink]="['/person-history', person.id]"
                 class="btn btn-hover"
                 type="button">
           История на промени
         </button>
+        <button [routerLink]="['/person-school', person.id]"
+                class="btn btn-hover"
+                type="button">
+          Преподавателски длъжности
+        </button>
       </li>
     </ul>
   </nav>
+
   <hr>
   <table class="table table-striped">
     <thead>

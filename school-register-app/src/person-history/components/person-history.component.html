@@ -3,12 +3,18 @@
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
         <button class="btn btn-hover"
-                [routerLink]="['/person',personHistory.personId]"> Основни данни</button>
+                [routerLink]="['/person',person.id]"> Основни данни</button>
 
-        <button [routerLink]="['/person-history', personHistory.personId]"
+        <button [routerLink]="['/person-history', person.id]"
                 class="btn btn-hover"
                 type="button">
           История на промени
+        </button>
+
+        <button [routerLink]="['/person-school', person.id]"
+                class="btn btn-hover"
+                type="button">
+          Преподавателски длъжности
         </button>
       </li>
     </ul>
