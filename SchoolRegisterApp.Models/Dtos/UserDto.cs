@@ -1,4 +1,6 @@
-﻿namespace SchoolRegisterApp.Models.Dtos
+﻿using SchoolRegisterApp.Models.Entities;
+
+namespace SchoolRegisterApp.Models.Dtos
 {
     public class UserDto
     {
@@ -6,7 +8,7 @@
 
         public string Username { get; set; }
 
-        public string School { get; set; }
+        public School School { get; set; }
 
         public string Phone { get; set; }
     }
