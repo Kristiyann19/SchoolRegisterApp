@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SchoolRegisterApp.Models;
@@ -11,9 +12,11 @@ using SchoolRegisterApp.Models;
 namespace SchoolRegisterApp.Models.Migrations
 {
     [DbContext(typeof(SchoolRegisterDbContext))]
-    partial class SchoolRegisterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240314075752_AddSchoolIdToPerson")]
+    partial class AddSchoolIdToPerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

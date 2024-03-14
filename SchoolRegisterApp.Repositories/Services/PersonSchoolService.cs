@@ -69,10 +69,14 @@ namespace SchoolRegisterApp.Repositories.Services
         }
 
         public async Task<List<PersonSchoolDto>> GetPersonSchoolByPersonIdAsync(int id)
-            => await context.PersonSchools
+        {
+            var personSchools = await context.PersonSchools
                 .ProjectTo<PersonSchoolDto>(mapper.ConfigurationProvider)
                 .Where(x => x.PersonId == id)
                 .ToListAsync();
+
+            return personSchools;
+        }
 
         public async Task UpdatePersonSchoolAsync(PersonSchoolUpdateDto personSchoolUpdateDto, HttpContext httpContext)
         {
