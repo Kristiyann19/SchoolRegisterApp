@@ -49,7 +49,7 @@ namespace SchoolRegisterApp.Controllers
             return Ok();
         }
 
-        [HttpPost("Add")]
+        [HttpPost()]
         [AllowAnonymous]//Remove after done testing
         public async Task<IActionResult> AddPersonAsync([FromBody] PersonDetailsDto personAddDto)
         {
