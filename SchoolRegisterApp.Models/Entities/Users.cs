@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Models.Entities
 {
@@ -18,6 +19,8 @@ namespace SchoolRegisterApp.Models.Entities
         public int SchoolId { get; set; }
 
         public School School { get; set; }
+
+        public RoleEnum Role { get; set; }
 
         public bool IsActive { get; set; }
     }
