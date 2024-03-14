@@ -12,8 +12,11 @@ namespace SchoolRegisterApp.Models.Dtos
 
         public string Uic { get; set; }
 
+        public int? SchoolId { get; set; }
+
         public DateTime BirthDate { get; set; }
 
         public Settlement BirthPlace { get; set; }
+
     }
 }

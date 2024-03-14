@@ -16,7 +16,7 @@ namespace SchoolRegisterApp.Models.Entities
 
         public string PasswordSalt { get; set; }
 
-        public int SchoolId { get; set; }
+        public int? SchoolId { get; set; }
 
         public School School { get; set; }
 

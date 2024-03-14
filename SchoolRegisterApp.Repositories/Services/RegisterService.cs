@@ -42,7 +42,7 @@ namespace SchoolRegisterApp.Repositories.Services
                 Username = register.UserName,
                 Phone = register.Phone,
                 PasswordSalt = PasswordHasher.GenerateSalt(),
-                SchoolId = register.SchoolId
+                SchoolId = register.SchoolId == 0 ? null : register.SchoolId
             };
             user.PasswordHash = PasswordHasher.ComputeHash(register.Password, user.PasswordSalt);
             user.IsActive = true;

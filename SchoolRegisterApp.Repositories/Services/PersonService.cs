@@ -77,10 +77,32 @@ namespace SchoolRegisterApp.Repositories.Services
             }
         }
 
-        public async Task<List<PersonDto>> GetAllPeopleAsync()
-            => await context.People
-                .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
-                .ToListAsync();
+        public async Task<List<PersonDto>> GetAllPeopleAsync(HttpContext httpContext)
+        {
+            var existingUserClaim = httpContext.User
+                        .FindFirst(ClaimTypes.Name);
+
+            if (existingUserClaim == null)
+            {
+                throw new Exception("Invalid user");
+            }
+
+            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+
+            var people = await context.People
+                                .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
+                                .ToListAsync();
+
+            if (user.Role == RoleEnum.Director)
+            {
+                people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null);
+
+                return people;
+            }
+
+            return people;
+
+        }
 
         public async Task<List<PersonDto>> GetFilteredPeopleAsync(PersonFilterDto filter) 
             => await filter

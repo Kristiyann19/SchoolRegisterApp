@@ -20,7 +20,7 @@ namespace SchoolRegisterApp.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             return Ok(await personService
-                .GetAllPeopleAsync());
+                .GetAllPeopleAsync(HttpContext));
         }
 
         [HttpGet("Filter")]
