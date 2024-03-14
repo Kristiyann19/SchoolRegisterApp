@@ -1,4 +1,5 @@
-﻿using SchoolRegisterApp.Models.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using SchoolRegisterApp.Models.Dtos;
 
 namespace SchoolRegisterApp.Repositories.Contracts
 {
@@ -6,6 +7,6 @@ namespace SchoolRegisterApp.Repositories.Contracts
     {
         Task<List<PersonSchoolDto>> GetPersonSchoolByPersonIdAsync(int id);
 
-        Task AddPersonSchoolAsync(PersonSchoolAddDto personSchoolAddDto);
+        Task AddPersonSchoolAsync(PersonSchoolAddDto personSchoolAddDto, HttpContext httpContext);
     }
 }

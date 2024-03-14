@@ -30,5 +30,12 @@ namespace SchoolRegisterApp.Controllers
             return Ok(await schoolService
                 .GetFilteredSchoolsAsync(schoolFilter));
         }
+
+        [HttpGet("GetSchoolByUser")]
+        public async Task<IActionResult> GetSchoolByUser()
+        {
+            return Ok(await schoolService
+                .GetSchoolByUserAsync(HttpContext));
+        }
     }
 }
