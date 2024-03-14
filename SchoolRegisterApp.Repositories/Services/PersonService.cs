@@ -99,9 +99,9 @@ namespace SchoolRegisterApp.Repositories.Services
 
             if (user.Role == RoleEnum.Director)
             {
-                people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null);
+                var peopleSchool = people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null).ToList();
 
-                return people;
+                return peopleSchool;
             }
 
             return people;
