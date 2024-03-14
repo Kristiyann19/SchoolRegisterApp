@@ -37,7 +37,11 @@ namespace SchoolRegisterApp.Repositories.Services
                     }
 
                     var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
-                    int userId = user.Id;
+
+                    if (user.Role != RoleEnum.Admin)
+                    {
+                        throw new Exception("You are not an admin");
+                    }
 
                     DecodeUic(personAddDto);
 
@@ -58,7 +62,7 @@ namespace SchoolRegisterApp.Repositories.Services
                     var personHistory = new PersonHistory
                     {
                         PersonId = person.Id,
-                        UserId = userId,
+                        UserId = user.Id,
                         ActionDate = DateTime.UtcNow,
                         DataModified = DataModified.Person,
                         ModificationType = ModificationType.Created
