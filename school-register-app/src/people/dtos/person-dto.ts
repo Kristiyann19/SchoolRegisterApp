@@ -1,3 +1,4 @@
+import { SchoolIdAndNameDto } from "../../school/all-schools/dtos/school-id-and-name-dto";
 import { SettlementDto } from "../../settlement/dtos/settlement-dto";
 
 export class PersonDto {
@@ -6,5 +7,7 @@ export class PersonDto {
   lastName: string;
   uic: string;
   birthDate: Date;
+  schoolId : number;
+ 
   birthPlace: SettlementDto;
 }

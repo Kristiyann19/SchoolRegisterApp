@@ -52,6 +52,8 @@ namespace SchoolRegisterApp
                 .ForMember(m => m.MiddleName, cfg => cfg.MapFrom(src => src.MiddleName))
                 .ForMember(m => m.LastName, cfg => cfg.MapFrom(src => src.LastName))
                 .ForMember(m => m.BirthDate, cfg => cfg.MapFrom(src => src.BirthDate))
+                .ForMember(m => m.SchoolId, cfg => cfg.MapFrom(src => src.SchoolId))
+                .ForMember(m => m.School, cfg => cfg.MapFrom(src => src.School))
                 .ForMember(m => m.BirthPlaceId, cfg => cfg.MapFrom(src => src.BirthPlaceId))
                 .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic))
                 .ForMember(m => m.Gender, cfg => cfg.MapFrom(src => src.Gender));

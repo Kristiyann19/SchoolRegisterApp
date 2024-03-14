@@ -33,6 +33,7 @@
           <th scope="col">Дата на раждане</th>
           <th scope="col">Пол</th>
           <th scope="col">Месторождение</th>
+          <th scope="col">Училище</th>
         </tr>
       </thead>
       <tbody>
@@ -94,8 +95,8 @@
                 {{ settlement.name }}
               </option>
             </select></td>
-
-
+          <td *ngIf="person.school?.name == null">Няма добавена длъжност </td>
+          <td>{{person.school?.name}} </td>
         </tr>
         <button type="submit"
                 class="btn btn-primary"

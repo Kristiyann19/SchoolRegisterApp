@@ -8,11 +8,19 @@ import { Router } from "@angular/router";
   providedIn: "root",
 })
 export class RegistrationService {
-  private baseUrl = "http://localhost:12123";
+  private baseUrl = "http://localhost:12123/api/Register";
 
   constructor(private http: HttpClient) {}
 
   register(userDto: UserRegistrationDto): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/api/Register`, userDto);
+    return this.http.post<void>(`${this.baseUrl}`, userDto);
   }
+
+  checkUsernameAvailability(username: string) : Observable<boolean>{
+    return this.http.get<boolean>(`${this.baseUrl}/check-username/${username}`);
+}
+
+  checkPhoneAvailability(phone: string) : Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/check-phone/${phone}`)
+}
 }

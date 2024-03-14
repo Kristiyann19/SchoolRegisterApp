@@ -24,5 +24,21 @@ namespace SchoolRegisterApp.Controllers
 
             return Ok();
         }
+
+        [HttpGet("check-username/{username}")]
+        public ActionResult UserNameValidation(string username)
+        {
+            var isAvailable = registerService.CheckUserNameAvailability(username);
+
+            return Ok(isAvailable);
+        }
+
+        [HttpGet("check-phone/{phone}")]
+        public ActionResult EmailValidation(string phone)
+        {
+            var isAvailable = registerService.CheckPhoneAvailability(phone);
+
+            return Ok(isAvailable);
+        }
     }
 }

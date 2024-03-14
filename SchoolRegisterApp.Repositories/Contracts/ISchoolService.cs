@@ -10,5 +10,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
         Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter);
 
         Task<SchoolIdAndNameDto> GetSchoolByUserAsync(HttpContext httpContext);
+
+        Task<string> GetSchoolNameById(int id);
     }
 }

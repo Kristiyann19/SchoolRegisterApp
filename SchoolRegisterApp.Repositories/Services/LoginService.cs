@@ -23,7 +23,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public string Login(LoginDto login)
         {
-            var LoginUser = context.Users.SingleOrDefault(x => x.Username == login.UserName);
+            var LoginUser = context.Users.SingleOrDefault(x => x.Username == login.Username);
 
             if (LoginUser == null)
             {
@@ -46,7 +46,7 @@ namespace SchoolRegisterApp.Repositories.Services
                 Audience = "http://localhost:12123",
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, login.UserName)
+                    new Claim(ClaimTypes.Name, login.Username)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)

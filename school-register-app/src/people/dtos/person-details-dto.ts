@@ -1,4 +1,5 @@
 import { GenderEnum } from "../../enums/gender.enum";
+import { SchoolDto } from "../../school/all-schools/dtos/school-dto";
 import { SettlementDto } from "../../settlement/dtos/settlement-dto";
 
 export class PersonDetailsDto{ 
@@ -9,5 +10,7 @@ export class PersonDetailsDto{
   uic: string;
   birthDate: Date;
   gender: GenderEnum;
+  schoolId: number;
+  school: SchoolDto;
   birthPlaceId: number;
 }

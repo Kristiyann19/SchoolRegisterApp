@@ -6,7 +6,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
     {
         void Register(RegisterDto register);
 
-        bool CheckUserNameAvailability(string userName);
+        bool CheckUserNameAvailability(string username);
 
         bool CheckPhoneAvailability(string phone);
     }

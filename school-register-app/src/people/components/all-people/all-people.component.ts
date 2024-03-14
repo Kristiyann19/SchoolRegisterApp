@@ -4,6 +4,8 @@ import { PersonFilterDto } from "../../dtos/person-filter-dto";
 import { PersonService } from "../../services/person.service";
 import { catchError, throwError } from "rxjs";
 import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
+import { SchoolService } from "../../../school/all-schools/services/school.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-all-people",
@@ -13,10 +15,11 @@ import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 export class AllPeopleComponent {
   people: PersonDto[] = [];
   personDto: PersonFilterDto = new PersonFilterDto();
-
+  schoolId: number;
   settlement: SettlementDto = new SettlementDto();
+  schoolName: string;
 
-  constructor(public personService: PersonService) {}
+  constructor(public personService: PersonService, public schoolService: SchoolService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.get();
