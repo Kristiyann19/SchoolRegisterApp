@@ -1,26 +1,30 @@
 <div class="container">
-
   <nav>
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
-        <button class="btn btn-hover"
-                [routerLink]="['/person',person.id]"> Основни данни</button>
+        <button class="btn btn-hover" [routerLink]="['/person', person.id]">
+          Основни данни
+        </button>
 
-        <button [routerLink]="['/person-history', person.id]"
-                class="btn btn-hover"
-                type="button">
+        <button
+          [routerLink]="['/person-history', person.id]"
+          class="btn btn-hover"
+          type="button"
+        >
           История на промени
         </button>
-        <button [routerLink]="['/person-school', person.id]"
-                class="btn btn-hover"
-                type="button">
+        <button
+          [routerLink]="['/person-school', person.id]"
+          class="btn btn-hover"
+          type="button"
+        >
           Преподавателски длъжности
         </button>
       </li>
     </ul>
   </nav>
 
-  <hr>
+  <hr />
   <table class="table table-striped">
     <thead>
       <tr>
@@ -32,18 +36,22 @@
     </thead>
     <tbody>
       <tr *ngFor="let personSchool of personSchools">
+        <td
+          [(ngModel)]="personSchool.schoolId"
+          name="schoolId"
+          id="schoolId"
+          disabled="disabled"
+          *ngFor="let school of schools"
+          [ngValue]="school.id"
+        >
+          {{ school.name }}
+        </td>
 
-        <td [(ngModel)]="personSchool.schoolId"
-            name="schoolId"
-            id="schoolId"
-            disabled="disabled"
-            *ngFor="let school of schools"
-            [ngValue]="school.id">{{ school.name }}</td>
-
-        <td>Преподавател по {{positionEnumLocalization[personSchool.position]}}</td>
-        <td>{{personSchool.startDate | date: 'medium'}}</td>
-        <td>{{personSchool.endDate | date: 'medium'}}</td>
-
+        <td>
+          Преподавател по {{ positionEnumLocalization[personSchool.position] }}
+        </td>
+        <td>{{ personSchool.startDate | date : "medium" }}</td>
+        <td>{{ personSchool.endDate | date : "medium" }}</td>
       </tr>
     </tbody>
   </table>

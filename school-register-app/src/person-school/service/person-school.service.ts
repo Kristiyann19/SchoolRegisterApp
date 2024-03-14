@@ -16,7 +16,7 @@ export class PersonSchoolService {
     return this.http.get<PersonSchoolDto[]>(this.baseUrl + `/${id}`);
   }
 
-  add(personSchoolDto: PersonSchoolAddDto): Observable<void> {
+  addPersonSchool(personSchoolDto: PersonSchoolAddDto): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}`, personSchoolDto);
   }
 }

@@ -21,18 +21,25 @@ export class PersonSchoolComponent {
   personSchools: PersonSchoolDto[] = [];
   positionEnumLocalization = PositionEnumLocalization;
   schools: SchoolDto[] = [];
-  person: PersonDetailsDto= new PersonDetailsDto();
+  person: PersonDetailsDto = new PersonDetailsDto();
 
-  constructor (private personSchoolService: PersonSchoolService, private route: ActivatedRoute, private schoolService: SchoolService, private personService: PersonService) {}
+  constructor(
+    private personSchoolService: PersonSchoolService,
+    private route: ActivatedRoute,
+    private schoolService: SchoolService,
+    private personService: PersonService
+  ) {}
 
-  ngOnInit (): void{
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!)
-    this.personSchoolService.getPersonSchoolById(id).subscribe((personSchools: PersonSchoolDto[]) => {
-      this.personSchools = personSchools;
-      this.get();
-      this.getId();
-    })
-  } 
+  ngOnInit(): void {
+    const id = parseInt(this.route.snapshot.paramMap.get("id")!);
+    this.personSchoolService
+      .getPersonSchoolById(id)
+      .subscribe((personSchools: PersonSchoolDto[]) => {
+        this.personSchools = personSchools;
+        this.get();
+        this.getId();
+      });
+  }
 
   get() {
     this.schoolService
@@ -47,10 +54,10 @@ export class PersonSchoolComponent {
       });
   }
 
-  getId() : void {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!)
+  getId(): void {
+    const id = parseInt(this.route.snapshot.paramMap.get("id")!);
     this.personService.getById(id).subscribe((person) => {
-      this.person = { ...person }; 
+      this.person = { ...person };
     });
   }
 }

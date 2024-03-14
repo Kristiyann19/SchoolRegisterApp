@@ -73,6 +73,58 @@ namespace SchoolRegisterApp.Repositories.Services
                 .ProjectTo<PersonSchoolDto>(mapper.ConfigurationProvider)
                 .Where(x => x.PersonId == id)
                 .ToListAsync();
-        
+
+        public async Task UpdatePersonSchoolAsync(PersonSchoolUpdateDto personSchoolUpdateDto, HttpContext httpContext)
+        {
+            var existingUserClaim = httpContext.User
+                        .FindFirst(ClaimTypes.Name);
+
+            if (existingUserClaim == null)
+            {
+                throw new Exception("Invalid user");
+            }
+
+            var username = existingUserClaim.Value;
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
+
+            if (personSchoolUpdateDto.SchoolId != user.SchoolId)
+            {
+                throw new Exception("Invalid school");
+            }
+
+            var personSchoolToUpdate = await context.PersonSchools
+                .FirstOrDefaultAsync(ps => ps.Id ==  personSchoolUpdateDto.Id);
+
+            if (personSchoolToUpdate == null)
+            {
+                throw new Exception("Invalid person school");
+            }
+
+            if (personSchoolToUpdate.PersonId != personSchoolUpdateDto.PersonId)
+            {
+                throw new Exception("Cannot change person");
+            }
+
+            if (personSchoolToUpdate.SchoolId != personSchoolUpdateDto.SchoolId)
+            {
+                throw new Exception("Cannot change school");
+            }
+
+            personSchoolToUpdate.Position = personSchoolUpdateDto.Position;
+            personSchoolToUpdate.StartDate = personSchoolUpdateDto.StartDate;
+            personSchoolToUpdate.EndDate = personSchoolUpdateDto.EndDate;
+
+            PersonHistory personHistory = new PersonHistory()
+            {
+                PersonId = personSchoolUpdateDto.PersonId,
+                UserId = user.Id,
+                ActionDate = DateTime.UtcNow,
+                DataModified = DataModified.PersonSchool,
+                ModificationType = ModificationType.Updated
+            };
+
+            await context.AddAsync(personHistory);
+            await context.SaveChangesAsync();
+        }
     }
 }

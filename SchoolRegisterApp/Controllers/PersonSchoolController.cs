@@ -33,5 +33,15 @@ namespace SchoolRegisterApp.Controllers
 
             return Ok();
         }
+
+        [HttpPut()]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdatePersonSchool([FromBody] PersonSchoolUpdateDto personSchoolUpdateDto)
+        {
+            await personSchoolService
+                .UpdatePersonSchoolAsync(personSchoolUpdateDto, HttpContext);
+
+            return Ok();
+        }
     }
 }
