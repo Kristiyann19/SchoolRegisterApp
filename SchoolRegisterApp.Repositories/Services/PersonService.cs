@@ -81,7 +81,7 @@ namespace SchoolRegisterApp.Repositories.Services
             }
         }
 
-        public async Task<List<PersonDto>> GetAllPeopleAsync(HttpContext httpContext)
+        public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)
         {
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
@@ -100,16 +100,16 @@ namespace SchoolRegisterApp.Repositories.Services
                 people = people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null);
             }
 
-            return await people
-                    .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
-                  .ToListAsync();
-        }
+            if (filter != null)
+            {
+                people = filter.WhereBuilder(people);
+         
+            }
 
-        public async Task<List<PersonDto>> GetFilteredPeopleAsync(PersonFilterDto filter)
-            => await filter
-                  .WhereBuilder(context.People.AsQueryable())
+            return await people
                   .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
                   .ToListAsync();
+        }
 
 
         public async Task<PersonDetailsDto> GetPersonDetailsAsync(int id)

@@ -22,12 +22,12 @@ export class AllPeopleComponent {
   constructor(public personService: PersonService, public schoolService: SchoolService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.get();
+    this.get(this.personDto);
   }
 
-  get() {
+  get(personDto: PersonFilterDto) {
     this.personService
-      .getAll()
+      .getAllWithFilter(personDto)
       .pipe(
         catchError((err) => {
           return throwError(() => err);
@@ -38,16 +38,4 @@ export class AllPeopleComponent {
       });
   }
 
-  getFiltered(personDto: PersonFilterDto) {
-    this.personService
-      .getFiltered(personDto)
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res) => {
-        this.people = res;
-      });
-  }
 }
