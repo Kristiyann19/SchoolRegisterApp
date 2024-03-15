@@ -12,5 +12,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
         Task<SchoolIdAndNameDto> GetSchoolByUserAsync(HttpContext httpContext);
 
         Task<SchoolIdAndNameDto> GetSchoolByPersonAsync(int personId);
+
+        Task<string> GetSchoolNameById(int id);
     }
 }
