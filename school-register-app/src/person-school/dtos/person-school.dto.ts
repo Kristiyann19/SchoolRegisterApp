@@ -5,6 +5,7 @@ export class PersonSchoolDto {
   position: PositionEnum;
   personId: number;
   schoolId: number;
+  schoolName: string;
   startDate: Date;
   endDate: Date;
 }

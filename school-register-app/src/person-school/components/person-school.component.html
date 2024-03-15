@@ -45,6 +45,9 @@
     <tbody>
       <tr *ngFor="let personSchool of personSchools">
         <td>
+          {{ personSchool.schoolName }}
+        </td>
+        <td>
           Преподавател по {{ positionEnumLocalization[personSchool.position] }}
         </td>
         <td>{{ personSchool.startDate | date : "medium" }}</td>

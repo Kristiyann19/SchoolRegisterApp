@@ -1,5 +1,4 @@
-﻿using SchoolRegisterApp.Models.Entities;
-using SchoolRegisterApp.Models.Enums;
+﻿using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Models.Dtos
 {
@@ -12,6 +11,8 @@ namespace SchoolRegisterApp.Models.Dtos
         public int PersonId { get; set; }
 
         public int SchoolId { get; set; }
+
+        public string SchoolName { get; set; }
 
         public DateTime StartDate { get; set; }
 

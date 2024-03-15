@@ -19,7 +19,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class PersonSchoolComponent {
   personSchools: PersonSchoolDto[] = [];
   positionEnumLocalization = PositionEnumLocalization;
-  schools: SchoolDto[] = [];
   person: PersonDetailsDto = new PersonDetailsDto();
 
   constructor(
@@ -36,21 +35,7 @@ export class PersonSchoolComponent {
       .getPersonSchoolById(id)
       .subscribe((personSchools: PersonSchoolDto[]) => {
         this.personSchools = personSchools;
-        this.get();
         this.getId();
-      });
-  }
-
-  get() {
-    this.schoolService
-      .getAll()
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res) => {
-        this.schools = res;
       });
   }
 
