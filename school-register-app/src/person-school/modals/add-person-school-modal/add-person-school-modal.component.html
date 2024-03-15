@@ -1,0 +1,89 @@
+<div class="modal-header">
+  <h4 class="modal-title">Добави длъжност</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="this.activeModal.close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label for="firstName"> Име: </label>
+    <input
+      type="text"
+      id="firstName"
+      value="{{ firstName }}"
+      name="firstName"
+      class="form-control"
+      required
+      disabled
+    />
+  </div>
+  <div class="form-group">
+    <label for="lastName"> Фамилия: </label>
+    <input
+      type="text"
+      id="lastName"
+      value="{{ lastName }}"
+      name="lastName"
+      class="form-control"
+      required
+      disabled
+    />
+  </div>
+  <div class="form-group">
+    <label for="school"> Училище: </label>
+    <input
+      type="text"
+      id="school"
+      value="{{ schoolName }}"
+      name="school"
+      class="form-control"
+      required
+      disabled
+    />
+  </div>
+  <div class="form-group">
+    <label for="expirationDate"> Позиция: </label>
+    <select
+      (ngModel)="(personSchoolAddDto.position)"
+      class="form-control"
+      name="position"
+      id="position"
+    >
+      <option value="1">Математика</option>
+      <option value="2">География</option>
+      <option value="3">История</option>
+      <option value="4">Биология</option>
+      <option value="5">Химия</option>
+      <option value="6">Литература</option>
+      <option value="7">Английски</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="startDate"> От дата: </label>
+    <input
+      type="date"
+      id="startDate"
+      value="{{ personSchoolAddDto.startDate }}"
+      name="startDate"
+      class="form-control"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="endDate"> До дата: </label>
+    <input
+      type="date"
+      id="endDate"
+      value="{{ personSchoolAddDto.endDate }}"
+      name="endDate"
+      class="form-control"
+      required
+    />
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success">Запази</button>
+  </div>
+</div>

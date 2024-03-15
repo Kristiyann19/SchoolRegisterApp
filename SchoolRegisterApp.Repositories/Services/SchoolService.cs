@@ -6,6 +6,7 @@ using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using SchoolRegisterApp.Models.Entities;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -34,6 +35,33 @@ namespace SchoolRegisterApp.Repositories.Services
                 .ToListAsync();
 
             return schools;
+        }
+
+        public async Task<SchoolIdAndNameDto> GetSchoolByPersonAsync(int personId)
+        {
+            var person = await context.People
+                .FirstOrDefaultAsync(p => p.Id == personId);
+
+            if (person == null)
+            {
+                throw new Exception("Invalid person");
+            }
+
+            if (person.SchoolId == null)
+            {
+                throw new Exception("Person doesn't have school");
+            }
+
+            var school = await context.Schools
+                .FirstOrDefaultAsync(s => s.Id == person.SchoolId);
+
+            var schoolToReturn = new SchoolIdAndNameDto()
+            {
+                Id = school.Id,
+                Name = school.Name
+            };
+
+            return schoolToReturn;
         }
 
         public async Task<SchoolIdAndNameDto> GetSchoolByUserAsync(HttpContext httpContext)

@@ -36,5 +36,12 @@ namespace SchoolRegisterApp.Controllers
             return Ok(await schoolService
                 .GetSchoolByUserAsync(HttpContext));
         }
+
+        [HttpGet("GetSchoolByPerson/{personId:int}")]
+        public async Task<IActionResult> GetSchoolByPerson(int personId)
+        {
+            return Ok(await schoolService
+                .GetSchoolByPersonAsync(personId));
+        }
     }
 }

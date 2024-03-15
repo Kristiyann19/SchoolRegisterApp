@@ -42,8 +42,7 @@ export function appInitializer(userService: UserService) {
     DetailsPersonComponent,
     AddPersonComponent,
     PersonHistoryComponent,
-    PersonSchoolComponent
-
+    PersonSchoolComponent,
   ],
   imports: [
     BrowserModule,

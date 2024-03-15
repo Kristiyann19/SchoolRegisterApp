@@ -1,16 +1,15 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { PersonSchoolDto } from "../dtos/person-school.dto";
 import { PositionEnumLocalization } from "../../enums/position.enum";
 import { PersonSchoolService } from "../service/person-school.service";
-import { SettlementService } from "../../settlement/services/settlement.service";
 import { catchError, throwError } from "rxjs";
-import { SettlementDto } from "../../settlement/dtos/settlement-dto";
 import { SchoolService } from "../../school/all-schools/services/school.service";
 import { SchoolDto } from "../../school/all-schools/dtos/school-dto";
 import { PersonService } from "../../people/services/person.service";
-import { PersonDto } from "../../people/dtos/person-dto";
 import { PersonDetailsDto } from "../../people/dtos/person-details-dto";
+import { AddDiscountModalContent } from "../modals/add-person-school-modal/add-person-school-modal.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-person-school",
@@ -27,7 +26,8 @@ export class PersonSchoolComponent {
     private personSchoolService: PersonSchoolService,
     private route: ActivatedRoute,
     private schoolService: SchoolService,
-    private personService: PersonService
+    private personService: PersonService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +59,14 @@ export class PersonSchoolComponent {
     this.personService.getById(id).subscribe((person) => {
       this.person = { ...person };
     });
+  }
+
+  openAddPersonSchoolModal() {
+    const modalRef = this.modalService.open(AddDiscountModalContent);
+    modalRef.componentInstance.firstName = this.person.firstName;
+    modalRef.componentInstance.lastName = this.person.lastName;
+    modalRef.componentInstance.schoolName = this.person.firstName;
+    modalRef.componentInstance.schoolId = this.person.id;
+    modalRef.componentInstance.personId = this.person.id;
   }
 }
