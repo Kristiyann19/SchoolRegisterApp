@@ -45,9 +45,9 @@
     />
   </div>
   <div class="form-group">
-    <label for="expirationDate"> Позиция: </label>
+    <label for="position"> Позиция: </label>
     <select
-      (ngModel)="(personSchoolAddDto.position)"
+      [(ngModel)]="personSchoolAddDto.position"
       class="form-control"
       name="position"
       id="position"
@@ -66,7 +66,7 @@
     <input
       type="date"
       id="startDate"
-      value="{{ personSchoolAddDto.startDate }}"
+      [(ngModel)]="personSchoolAddDto.startDate"
       name="startDate"
       class="form-control"
       required
@@ -77,13 +77,15 @@
     <input
       type="date"
       id="endDate"
-      value="{{ personSchoolAddDto.endDate }}"
+      [(ngModel)]="personSchoolAddDto.endDate"
       name="endDate"
       class="form-control"
       required
     />
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success">Запази</button>
+    <button type="button" class="btn btn-success" (click)="add()">
+      Запази
+    </button>
   </div>
 </div>

@@ -12,8 +12,6 @@ namespace SchoolRegisterApp.Models.Dtos
 
         public int SchoolId { get; set; }
 
-        public string SchoolName { get; set; }
-
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }

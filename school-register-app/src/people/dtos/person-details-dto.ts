@@ -1,8 +1,7 @@
 import { GenderEnum } from "../../enums/gender.enum";
 import { SchoolDto } from "../../school/all-schools/dtos/school-dto";
-import { SettlementDto } from "../../settlement/dtos/settlement-dto";
 
-export class PersonDetailsDto{ 
+export class PersonDetailsDto {
   id: number;
   firstName: string;
   middleName: string;

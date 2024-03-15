@@ -17,6 +17,7 @@ export class PersonSchoolService {
   }
 
   addPersonSchool(personSchoolDto: PersonSchoolAddDto): Observable<void> {
+    debugger;
     return this.http.post<void>(`${this.baseUrl}`, personSchoolDto);
   }
 }

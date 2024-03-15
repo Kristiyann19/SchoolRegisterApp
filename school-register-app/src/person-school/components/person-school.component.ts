@@ -24,7 +24,6 @@ export class PersonSchoolComponent {
   constructor(
     private personSchoolService: PersonSchoolService,
     private route: ActivatedRoute,
-    private schoolService: SchoolService,
     private personService: PersonService,
     private modalService: NgbModal
   ) {}
@@ -50,8 +49,8 @@ export class PersonSchoolComponent {
     const modalRef = this.modalService.open(AddDiscountModalContent);
     modalRef.componentInstance.firstName = this.person.firstName;
     modalRef.componentInstance.lastName = this.person.lastName;
-    modalRef.componentInstance.schoolName = this.person.firstName;
-    modalRef.componentInstance.schoolId = this.person.id;
+    modalRef.componentInstance.schoolName = this.person.school.name;
+    modalRef.componentInstance.schoolId = this.person.school.id;
     modalRef.componentInstance.personId = this.person.id;
   }
 }

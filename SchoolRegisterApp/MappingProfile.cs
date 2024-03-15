@@ -70,7 +70,6 @@ namespace SchoolRegisterApp
                 .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
                 .ForMember(m => m.PersonId, cfg => cfg.MapFrom(src => src.PersonId))
                 .ForMember(m => m.SchoolId, cfg => cfg.MapFrom(src => src.SchoolId))
-                .ForMember(m => m.SchoolName, cfg => cfg.MapFrom(src => src.School.Name))
                 .ForMember(m => m.Position, cfg => cfg.MapFrom(src => src.Position))
                 .ForMember(m => m.StartDate, cfg => cfg.MapFrom(src => src.StartDate))
                 .ForMember(m => m.EndDate, cfg => cfg.MapFrom(src => src.EndDate));
