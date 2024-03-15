@@ -22,6 +22,7 @@ export class LoginComponent {
     this.loginService.login(this.loginDto).subscribe((response: any) => {
       if (response?.token) {
         localStorage.setItem("token", response.token);
+        this.loginService.setIsLoggedIn(true); 
         this.userServicec.initializeUser();
         this.router.navigate(["/"]);
       }

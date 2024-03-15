@@ -29,7 +29,7 @@ export class AllPeopleComponent {
     this.personService
       .getAllWithFilter(personDto)
       .pipe(
-        catchError((err) => {
+        catchError((err) => { 
           return throwError(() => err);
         })
       )
