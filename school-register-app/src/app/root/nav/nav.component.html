@@ -1,21 +1,30 @@
 <nav class="navbar navbar-expand-sm navbar-light fixed-top">
   <div class="buttons d-flex justify-content-end">
-    <div class="p-2" *ngIf="userService.currentUser != null">
+    <div class="p-2"
+         *ngIf="userService.currentUser != null">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <button routerLink="/all-people" class="btn btn-hover" type="button">
+          <button routerLink="/all-people"
+                  class="btn btn-hover"
+                  type="button">
             Преподаватели
             <i class="fa-solid fa-caret-down"></i>
           </button>
-          <button routerLink="/all-schools" class="btn btn-hover" type="button">
+          <button routerLink="/all-schools"
+                  class="btn btn-hover"
+                  type="button">
             Училища
             <i class="fa-solid fa-caret-down"></i>
           </button>
-          <button routerLink="/" class="btn btn-hover" type="button">
+          <button routerLink="/"
+                  class="btn btn-hover"
+                  type="button">
             Справки
             <i class="fa-solid fa-caret-down"></i>
           </button>
-          <button routerLink="/all-users" class="btn btn-hover" type="button">
+          <button routerLink="/all-users"
+                  class="btn btn-hover"
+                  type="button">
             Потребители
             <i class="fa-solid fa-caret-down"></i>
           </button>
@@ -23,29 +32,28 @@
       </ul>
     </div>
     <div class="ml-auto p-2 nav-bar-right">
-      <button
-        *ngIf="userService.currentUser == null"
-        routerLink="/login"
-        class="btn btn-outline-success"
-        type="button"
-      >
+      <button *ngIf="userService.currentUser == null"
+              routerLink="/login"
+              class="btn btn-outline-success"
+              type="button">
         Вход
       </button>
-      <button
-        *ngIf="userService.currentUser == null"
-        routerLink="/registration"
-        class="btn btn-outline-primary"
-        type="button"
-      >
+      <button *ngIf="userService.currentUser == null"
+              routerLink="/registration"
+              class="btn btn-outline-primary"
+              type="button">
         Регистриране
       </button>
-      <button
-        *ngIf="userService.currentUser != null"
-        (click)="loginService.logout()"
-        class="btn-logout btn btn-danger btn-center-text"
-      >
-        Изход
-      </button>
+
     </div>
+  </div>
+  <div class="navbar-collapse justify-content-end">
+
+    <button *ngIf="userService.currentUser != null"
+            (click)="logout()"
+            class="btn-logout btn btn-danger btn-center-text"
+            id="btn">
+      Изход
+    </button>
   </div>
 </nav>

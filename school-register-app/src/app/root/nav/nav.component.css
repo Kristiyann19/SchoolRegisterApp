@@ -11,3 +11,8 @@ button {
   justify-content: center;
   gap: 1rem;
 }
+
+
+#btn {
+  margin-right: 20px
+}

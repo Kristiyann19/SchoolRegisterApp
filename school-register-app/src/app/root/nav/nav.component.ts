@@ -12,4 +12,15 @@ export class NavComponent {
     public userService: UserService,
     public loginService: LoginService
   ) {}
+
+
+  get isLoggedIn(): boolean {
+    return this.loginService.getIsLoggedIn();
+  }
+
+
+logout(): void {
+  this.loginService.logout(); 
+  this.userService.initializeUser();
+}
 }
