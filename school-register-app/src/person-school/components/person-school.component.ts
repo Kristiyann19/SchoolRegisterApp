@@ -10,6 +10,7 @@ import { PersonService } from "../../people/services/person.service";
 import { PersonDetailsDto } from "../../people/dtos/person-details-dto";
 import { AddDiscountModalContent } from "../modals/add-person-school-modal/add-person-school-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { UserService } from "../../user/services/user.service";
 
 @Component({
   selector: "app-person-school",
@@ -25,7 +26,8 @@ export class PersonSchoolComponent {
     private personSchoolService: PersonSchoolService,
     private route: ActivatedRoute,
     private personService: PersonService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -49,8 +51,10 @@ export class PersonSchoolComponent {
     const modalRef = this.modalService.open(AddDiscountModalContent);
     modalRef.componentInstance.firstName = this.person.firstName;
     modalRef.componentInstance.lastName = this.person.lastName;
-    modalRef.componentInstance.schoolName = this.person.school.name;
-    modalRef.componentInstance.schoolId = this.person.school.id;
+    modalRef.componentInstance.schoolName =
+      this.userService.currentUser.school.name;
+    modalRef.componentInstance.schoolId =
+      this.userService.currentUser.school.id;
     modalRef.componentInstance.personId = this.person.id;
   }
 }

@@ -8,22 +8,19 @@ import { PersonDetailsDto } from "../../../people/dtos/person-details-dto";
 @Injectable({
   providedIn: "root",
 })
-
 export class SchoolService {
   private baseUrl = "http://localhost:12123";
 
   constructor(private http: HttpClient) {}
 
-  
-
   getAll(): Observable<SchoolDto[]> {
     return this.http.get<SchoolDto[]>(`${this.baseUrl}/api/School`);
   }
 
-  schoolNameById(id: number) : Observable<any> {
-    debugger;
-    return this.http.get(`${this.baseUrl}/api/School/SchoolId/${id}`)
+  schoolNameById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/School/SchoolId/${id}`);
   }
+
   getFiltered(schoolDto: SchoolFilterDto): Observable<SchoolDto[]> {
     return this.http.get<SchoolDto[]>(
       `${this.baseUrl}/api/School/Search?${this.composeQueryString(schoolDto)}`
