@@ -25,7 +25,7 @@ import { SettlementService } from "../settlement/services/settlement.service";
 import { PersonHistoryComponent } from "../person-history/components/person-history.component";
 import { PersonSchoolComponent } from "../person-school/components/person-school.component";
 import { AllUsersComponent } from "../user/components/all-users/all-users.component";
-import { PersonSchoolAddModalComponent } from "../person-school/modals/person-school-add-modal/person-school-add-modal.component";
+import { PersonSchoolAddModalComponent } from "./person-school-add-modal/person-school-add-modal.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();

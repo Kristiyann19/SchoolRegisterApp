@@ -37,7 +37,7 @@
     <thead>
       <tr>
         <th scope="col">Училище</th>
-        <th scope="col">Длъжност</th>
+        <th scope="col">Длъжност (Преподавател по)</th>
         <th scope="col">От дата:</th>
         <th scope="col">До дата:</th>
       </tr>
@@ -48,10 +48,49 @@
           {{ person.school?.name }}
         </td>
         <td>
-          Преподавател по {{ positionEnumLocalization[personSchool.position] }}
+          <select
+            [(ngModel)]="personSchool.position"
+            class="form-control"
+            name="position"
+            id="position"
+          >
+            <option [ngValue]="1">Математика</option>
+            <option [ngValue]="2">География</option>
+            <option [ngValue]="3">История</option>
+            <option [ngValue]="4">Биология</option>
+            <option [ngValue]="5">Химия</option>
+            <option [ngValue]="6">Литература</option>
+            <option [ngValue]="7">Английски</option>
+          </select>
         </td>
-        <td>{{ personSchool.startDate | date : "medium" }}</td>
-        <td>{{ personSchool.endDate | date : "medium" }}</td>
+        <td>
+          <input
+            type="date"
+            id="startDate"
+            [ngModel]="personSchool.startDate | date : 'yyyy-MM-dd'"
+            (ngModelChange)="personSchool.startDate = $event"
+            name="startDate"
+            class="form-control"
+            required
+          />
+        </td>
+        <td>
+          <input
+            type="date"
+            id="endDate"
+            [ngModel]="personSchool.endDate | date : 'yyyy-MM-dd'"
+            (ngModelChange)="personSchool.endDate = $event"
+            name="endDate"
+            class="form-control"
+            required
+          />
+        </td>
+        <td>
+          <button (click)="update(personSchool)" class="btn btn-primary">
+            <i class="fa-solid fa-pencil"></i>
+            Редактирай
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

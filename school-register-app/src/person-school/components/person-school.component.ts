@@ -7,7 +7,9 @@ import { PersonService } from "../../people/services/person.service";
 import { PersonDetailsDto } from "../../people/dtos/person-details-dto";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UserService } from "../../user/services/user.service";
-import { PersonSchoolAddModalComponent } from "../modals/person-school-add-modal/person-school-add-modal.component";
+import { PersonSchoolAddModalComponent } from "../../app/person-school-add-modal/person-school-add-modal.component";
+import { PersonSchoolUpdateDto } from "../dtos/person-school-update-dto";
+import { catchError, throwError } from "rxjs";
 
 @Component({
   selector: "app-person-school",
@@ -18,6 +20,7 @@ export class PersonSchoolComponent {
   personSchools: PersonSchoolDto[] = [];
   positionEnumLocalization = PositionEnumLocalization;
   person: PersonDetailsDto = new PersonDetailsDto();
+  personSchoolUpdateDto: PersonSchoolUpdateDto = new PersonSchoolUpdateDto();
 
   constructor(
     private personSchoolService: PersonSchoolService,
@@ -53,5 +56,23 @@ export class PersonSchoolComponent {
     modalRef.componentInstance.schoolId =
       this.userService.currentUser.school.id;
     modalRef.componentInstance.personId = this.person.id;
+  }
+
+  update(personSchoolDto: PersonSchoolDto) {
+    this.personSchoolUpdateDto.id = personSchoolDto.id;
+    this.personSchoolUpdateDto.position = personSchoolDto.position;
+    this.personSchoolUpdateDto.personId = personSchoolDto.personId;
+    this.personSchoolUpdateDto.schoolId = personSchoolDto.schoolId;
+    this.personSchoolUpdateDto.startDate = personSchoolDto.startDate;
+    this.personSchoolUpdateDto.endDate = personSchoolDto.endDate;
+
+    this.personSchoolService
+      .updatePersonSchool(this.personSchoolUpdateDto)
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      )
+      .subscribe((res) => {});
   }
 }
