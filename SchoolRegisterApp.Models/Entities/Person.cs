@@ -25,6 +25,8 @@ namespace SchoolRegisterApp.Models.Entities
         public Settlement BirthPlace { get; set; }
 
         public int? SchoolId { get; set; }
+
+        public School School { get; set; }
     }
 
     public class PersonConfiguration : IEntityTypeConfiguration<Person>

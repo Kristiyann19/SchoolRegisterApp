@@ -93,22 +93,19 @@ namespace SchoolRegisterApp.Repositories.Services
 
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
-            var people = await context.People
-                                .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
-                                .ToListAsync();
+            var people = context.People.AsQueryable();
 
             if (user.Role == RoleEnum.Director)
             {
-                people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null);
-
-                return people;
+                people = people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null);
             }
 
-            return people;
-
+            return await people
+                    .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
+                  .ToListAsync();
         }
 
-        public async Task<List<PersonDto>> GetFilteredPeopleAsync(PersonFilterDto filter) 
+        public async Task<List<PersonDto>> GetFilteredPeopleAsync(PersonFilterDto filter)
             => await filter
                   .WhereBuilder(context.People.AsQueryable())
                   .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
@@ -117,7 +114,8 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task<PersonDetailsDto> GetPersonDetailsAsync(int id)
             => await context.People
-                  .ProjectTo<PersonDetailsDto>(mapper.ConfigurationProvider)    
+                  .Include(x => x.School)
+                  .ProjectTo<PersonDetailsDto>(mapper.ConfigurationProvider)
                   .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson, HttpContext httpContext)
@@ -197,8 +195,8 @@ namespace SchoolRegisterApp.Repositories.Services
 
             int digitForGender = int.Parse(personAddDto.Uic.Substring(8, 1));
 
-            GenderEnum gender = digitForGender % 2 == 0 
-                ? GenderEnum.Male 
+            GenderEnum gender = digitForGender % 2 == 0
+                ? GenderEnum.Male
                 : GenderEnum.Female;
 
             personAddDto.BirthDate = personAddDto.BirthDate;

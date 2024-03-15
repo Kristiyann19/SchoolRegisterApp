@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { SchoolDto } from "../dtos/school-dto";
 import { SchoolFilterDto } from "../dtos/school-filter-dto";
+import { PersonDetailsDto } from "../../../people/dtos/person-details-dto";
 
 @Injectable({
   providedIn: "root",
@@ -19,6 +20,10 @@ export class SchoolService {
     return this.http.get<SchoolDto[]>(`${this.baseUrl}/api/School`);
   }
 
+  schoolNameById(id: number) : Observable<any> {
+    debugger;
+    return this.http.get(`${this.baseUrl}/api/School/SchoolId/${id}`)
+  }
   getFiltered(schoolDto: SchoolFilterDto): Observable<SchoolDto[]> {
     return this.http.get<SchoolDto[]>(
       `${this.baseUrl}/api/School/Search?${this.composeQueryString(schoolDto)}`

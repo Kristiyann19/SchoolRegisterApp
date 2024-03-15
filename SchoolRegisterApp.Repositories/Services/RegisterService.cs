@@ -15,15 +15,15 @@ namespace SchoolRegisterApp.Repositories.Services
         }
 
 
-        public bool CheckUserNameAvailability(string userName)
-             => !context.Users.Any(u => u.Username == userName);
+        public bool CheckUserNameAvailability(string username)
+             => !context.Users.Any(u => u.Username == username);
 
-            public bool CheckPhoneAvailability(string phone)
+        public bool CheckPhoneAvailability(string phone)
                 => !context.Users.Any(u => u.Phone == phone);
 
         public void Register(RegisterDto register)
         {
-            var isUsernameAvailable = CheckUserNameAvailability(register.UserName);
+            var isUsernameAvailable = CheckUserNameAvailability(register.Username);
             var isPhoneAvailable = CheckPhoneAvailability(register.Phone);
 
 
@@ -39,7 +39,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
             var user = new Users
             {
-                Username = register.UserName,
+                Username = register.Username,
                 Phone = register.Phone,
                 PasswordSalt = PasswordHasher.GenerateSalt(),
                 SchoolId = register.SchoolId == 0 ? null : register.SchoolId
