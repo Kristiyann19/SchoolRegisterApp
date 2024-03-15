@@ -1,4 +1,4 @@
-﻿using SchoolRegisterApp.Models.Dtos;
+﻿using SchoolRegisterApp.Models.Dtos.PersonHistoryDtos;
 
 namespace SchoolRegisterApp.Repositories.Contracts
 {

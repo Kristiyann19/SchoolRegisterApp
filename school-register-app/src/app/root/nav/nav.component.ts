@@ -13,11 +13,9 @@ export class NavComponent {
     public loginService: LoginService
   ) {}
 
-
   get isLoggedIn(): boolean {
     return this.loginService.getIsLoggedIn();
   }
-
 
 logout(): void {
   this.loginService.logout(); 

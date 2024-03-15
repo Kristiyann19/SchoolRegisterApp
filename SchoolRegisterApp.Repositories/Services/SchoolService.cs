@@ -2,11 +2,12 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
-using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using SchoolRegisterApp.Models.Entities;
+using SchoolRegisterApp.Models.Dtos.SchoolDtos;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -19,6 +20,30 @@ namespace SchoolRegisterApp.Repositories.Services
         {
             context = _context;
             mapper = _mapper;
+        }
+
+        public async Task AddSchoolAsync(HttpContext httpContext, AddSchoolDto school)
+        {
+            var existingUserClaim = httpContext.User
+                        .FindFirst(ClaimTypes.Name);
+
+            if (existingUserClaim == null)
+            {
+                throw new Exception("Invalid user");
+            }
+
+            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+
+            if (user.Role == RoleEnum.Director)
+            {
+                throw new Exception("Only Admins can add schools");
+            }
+
+            var schoolEntity = mapper.Map<School>(school);
+
+            await context.AddAsync(schoolEntity);
+            await context.SaveChangesAsync();
+
         }
 
         public async Task<IEnumerable<SchoolDto>> GetAllSchoolsAsync()

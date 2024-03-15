@@ -4,7 +4,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
-using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;

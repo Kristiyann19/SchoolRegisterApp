@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Dtos.SchoolDtos;
 
 namespace SchoolRegisterApp.Repositories.Contracts
 {
@@ -14,5 +14,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
         Task<SchoolIdAndNameDto> GetSchoolByPersonAsync(int personId);
 
         Task<string> GetSchoolNameById(int id);
+
+        Task AddSchoolAsync(HttpContext httpContext, AddSchoolDto school);
     }
 }

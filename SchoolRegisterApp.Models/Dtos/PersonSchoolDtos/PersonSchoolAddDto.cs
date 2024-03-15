@@ -1,11 +1,9 @@
 ﻿using SchoolRegisterApp.Models.Enums;
 
-namespace SchoolRegisterApp.Models.Dtos
+namespace SchoolRegisterApp.Models.Dtos.PersonSchoolDtos
 {
-    public class PersonSchoolDto
+    public class PersonSchoolAddDto
     {
-        public int Id { get; set; }
-
         public PositionEnum Position { get; set; }
 
         public int PersonId { get; set; }

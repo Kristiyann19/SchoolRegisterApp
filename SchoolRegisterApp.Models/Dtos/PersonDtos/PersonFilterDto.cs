@@ -2,7 +2,7 @@
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 
-namespace SchoolRegisterApp.Models.Dtos
+namespace SchoolRegisterApp.Models.Dtos.PersonDtos
 {
     public class PersonFilterDto : IFilter<Person>
     {

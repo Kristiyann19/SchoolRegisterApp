@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 using SchoolRegisterApp.Models;
-using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
 
 namespace SchoolRegisterApp.Repositories.Services
 {

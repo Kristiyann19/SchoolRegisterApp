@@ -1,6 +1,6 @@
 ﻿using SchoolRegisterApp.Models.Entities;
 
-namespace SchoolRegisterApp.Models.Dtos
+namespace SchoolRegisterApp.Models.Dtos.PersonDtos
 {
     public class PersonDto
     {

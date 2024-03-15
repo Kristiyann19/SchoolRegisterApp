@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Dtos.SchoolDtos;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Controllers
@@ -29,6 +29,14 @@ namespace SchoolRegisterApp.Controllers
         {
             return Ok(await schoolService
                 .GetFilteredSchoolsAsync(schoolFilter));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSchool([FromBody] AddSchoolDto school)
+        {
+            await schoolService.AddSchoolAsync(HttpContext, school);
+
+            return Ok();
         }
 
         [HttpGet("GetSchoolByUser")]

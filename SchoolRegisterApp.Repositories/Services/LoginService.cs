@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Repositories.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using SchoolRegisterApp.Models.Dtos.UserDtos;
 
 namespace SchoolRegisterApp.Repositories.Services
 {

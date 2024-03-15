@@ -1,7 +1,7 @@
-﻿using SchoolRegisterApp.Models.Dtos;
-using SchoolRegisterApp.Models.Entities;
+﻿using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Models.Dtos.UserDtos;
 
 namespace SchoolRegisterApp.Repositories.Services
 {

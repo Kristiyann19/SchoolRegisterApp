@@ -2,8 +2,8 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
-using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Models.Dtos.PersonHistoryDtos;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
