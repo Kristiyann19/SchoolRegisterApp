@@ -17,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddSwaggerGen();
 builder.Services.AddSchoolRegisterServices();
-builder.Services.ConfigureJwtAuthenticationServices();
+builder.Services.ConfigureJwtAuthenticationServices(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
 
