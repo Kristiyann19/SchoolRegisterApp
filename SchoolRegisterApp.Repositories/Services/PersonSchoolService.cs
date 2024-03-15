@@ -58,7 +58,11 @@ namespace SchoolRegisterApp.Repositories.Services
                     : null
             };
 
+            var updatedPerson = await context.People.FirstOrDefaultAsync(x => x.Id == personSchool.PersonId);
+
             await context.AddAsync(personSchool);
+
+            updatedPerson.SchoolId = personSchool.SchoolId;
 
             PersonHistory personHistory = new PersonHistory()
             {
