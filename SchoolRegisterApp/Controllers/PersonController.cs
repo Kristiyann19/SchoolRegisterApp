@@ -17,17 +17,11 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllAsync([FromQuery] PersonFilterDto filter)
         {
             return Ok(await personService
-                .GetAllPeopleAsync(HttpContext));
-        }
-
-        [HttpGet("Filter")]
-        public async Task<IActionResult> GetFilteredAsync([FromQuery] PersonFilterDto filter)
-        {
-            return Ok(await personService
-                .GetFilteredPeopleAsync(filter));
+                .GetAllPeopleWithFilterAsync(HttpContext, filter));
         }
 
 

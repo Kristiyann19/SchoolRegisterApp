@@ -17,14 +17,8 @@ export class PersonService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<PersonDto[]> {
-    return this.http.get<PersonDto[]>(`${this.baseUrl}`);
-  }
-
-  getFiltered(personDto: PersonFilterDto): Observable<PersonDto[]> {
-    return this.http.get<PersonDto[]>(
-      `${this.baseUrl}/Filter?${this.composeQueryString(personDto)}`
-    );
+  getAllWithFilter(personDto: PersonFilterDto): Observable<PersonDto[]> {
+    return this.http.get<PersonDto[]>(`${this.baseUrl}?${this.composeQueryString(personDto)}`);
   }
 
   updatePerson(id: number, updatedPerson: PersonDetailsDto): Observable<any> {
