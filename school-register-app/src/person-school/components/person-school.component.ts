@@ -3,14 +3,11 @@ import { ActivatedRoute } from "@angular/router";
 import { PersonSchoolDto } from "../dtos/person-school.dto";
 import { PositionEnumLocalization } from "../../enums/position.enum";
 import { PersonSchoolService } from "../service/person-school.service";
-import { catchError, throwError } from "rxjs";
-import { SchoolService } from "../../school/all-schools/services/school.service";
-import { SchoolDto } from "../../school/all-schools/dtos/school-dto";
 import { PersonService } from "../../people/services/person.service";
 import { PersonDetailsDto } from "../../people/dtos/person-details-dto";
-import { AddDiscountModalContent } from "../modals/add-person-school-modal/add-person-school-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UserService } from "../../user/services/user.service";
+import { PersonSchoolAddModalComponent } from "../modals/person-school-add-modal/person-school-add-modal.component";
 
 @Component({
   selector: "app-person-school",
@@ -48,7 +45,7 @@ export class PersonSchoolComponent {
   }
 
   openAddPersonSchoolModal() {
-    const modalRef = this.modalService.open(AddDiscountModalContent);
+    const modalRef = this.modalService.open(PersonSchoolAddModalComponent);
     modalRef.componentInstance.firstName = this.person.firstName;
     modalRef.componentInstance.lastName = this.person.lastName;
     modalRef.componentInstance.schoolName =

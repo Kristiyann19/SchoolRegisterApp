@@ -5,11 +5,11 @@ import { PersonSchoolService } from "../../service/person-school.service";
 import { catchError, throwError } from "rxjs";
 
 @Component({
-  selector: "add-address-modal-content",
-  templateUrl: `./add-person-school-modal.component.html`,
-  styleUrl: `./add-person-school-modal.component.html`,
+  selector: "app-person-school-add-modal",
+  templateUrl: `./person-school-add-modal.component.html`,
+  styleUrl: `./person-school-add-modal.component.css`,
 })
-export class AddDiscountModalContent {
+export class PersonSchoolAddModalComponent {
   personSchoolAddDto: PersonSchoolAddDto = new PersonSchoolAddDto();
 
   @Input() firstName: string;

@@ -15,7 +15,6 @@ import { LoginService } from "../login/services/login.service";
 import { NavComponent } from "./root/nav/nav.component";
 import { RegistrationService } from "../registration/services/registration.service";
 import { UserService } from "../user/services/user.service";
-import { AllUsersComponent } from "../user/components/all-users/all-users.component";
 import { AllSchoolsComponent } from "../school/all-schools/components/all-schools.component";
 import { AllPeopleComponent } from "../people/components/all-people/all-people.component";
 
@@ -25,7 +24,8 @@ import { AddPersonComponent } from "../people/components/add-person/add-person.c
 import { SettlementService } from "../settlement/services/settlement.service";
 import { PersonHistoryComponent } from "../person-history/components/person-history.component";
 import { PersonSchoolComponent } from "../person-school/components/person-school.component";
-import { AddDiscountModalContent } from "../person-school/modals/add-person-school-modal/add-person-school-modal.component";
+import { AllUsersComponent } from "../user/components/all-users/all-users.component";
+import { PersonSchoolAddModalComponent } from "../person-school/modals/person-school-add-modal/person-school-add-modal.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -44,7 +44,7 @@ export function appInitializer(userService: UserService) {
     AddPersonComponent,
     PersonHistoryComponent,
     PersonSchoolComponent,
-    AddDiscountModalContent,
+    PersonSchoolAddModalComponent,
   ],
   imports: [
     BrowserModule,

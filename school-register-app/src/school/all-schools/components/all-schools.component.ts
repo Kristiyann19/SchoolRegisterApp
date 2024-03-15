@@ -3,7 +3,10 @@ import { catchError, throwError } from "rxjs";
 import { SchoolDto } from "../dtos/school-dto";
 import { SchoolFilterDto } from "../dtos/school-filter-dto";
 import { SchoolService } from "../services/school.service";
-import { SchoolTypeEnum, SchoolTypeEnumLocalization } from "../../../enums/school-type.enum";
+import {
+  SchoolTypeEnum,
+  SchoolTypeEnumLocalization,
+} from "../../../enums/school-type.enum";
 
 @Component({
   selector: "app-user",
