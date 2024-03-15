@@ -1,7 +1,11 @@
 ﻿using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Repositories.Contracts;
+<<<<<<< HEAD
 using SchoolRegisterApp.Models.Dtos.UserDtos;
+=======
+using SchoolRegisterApp.Models.Enums;
+>>>>>>> cfaf1f508c99ba054c347da9e7619d636657ab0d
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -46,6 +50,7 @@ namespace SchoolRegisterApp.Repositories.Services
             };
             user.PasswordHash = PasswordHasher.ComputeHash(register.Password, user.PasswordSalt);
             user.IsActive = true;
+            user.Role = RoleEnum.Director;
 
             context.Users.Add(user);
             context.SaveChanges();

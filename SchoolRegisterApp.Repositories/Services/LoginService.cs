@@ -5,7 +5,12 @@ using SchoolRegisterApp.Repositories.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+<<<<<<< HEAD
 using SchoolRegisterApp.Models.Dtos.UserDtos;
+=======
+using Microsoft.AspNetCore.Http;
+using SchoolRegisterApp.Models.Entities;
+>>>>>>> cfaf1f508c99ba054c347da9e7619d636657ab0d
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -37,20 +42,26 @@ namespace SchoolRegisterApp.Repositories.Services
                 throw new Exception("Username or password did not match.");
             }
 
+            return GenerateToken(LoginUser);
+        }
 
+        private string GenerateToken(Users loggedInUser)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Issuer = "http://localhost:12123",
-                Audience = "http://localhost:12123",
+                Issuer = configuration["Jwt:Issuer"],
+                Audience = configuration["Jwt:Audience"],
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, login.Username)
+                    new Claim(ClaimTypes.Name, loggedInUser.Username),
+                    new Claim(ClaimTypes.Role, loggedInUser.Role.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(30),
+                Expires = DateTime.UtcNow.AddMinutes(configuration.GetValue<int>("Jwt:ExpiresInMinutes")),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             string userToken = tokenHandler.WriteToken(token);
             return userToken;

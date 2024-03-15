@@ -24,16 +24,16 @@ namespace SchoolRegisterApp
             return services;
         }
 
-        public static IServiceCollection ConfigureJwtAuthenticationServices(this IServiceCollection services)
+        public static IServiceCollection ConfigureJwtAuthenticationServices(this IServiceCollection services, IConfiguration configuration)
         {
             var keyBytes = Encoding.UTF8.GetBytes("VerySecretKeyThatNeedsToBeLongToWork");
             var signingKey = new SymmetricSecurityKey(keyBytes);
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
-                ValidIssuer = "http://localhost:12123",
+                ValidIssuer = configuration["Jwt:Issuer"],
                 ValidateAudience = true,
-                ValidAudience = "http://localhost:12123",
+                ValidAudience = configuration["Jwt:Audience"],
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero,
                 ValidateIssuerSigningKey = true,
