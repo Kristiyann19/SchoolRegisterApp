@@ -22,9 +22,13 @@ namespace SchoolRegisterApp.Repositories.Services
         }
 
         public async Task<IEnumerable<SchoolDto>> GetAllSchoolsAsync()
-            => await context.Schools
+        {
+            var schools = await context.Schools
                .ProjectTo<SchoolDto>(mapper.ConfigurationProvider)
                .ToListAsync();
+
+            return schools;
+        }
         
 
         public async Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter)
