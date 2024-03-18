@@ -17,10 +17,6 @@ export class SchoolService {
     return this.http.get<SchoolDto[]>(`${this.baseUrl}/api/School`);
   }
 
-  schoolNameById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/School/SchoolId/${id}`);
-  }
-
   getFiltered(schoolDto: SchoolFilterDto): Observable<SchoolDto[]> {
     return this.http.get<SchoolDto[]>(
       `${this.baseUrl}/api/School/Search?${this.composeQueryString(schoolDto)}`

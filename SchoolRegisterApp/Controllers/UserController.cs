@@ -16,8 +16,8 @@ namespace SchoolRegisterApp.Controllers
             userService = _userService;
         }
 
-        [AllowAnonymous]
         [HttpGet("CurrentUser")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUserData()
         {
             return Ok(await userService

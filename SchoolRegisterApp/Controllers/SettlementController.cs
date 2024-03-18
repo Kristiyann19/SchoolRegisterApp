@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Controllers
@@ -16,6 +17,7 @@ namespace SchoolRegisterApp.Controllers
 
 
         [HttpGet]
+        [AuthorizedAdmin]
         public async Task<IActionResult> GetAllSettlements()
         {
             return Ok(await settlementService

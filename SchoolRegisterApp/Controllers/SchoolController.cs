@@ -18,7 +18,6 @@ namespace SchoolRegisterApp.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAllSchools()
         {
             return Ok(await schoolService
@@ -52,13 +51,6 @@ namespace SchoolRegisterApp.Controllers
         {
             return Ok(await schoolService
                 .GetSchoolByPersonAsync(personId));
-        }
-
-        [HttpGet("SchoolId/{id:int}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> SchoolNameById([FromRoute] int id)
-        {
-            return Ok(await schoolService.GetSchoolNameById(id));
         }
     }
 }

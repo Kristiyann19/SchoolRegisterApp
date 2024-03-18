@@ -16,8 +16,8 @@ namespace SchoolRegisterApp.Controllers
             registerService = _registerService;
         }
 
-        [AllowAnonymous]
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Register([FromBody] RegisterDto register)
         {
             registerService.Register(register);

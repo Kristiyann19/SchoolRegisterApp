@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Controllers
@@ -16,7 +15,6 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [AllowAnonymous] //Remove after done testing
         public async Task<IActionResult> GetPersonHistory([FromRoute] int id)
         {
             return Ok(await personHistoryService

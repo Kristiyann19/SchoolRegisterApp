@@ -122,12 +122,5 @@ namespace SchoolRegisterApp.Repositories.Services
 
             return schoolToReturn;
         }
-
-        public async Task<string> GetSchoolNameById(int id)
-        {
-            var school =  await context.Schools.SingleOrDefaultAsync(x => x.Id == id);
-
-            return school.Name;
-        }
     }
 }

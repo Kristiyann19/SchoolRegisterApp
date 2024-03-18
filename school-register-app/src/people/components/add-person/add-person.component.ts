@@ -37,7 +37,6 @@ export class AddPersonComponent {
   }
 
   addPerson(personAddDto: PersonAddDto) {
-    debugger;
     this.personService
       .add(personAddDto)
       .pipe(

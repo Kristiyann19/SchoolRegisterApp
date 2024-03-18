@@ -15,50 +15,42 @@ import { SchoolDto } from "../../../school/all-schools/dtos/school-dto";
   styleUrl: "./details-person.component.css",
 })
 export class DetailsPersonComponent {
-
   genderEnumLocalization = GenderEnumLocalization;
   person: PersonDetailsDto = new PersonDetailsDto();
   settlements: SettlementDto[] = [];
   personId: number;
 
-  school: SchoolDto
-  schoolName: string;
+  school: SchoolDto;
 
-  constructor(private route: ActivatedRoute, 
-    public personService: PersonService, 
-    private router: Router, 
+  constructor(
+    private route: ActivatedRoute,
+    public personService: PersonService,
+    private router: Router,
     private settlementService: SettlementService,
-    public schoolService: SchoolService) { }
+    public schoolService: SchoolService
+  ) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.personId = +params['id'];
-      this.fetchPersonDetails(); 
+      this.personId = +params["id"];
+      this.fetchPersonDetails();
       this.getSettlements();
-      
     });
   }
-
 
   fetchPersonDetails(): void {
     this.personService.getById(this.personId).subscribe((data) => {
-      this.person = data; 
+      this.person = data;
     });
   }
 
-  updatePerson() : void {
-    this.personService.updatePerson(this.personId, this.person).subscribe(() => {
-      this.router.navigate(['/all-people'])
-    })
+  updatePerson(): void {
+    this.personService
+      .updatePerson(this.personId, this.person)
+      .subscribe(() => {
+        this.router.navigate(["/all-people"]);
+      });
   }
-
-
-  // schoolNameById() : void {
-  //   debugger;
-  //   this.schoolService.schoolNameById(this.person.schoolId).subscribe((schoolData: any) => {
-  //     this.schoolName = schoolData.name;
-  //   })
-  // }
-
 
   getSettlements() {
     this.settlementService
@@ -72,5 +64,4 @@ export class DetailsPersonComponent {
         this.settlements = res;
       });
   }
-
 }

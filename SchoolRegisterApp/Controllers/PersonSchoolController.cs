@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
 using SchoolRegisterApp.Repositories.Contracts;
 
@@ -17,7 +17,6 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetPersonSchool(int id)
         {
             return Ok(await personSchoolService
@@ -25,7 +24,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPost()]
-        [AllowAnonymous]
+        [AuthorizedDirector]
         public async Task<IActionResult> AddPersonSchool([FromBody] PersonSchoolAddDto personSchoolAddDto)
         {
             await personSchoolService
@@ -35,7 +34,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPut()]
-        [AllowAnonymous]
+        [AuthorizedDirector]
         public async Task<IActionResult> UpdatePersonSchool([FromBody] PersonSchoolUpdateDto personSchoolUpdateDto)
         {
             await personSchoolService
