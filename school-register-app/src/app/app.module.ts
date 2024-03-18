@@ -23,7 +23,7 @@ import { SettlementService } from "../settlement/services/settlement.service";
 import { PersonHistoryComponent } from "../person-history/components/person-history.component";
 import { PersonSchoolComponent } from "../person-school/components/person-school.component";
 import { AllUsersComponent } from "../user/components/all-users/all-users.component";
-import { PersonSchoolAddModalComponent } from "./person-school-add-modal/person-school-add-modal.component";
+import { PersonSchoolAddModalComponent } from "../person-school/modals/person-school-add-modal/person-school-add-modal.component";
 import { AddSchoolComponent } from "../school/add-school/components/add-school.component";
 
 export function appInitializer(userService: UserService) {
@@ -44,7 +44,7 @@ export function appInitializer(userService: UserService) {
     PersonHistoryComponent,
     PersonSchoolComponent,
     PersonSchoolAddModalComponent,
-    AddSchoolComponent
+    AddSchoolComponent,
   ],
   imports: [
     BrowserModule,

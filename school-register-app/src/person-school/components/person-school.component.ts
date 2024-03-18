@@ -7,7 +7,7 @@ import { PersonService } from "../../people/services/person.service";
 import { PersonDetailsDto } from "../../people/dtos/person-details-dto";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UserService } from "../../user/services/user.service";
-import { PersonSchoolAddModalComponent } from "../../app/person-school-add-modal/person-school-add-modal.component";
+import { PersonSchoolAddModalComponent } from "../modals/person-school-add-modal/person-school-add-modal.component";
 import { PersonSchoolUpdateDto } from "../dtos/person-school-update-dto";
 import { catchError, throwError } from "rxjs";
 

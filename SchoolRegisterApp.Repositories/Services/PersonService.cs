@@ -24,57 +24,36 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext httpContext)
         {
-            using (var transaction = await context.Database.BeginTransactionAsync())
-            {
-                try
-                {
-                    var existingUserClaim = httpContext.User
+            var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
 
-                    var user = await context.Users
-                        .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            var user = await context.Users
+                .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
-                    if (existingUserClaim == null)
-                    {
-                        throw new Exception("Invalid user");
-                    }
+            DecodeUic(personAddDto);
 
-                    DecodeUic(personAddDto);
+            var person = new Person
+            {
+                FirstName = personAddDto.FirstName,
+                MiddleName = personAddDto.MiddleName,
+                LastName = personAddDto.LastName,
+                Uic = personAddDto.Uic,
+                BirthDate = personAddDto.BirthDate,
+                Gender = personAddDto.Gender,
+                BirthPlaceId = personAddDto.BirthPlaceId
+            };
 
-                    var person = new Person
-                    {
-                        FirstName = personAddDto.FirstName,
-                        MiddleName = personAddDto.MiddleName,
-                        LastName = personAddDto.LastName,
-                        Uic = personAddDto.Uic,
-                        BirthDate = personAddDto.BirthDate,
-                        Gender = personAddDto.Gender,
-                        BirthPlaceId = personAddDto.BirthPlaceId
-                    };
+            var personHistory = new PersonHistory()
+            {
+                Person = person,
+                UserId = user.Id,
+                ActionDate = DateTime.UtcNow,
+                DataModified = DataModified.Person,
+                ModificationType = ModificationType.Created
+            };
 
-                    await context.People.AddAsync(person);
-                    await context.SaveChangesAsync();
-
-                    var personHistory = new PersonHistory
-                    {
-                        PersonId = person.Id,
-                        UserId = user.Id,
-                        ActionDate = DateTime.UtcNow,
-                        DataModified = DataModified.Person,
-                        ModificationType = ModificationType.Created
-                    };
-
-                    await context.PersonHistories.AddAsync(personHistory);
-                    await context.SaveChangesAsync();
-
-                    await transaction.CommitAsync();
-                }
-                catch (Exception)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            }
+            await context.PersonHistories.AddAsync(personHistory);
+            await context.SaveChangesAsync();
         }
 
         public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)

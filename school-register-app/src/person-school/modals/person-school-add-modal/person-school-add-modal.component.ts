@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { PersonSchoolAddDto } from "../../person-school/dtos/person-school-add-dto";
-import { PersonSchoolService } from "../../person-school/service/person-school.service";
+import { PersonSchoolAddDto } from "../../dtos/person-school-add-dto";
+import { PersonSchoolService } from "../../service/person-school.service";
 import { catchError, throwError } from "rxjs";
 
 @Component({
@@ -34,6 +34,8 @@ export class PersonSchoolAddModalComponent {
           return throwError(() => err);
         })
       )
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        this.activeModal.close();
+      });
   }
 }
