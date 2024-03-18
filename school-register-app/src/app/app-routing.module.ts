@@ -12,18 +12,19 @@ import { AddPersonComponent } from "../people/components/add-person/add-person.c
 import { PersonHistoryComponent } from "../person-history/components/person-history.component";
 import { PersonSchoolComponent } from "../person-school/components/person-school.component";
 import { AddSchoolComponent } from "../school/add-school/components/add-school.component";
+import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "registration", component: RegistrationComponent },
-  { path: "all-users", component: AllUsersComponent },
-  { path: "all-schools", component: AllSchoolsComponent },
-  { path: "all-people", component: AllPeopleComponent },
-  { path: "person/:id", component: DetailsPersonComponent },
-  { path: "add-person", component: AddPersonComponent },
-  { path: "person-history/:id", component: PersonHistoryComponent },
-  { path: "person-school/:id", component: PersonSchoolComponent },
-  { path: "add-school", component: AddSchoolComponent}
+  { path: "all-users", component: AllUsersComponent, canActivate: [AuthGuard]},
+  { path: "all-schools", component: AllSchoolsComponent, canActivate: [AuthGuard] },
+  { path: "all-people", component: AllPeopleComponent, canActivate: [AuthGuard] },
+  { path: "person/:id", component: DetailsPersonComponent, canActivate: [AuthGuard] },
+  { path: "add-person", component: AddPersonComponent, canActivate: [AuthGuard] },
+  { path: "person-history/:id", component: PersonHistoryComponent , canActivate: [AuthGuard]},
+  { path: "person-school/:id", component: PersonSchoolComponent, canActivate: [AuthGuard] },
+  { path: "add-school", component: AddSchoolComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
