@@ -30,6 +30,7 @@ namespace SchoolRegisterApp.Repositories.Services
             var user = await context.Users
                 .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
+
             DecodeUic(personAddDto);
 
             var person = new Person
@@ -43,16 +44,15 @@ namespace SchoolRegisterApp.Repositories.Services
                 BirthPlaceId = personAddDto.BirthPlaceId
             };
 
-            var personHistory = new PersonHistory()
+            person.PersonHistories.Add(new PersonHistory()
             {
-                Person = person,
                 UserId = user.Id,
                 ActionDate = DateTime.UtcNow,
                 DataModified = DataModified.Person,
                 ModificationType = ModificationType.Created
-            };
-
-            await context.PersonHistories.AddAsync(personHistory);
+            });
+           
+            await context.People.AddAsync(person);
             await context.SaveChangesAsync();
         }
 
@@ -60,11 +60,6 @@ namespace SchoolRegisterApp.Repositories.Services
         {
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
-
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
 
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
@@ -105,11 +100,6 @@ namespace SchoolRegisterApp.Repositories.Services
             var existingUserClaim = httpContext.User
                 .FindFirst(ClaimTypes.Name);
 
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
-
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
             int userId = user.Id;
 
@@ -132,7 +122,6 @@ namespace SchoolRegisterApp.Repositories.Services
 
             await context.AddAsync(personHistory);
             await context.SaveChangesAsync();
-
         }
 
 

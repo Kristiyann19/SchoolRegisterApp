@@ -43,7 +43,6 @@ namespace SchoolRegisterApp.Models.Entities
 
             builder
                 .Property(x => x.ModificationType)
-                .IsRequired();
         }
     }
 }
