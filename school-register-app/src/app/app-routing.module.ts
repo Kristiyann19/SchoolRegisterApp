@@ -11,6 +11,7 @@ import { DetailsPersonComponent } from "../people/components/details-person/deta
 import { AddPersonComponent } from "../people/components/add-person/add-person.component";
 import { PersonHistoryComponent } from "../person-history/components/person-history.component";
 import { PersonSchoolComponent } from "../person-school/components/person-school.component";
+import { AddSchoolComponent } from "../school/add-school/components/add-school.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: "add-person", component: AddPersonComponent },
   { path: "person-history/:id", component: PersonHistoryComponent },
   { path: "person-school/:id", component: PersonSchoolComponent },
+  { path: "add-school", component: AddSchoolComponent}
 ];
 
 @NgModule({

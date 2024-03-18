@@ -9,7 +9,7 @@ import {
 } from "../../../enums/school-type.enum";
 
 @Component({
-  selector: "app-user",
+  selector: "app-schools",
   templateUrl: "./all-schools.component.html",
   styleUrl: "./all-schools.component.css",
 })

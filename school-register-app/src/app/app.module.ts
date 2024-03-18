@@ -26,6 +26,7 @@ import { PersonHistoryComponent } from "../person-history/components/person-hist
 import { PersonSchoolComponent } from "../person-school/components/person-school.component";
 import { AllUsersComponent } from "../user/components/all-users/all-users.component";
 import { PersonSchoolAddModalComponent } from "./person-school-add-modal/person-school-add-modal.component";
+import { AddSchoolComponent } from "../school/add-school/components/add-school.component";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -45,6 +46,7 @@ export function appInitializer(userService: UserService) {
     PersonHistoryComponent,
     PersonSchoolComponent,
     PersonSchoolAddModalComponent,
+    AddSchoolComponent
   ],
   imports: [
     BrowserModule,

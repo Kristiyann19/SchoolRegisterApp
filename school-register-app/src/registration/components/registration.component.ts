@@ -20,8 +20,10 @@ export class RegistrationComponent {
     private router: Router
   ) {}
   onRegister(): void {
+    debugger;
     this.registerService.register(this.register).subscribe(
-      () => {
+      (form) => {
+        form = form;
         console.log("User registered successfuly");
         this.router.navigate(["/login"]);
       },
@@ -31,12 +33,12 @@ export class RegistrationComponent {
     );
   }
   checkUsernameAvailability(): void{
-
+    debugger;
     if(this.register.username){
       debugger;
       this.registerService.checkUsernameAvailability(this.register.username).subscribe(available => {
         if (!available){
-          this.form.get('username').setErrors({'alreadyTaken' : true});
+          //TODO:
         }
       });
     }

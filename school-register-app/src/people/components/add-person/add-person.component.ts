@@ -4,6 +4,7 @@ import { catchError, throwError } from "rxjs";
 import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { PersonAddDto } from "../../dtos/person-add-dto";
 import { PersonService } from "../../services/person.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-add-person",
@@ -15,8 +16,10 @@ export class AddPersonComponent {
   personAddDto: PersonAddDto = new PersonAddDto();
 
   constructor(
-    public settlementService: SettlementService,
-    public personService: PersonService
+    private settlementService: SettlementService,
+    public personService: PersonService,
+
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -45,6 +48,6 @@ export class AddPersonComponent {
           return throwError(() => err);
         })
       )
-      .subscribe((res) => {});
+      .subscribe(() => { });
   }
 }

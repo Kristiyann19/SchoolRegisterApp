@@ -5,6 +5,6 @@ export class AddSchoolDto{
   name: string;
   nameAlt: string;
   type: SchoolTypeEnum;
-  settlement: SettlementDto;
+  settlementId: number;
   isActive: boolean
 }
