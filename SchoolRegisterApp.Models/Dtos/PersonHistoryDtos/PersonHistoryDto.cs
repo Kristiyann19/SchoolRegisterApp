@@ -1,6 +1,6 @@
 ﻿using SchoolRegisterApp.Models.Enums;
 
-namespace SchoolRegisterApp.Models.Dtos
+namespace SchoolRegisterApp.Models.Dtos.PersonHistoryDtos
 {
     public class PersonHistoryDto
     {

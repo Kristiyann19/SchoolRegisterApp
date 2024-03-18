@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
 
 namespace SchoolRegisterApp.Repositories.Contracts
 {

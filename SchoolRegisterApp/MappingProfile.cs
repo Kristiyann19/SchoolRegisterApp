@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
 using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Dtos.PersonDtos;
+using SchoolRegisterApp.Models.Dtos.PersonHistoryDtos;
+using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
+using SchoolRegisterApp.Models.Dtos.SchoolDtos;
+using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Models.Entities;
 
 namespace SchoolRegisterApp
@@ -31,6 +36,14 @@ namespace SchoolRegisterApp
                .ForMember(m => m.Name, cfg => cfg.MapFrom(src => src.Name))
                .ForMember(m => m.NameAlt, cfg => cfg.MapFrom(src => src.NameAlt))
                .ForMember(m => m.Type, cfg => cfg.MapFrom(src => src.Type))
+               .ForMember(m => m.Settlement, cfg => cfg.MapFrom(src => src.Settlement))
+               .ForMember(m => m.IsActive, cfg => cfg.MapFrom(src => src.IsActive));
+
+            CreateMap<AddSchoolDto, School>()
+               .ForMember(m => m.Name, cfg => cfg.MapFrom(src => src.Name))
+               .ForMember(m => m.NameAlt, cfg => cfg.MapFrom(src => src.NameAlt))
+               .ForMember(m => m.Type, cfg => cfg.MapFrom(src => src.Type))
+               .ForMember(m => m.SettlementId, cfg => cfg.MapFrom(src => src.SettlementId))
                .ForMember(m => m.Settlement, cfg => cfg.MapFrom(src => src.Settlement))
                .ForMember(m => m.IsActive, cfg => cfg.MapFrom(src => src.IsActive));
 

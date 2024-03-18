@@ -2,7 +2,7 @@
 using SchoolRegisterApp.Models.Entities;
 using System.Xml.Linq;
 
-namespace SchoolRegisterApp.Models.Dtos
+namespace SchoolRegisterApp.Models.Dtos.UserDtos
 {
     public class UserFilterDto : IFilter<Users>
     {

@@ -1,13 +1,16 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Repositories.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+<<<<<<< HEAD
+using SchoolRegisterApp.Models.Dtos.UserDtos;
+=======
 using Microsoft.AspNetCore.Http;
 using SchoolRegisterApp.Models.Entities;
+>>>>>>> cfaf1f508c99ba054c347da9e7619d636657ab0d
 
 namespace SchoolRegisterApp.Repositories.Services
 {

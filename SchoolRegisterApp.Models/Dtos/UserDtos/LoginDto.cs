@@ -1,4 +1,4 @@
-﻿namespace SchoolRegisterApp.Models.Dtos
+﻿namespace SchoolRegisterApp.Models.Dtos.UserDtos
 {
     public class LoginDto
     {

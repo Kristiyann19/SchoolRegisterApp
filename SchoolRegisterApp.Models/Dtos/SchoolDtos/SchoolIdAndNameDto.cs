@@ -1,4 +1,4 @@
-﻿namespace SchoolRegisterApp.Models.Dtos
+﻿namespace SchoolRegisterApp.Models.Dtos.SchoolDtos
 {
     public class SchoolIdAndNameDto
     {

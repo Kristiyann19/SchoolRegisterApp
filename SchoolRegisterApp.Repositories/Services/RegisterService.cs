@@ -1,8 +1,11 @@
-﻿using SchoolRegisterApp.Models.Dtos;
-using SchoolRegisterApp.Models.Entities;
+﻿using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Repositories.Contracts;
+<<<<<<< HEAD
+using SchoolRegisterApp.Models.Dtos.UserDtos;
+=======
 using SchoolRegisterApp.Models.Enums;
+>>>>>>> cfaf1f508c99ba054c347da9e7619d636657ab0d
 
 namespace SchoolRegisterApp.Repositories.Services
 {
