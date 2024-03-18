@@ -53,7 +53,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
             await context.AddAsync(personSchool);
 
-            //updatedPerson.SchoolId = personSchool.SchoolId;
+            updatedPerson.SchoolId = personSchool.SchoolId;
 
             var personHistory = new PersonHistory()
             {
