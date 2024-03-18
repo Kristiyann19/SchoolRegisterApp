@@ -17,9 +17,7 @@ import { RegistrationService } from "../registration/services/registration.servi
 import { UserService } from "../user/services/user.service";
 import { AllSchoolsComponent } from "../school/all-schools/components/all-schools.component";
 import { AllPeopleComponent } from "../people/components/all-people/all-people.component";
-
 import { DetailsPersonComponent } from "../people/components/details-person/details-person.component";
-
 import { AddPersonComponent } from "../people/components/add-person/add-person.component";
 import { SettlementService } from "../settlement/services/settlement.service";
 import { PersonHistoryComponent } from "../person-history/components/person-history.component";

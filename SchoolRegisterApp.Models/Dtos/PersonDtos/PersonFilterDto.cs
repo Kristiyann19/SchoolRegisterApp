@@ -16,6 +16,8 @@ namespace SchoolRegisterApp.Models.Dtos.PersonDtos
 
         public string BirthPlace { get; set; }
 
+        //int page, int pageSize
+
         public IQueryable<Person> WhereBuilder(IQueryable<Person> query)
         {
             if (!string.IsNullOrWhiteSpace(FirstName))
@@ -42,6 +44,8 @@ namespace SchoolRegisterApp.Models.Dtos.PersonDtos
             {
                 query = query.Where(x => x.BirthPlace.Name.ToLower().Contains(BirthPlace.ToLower().Trim()));
             }
+
+  
 
             return query;
         }

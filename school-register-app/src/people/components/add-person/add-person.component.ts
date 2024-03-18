@@ -47,6 +47,8 @@ export class AddPersonComponent {
           return throwError(() => err);
         })
       )
-      .subscribe(() => { });
+      .subscribe(() => { 
+        this.router.navigate(['all-people'])
+      });
   }
 }

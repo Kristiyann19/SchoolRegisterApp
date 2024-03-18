@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.PersonDtos;
@@ -19,11 +20,23 @@ namespace SchoolRegisterApp.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllAsync([FromQuery] PersonFilterDto filter)
+        public async Task<IActionResult> GetAllAsync([FromQuery] PersonFilterDto filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 3)
         {
             return Ok(await personService
-                .GetAllPeopleWithFilterAsync(HttpContext, filter));
+                .GetAllPeopleWithFilterAsync(HttpContext, filter, page, pageSize));
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Count")]
+        public async Task<IActionResult> TotalPeople()
+        {
+            var totalPeople = await personService
+                .GetPeopleCount();
+
+            return Ok(totalPeople);
+        }
+
 
 
         [HttpGet("{id:int}")]

@@ -19,6 +19,10 @@ export class AllPeopleComponent {
   settlement: SettlementDto = new SettlementDto();
   schoolName: string;
 
+  pageSize = 3;
+  page = 1;
+  totalPeopleCount = 0;
+
   constructor(public personService: PersonService, public schoolService: SchoolService, private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -27,7 +31,7 @@ export class AllPeopleComponent {
 
   get(personDto: PersonFilterDto) {
     this.personService
-      .getAllWithFilter(personDto)
+      .getAllWithFilter(personDto, this.page, this.pageSize)
       .pipe(
         catchError((err) => { 
           return throwError(() => err);
@@ -35,7 +39,19 @@ export class AllPeopleComponent {
       )
       .subscribe((res) => {
         this.people = res;
+        this.totalItems()
       });
   }
+
+  totalItems() : void {
+    this.personService.totalPeople().subscribe((count: number) =>{
+        this.totalPeopleCount = count;
+    })
+  }
+
+  OnPageChange(newPage: number){
+    this.page = newPage;
+    this.get(this.personDto);
+   }
 
 }

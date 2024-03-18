@@ -76,7 +76,7 @@ namespace SchoolRegisterApp.Repositories.Services
             }
         }
 
-        public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)
+        public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter, int page, int pageSize)
         {
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
@@ -101,10 +101,19 @@ namespace SchoolRegisterApp.Repositories.Services
          
             }
 
-            return await people
+            var filteredPeople = await people
                   .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
+                  .Skip((page - 1) * pageSize)
+                  .Take(pageSize)
                   .ToListAsync();
+
+            var count =  filteredPeople.Count();
+
+            return (filteredPeople);
         }
+
+        public async Task<int> GetPeopleCount()
+            => await context.People.CountAsync();
 
 
         public async Task<PersonDetailsDto> GetPersonDetailsAsync(int id)
