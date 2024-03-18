@@ -5,6 +5,7 @@ import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { PersonAddDto } from "../../dtos/person-add-dto";
 import { PersonService } from "../../services/person.service";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-add-person",
@@ -18,8 +19,8 @@ export class AddPersonComponent {
   constructor(
     private settlementService: SettlementService,
     public personService: PersonService,
-
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -47,8 +48,10 @@ export class AddPersonComponent {
           return throwError(() => err);
         })
       )
-      .subscribe(() => { 
-        this.router.navigate(['all-people'])
+
+      .subscribe(() => {
+        this.toastr.success("Добавено");
+        this.router.navigate(["/all-people"]);
       });
   }
 }

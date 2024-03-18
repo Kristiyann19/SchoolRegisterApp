@@ -51,7 +51,7 @@ export class RegistrationComponent {
         this.router.navigate(["/login"]);
       },
       (error) => {
-        this.toastr.error("Неуспешна регистрация");
+        return throwError(() => error);
       }
     );
   }

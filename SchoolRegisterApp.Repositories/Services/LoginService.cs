@@ -8,6 +8,8 @@ using System.Text;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
 using Microsoft.AspNetCore.Http;
 using SchoolRegisterApp.Models.Entities;
+using SchoolRegisterApp.Repositories.CustomExceptions;
+using SchoolRegisterApp.Repositories.CustomExceptionMessages;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -36,7 +38,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
             if (LoginUser.PasswordHash != passwordHash)
             {
-                throw new Exception("Username or password did not match.");
+                throw new NotFoundException(ExceptionMessages.LoginInvalidUsernameOrPassword);
             }
 
             return GenerateToken(LoginUser);

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Controllers
 {
@@ -19,14 +20,12 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAllAsync([FromQuery] PersonFilterDto filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 3)
         {
             return Ok(await personService
                 .GetAllPeopleWithFilterAsync(HttpContext, filter, page, pageSize));
         }
 
-        [AllowAnonymous]
         [HttpGet]
         [Route("Count")]
         public async Task<IActionResult> TotalPeople()
@@ -56,13 +55,12 @@ namespace SchoolRegisterApp.Controllers
             return Ok();
         }
 
-        [HttpPost()]
+        [HttpPost]
         [AuthorizedAdmin]
         public async Task<IActionResult> AddPersonAsync([FromBody] PersonDetailsDto personAddDto)
         {
             await personService
                 .AddPersonAsync(personAddDto, HttpContext);
-
 
             return Ok();
         }

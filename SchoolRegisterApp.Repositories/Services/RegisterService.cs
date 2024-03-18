@@ -3,6 +3,8 @@ using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Repositories.Contracts;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Models.Enums;
+using SchoolRegisterApp.Repositories.CustomExceptions;
+using SchoolRegisterApp.Repositories.CustomExceptionMessages;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -30,12 +32,12 @@ namespace SchoolRegisterApp.Repositories.Services
 
             if (!isUsernameAvailable)
             {
-                throw new Exception("Username is already used");
+                throw new BadRequestException(ExceptionMessages.AlreadyUsedUsername);
             }
 
             if (!isPhoneAvailable)
             {
-                throw new Exception("Phone is already used");
+                throw new BadRequestException(ExceptionMessages.AlreadyUsedPhone);
             }
 
             var user = new Users

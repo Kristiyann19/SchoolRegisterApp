@@ -9,6 +9,8 @@ using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
 using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
+using SchoolRegisterApp.Repositories.CustomExceptions;
+using SchoolRegisterApp.Repositories.CustomExceptionMessages;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -29,17 +31,12 @@ namespace SchoolRegisterApp.Repositories.Services
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
 
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
-
             var username = existingUserClaim.Value;
             var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
             if (personSchoolAddDto.SchoolId != user.SchoolId)
             {
-                throw new Exception("Invalid school");
+                throw new NotFoundException(ExceptionMessages.InvalidSchool);
             }
 
             PersonSchool personSchool = new PersonSchool()
@@ -87,17 +84,12 @@ namespace SchoolRegisterApp.Repositories.Services
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
 
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
-
             var username = existingUserClaim.Value;
             var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
             if (personSchoolUpdateDto.SchoolId != user.SchoolId)
             {
-                throw new Exception("Invalid school");
+                throw new NotFoundException(ExceptionMessages.InvalidSchool);
             }
 
             var personSchoolToUpdate = await context.PersonSchools
@@ -105,17 +97,17 @@ namespace SchoolRegisterApp.Repositories.Services
 
             if (personSchoolToUpdate == null)
             {
-                throw new Exception("Invalid person school");
+                throw new NotFoundException(ExceptionMessages.InvalidPersonSchool);
             }
 
             if (personSchoolToUpdate.PersonId != personSchoolUpdateDto.PersonId)
             {
-                throw new Exception("Cannot change person");
+                throw new BadRequestException(ExceptionMessages.CannotChangePersonForPersonSchool);
             }
 
             if (personSchoolToUpdate.SchoolId != personSchoolUpdateDto.SchoolId)
             {
-                throw new Exception("Cannot change school");
+                throw new BadRequestException(ExceptionMessages.CannotChangeSchoolForPersonSchool);
             }
 
             personSchoolToUpdate.Position = personSchoolUpdateDto.Position;

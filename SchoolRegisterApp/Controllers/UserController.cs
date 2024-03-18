@@ -24,7 +24,7 @@ namespace SchoolRegisterApp.Controllers
                 .GetUserDataAsync(HttpContext));
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
             return Ok(await userService

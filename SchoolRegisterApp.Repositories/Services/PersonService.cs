@@ -8,6 +8,8 @@ using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Repositories.CustomExceptionMessages;
+using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -30,11 +32,6 @@ namespace SchoolRegisterApp.Repositories.Services
                 {
                     var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
-
-                    if (existingUserClaim == null)
-                    {
-                        throw new Exception("Invalid user");
-                    }
 
                     var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
@@ -81,11 +78,6 @@ namespace SchoolRegisterApp.Repositories.Services
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
 
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
-
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
             var people = context.People.AsQueryable();
@@ -125,14 +117,8 @@ namespace SchoolRegisterApp.Repositories.Services
             var existingUserClaim = httpContext.User
                 .FindFirst(ClaimTypes.Name);
 
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
-
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
             int userId = user.Id;
-
 
             var existingPerson = await context.People
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -152,7 +138,6 @@ namespace SchoolRegisterApp.Repositories.Services
 
             await context.AddAsync(personHistory);
             await context.SaveChangesAsync();
-
         }
 
 

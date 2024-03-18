@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Controllers
 {
@@ -20,9 +21,16 @@ namespace SchoolRegisterApp.Controllers
         [AllowAnonymous]
         public ActionResult Register([FromBody] RegisterDto register)
         {
-            registerService.Register(register);
+            try
+            {
+                registerService.Register(register);
 
-            return Ok();
+                return Ok();
+            }
+            catch (BadRequestException bre)
+            {
+                return NotFound(bre.Message);
+            }
         }
 
         [AllowAnonymous]

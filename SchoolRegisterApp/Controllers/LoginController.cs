@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Controllers
 {
@@ -20,14 +21,21 @@ namespace SchoolRegisterApp.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
-            var token = loginService.Login(loginDto);
-
-            if (!string.IsNullOrEmpty(token))
+            try
             {
-                return Ok(new { Token = token });
-            }
+                var token = loginService.Login(loginDto);
 
-            return Unauthorized("Invalid credentials");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    return Ok(new { Token = token });
+                }
+
+                return Unauthorized("Invalid credentials");
+            }
+            catch (NotFoundException nfe)
+            {
+                return NotFound(nfe.Message);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Controllers
 {
@@ -27,20 +28,38 @@ namespace SchoolRegisterApp.Controllers
         [AuthorizedDirector]
         public async Task<IActionResult> AddPersonSchool([FromBody] PersonSchoolAddDto personSchoolAddDto)
         {
-            await personSchoolService
+            try
+            {
+                await personSchoolService
                 .AddPersonSchoolAsync(personSchoolAddDto, HttpContext);
 
-            return Ok();
+                return Ok();
+            }
+            catch (NotFoundException nfe)
+            {
+                return NotFound(nfe.Message);
+            }
         }
 
         [HttpPut()]
         [AuthorizedDirector]
         public async Task<IActionResult> UpdatePersonSchool([FromBody] PersonSchoolUpdateDto personSchoolUpdateDto)
         {
-            await personSchoolService
+            try
+            {
+                await personSchoolService
                 .UpdatePersonSchoolAsync(personSchoolUpdateDto, HttpContext);
 
-            return Ok();
+                return Ok();
+            }
+            catch (NotFoundException nfe)
+            {
+                return NotFound(nfe.Message);
+            }
+            catch (BadRequestException bre)
+            {
+                return NotFound(bre.Message);
+            }
         }
     }
 }
