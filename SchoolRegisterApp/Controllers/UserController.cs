@@ -25,18 +25,19 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllUsers([FromQuery] UserFilterDto filter)
         {
             return Ok(await userService
-                .GetAllUsersAsync());
+                .GetAllUsersWithFilterAsync(filter));
         }
 
-        [HttpGet("Filter")]
-        public async Task<IActionResult> GetFilteredAsync([FromQuery] UserFilterDto userDto)
+        [HttpGet]
+        [Route("Count")]
+        public async Task<IActionResult> TotalUsers()
         {
-            List<UserDto> users = await userService.GetFilteredUsersAsync(userDto);
-
-            return Ok(users);
+            return Ok(await userService
+                .GetUsersCount());
         }
     }
 }

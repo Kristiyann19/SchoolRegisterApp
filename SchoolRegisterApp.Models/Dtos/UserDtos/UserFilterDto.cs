@@ -1,4 +1,5 @@
-﻿using SchoolRegisterApp.Models.Common;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
+using SchoolRegisterApp.Models.Common;
 using SchoolRegisterApp.Models.Entities;
 using System.Xml.Linq;
 
@@ -7,9 +8,10 @@ namespace SchoolRegisterApp.Models.Dtos.UserDtos
     public class UserFilterDto : IFilter<Users>
     {
         public string Username { get; set; }
-
         public string School { get; set; }
         public string Phone { get; set; }
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 5;
 
         public IQueryable<Users> WhereBuilder(IQueryable<Users> query)
         {

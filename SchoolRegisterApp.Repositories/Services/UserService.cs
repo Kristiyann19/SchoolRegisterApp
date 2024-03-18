@@ -1,10 +1,8 @@
 ﻿using System.Security.Claims;
-
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Repositories.Contracts;
@@ -42,24 +40,27 @@ namespace SchoolRegisterApp.Repositories.Services
             return null;
         }
 
-        public async Task<List<UserDto>> GetAllUsersAsync()
-        {
-            var users = await context.Users
-                .Include(u => u.School)
-                .ProjectTo<UserDto>(mapper.ConfigurationProvider)
-                .ToListAsync();
 
-            return users;
+        public async Task<IEnumerable<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter)
+        {
+            var users = context.Users.AsQueryable();
+
+            if (filter != null)
+            {
+                users = filter.WhereBuilder(users);
+
+            }
+
+            var filteredUsers = await users
+                  .ProjectTo<UserDto>(mapper.ConfigurationProvider)
+                  .Skip((filter.Page - 1) * filter.PageSize)
+                  .Take(filter.PageSize)
+                  .ToListAsync();
+
+            return filteredUsers;
         }
 
-        public async Task<List<UserDto>> GetFilteredUsersAsync(UserFilterDto filter)
-        {
-            var users = await filter
-               .WhereBuilder(context.Users.Include(u => u.School).AsQueryable())
-               .ProjectTo<UserDto>(mapper.ConfigurationProvider)
-               .ToListAsync();
-
-            return users;
-        }
+        public async Task<int> GetUsersCount()
+           => await context.Users.CountAsync();
     }
 }

@@ -7,8 +7,9 @@ namespace SchoolRegisterApp.Repositories.Contracts
     {
         Task<UserDto> GetUserDataAsync(HttpContext httpContext);
 
-        Task<List<UserDto>> GetAllUsersAsync();
+        Task<IEnumerable<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter);
 
-        Task<List<UserDto>> GetFilteredUsersAsync(UserFilterDto filter);
+        Task<int> GetUsersCount();
+
     }
 }

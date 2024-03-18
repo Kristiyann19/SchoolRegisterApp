@@ -8,7 +8,7 @@ import { UserFilterDto } from "../dtos/user-filter-dto";
   providedIn: "root",
 })
 export class UserService {
-  private baseUrl = "http://localhost:12123";
+  private baseUrl = "http://localhost:12123/api/User";
   public currentUser: UserDto = new UserDto();
 
   constructor(private http: HttpClient) {}
@@ -24,14 +24,12 @@ export class UserService {
     });
   }
 
-  getAll(): Observable<UserDto[]> {
-    return this.http.get<UserDto[]>(`${this.baseUrl}/api/User`);
+  getAllwithFilter(userDto: UserFilterDto): Observable<UserDto[]> {
+    return this.http.get<UserDto[]>(`${this.baseUrl}?${this.composeQueryString(userDto)}`);
   }
 
-  getFiltered(userDto: UserFilterDto): Observable<UserDto[]> {
-    return this.http.get<UserDto[]>(
-      `${this.baseUrl}/api/User/Filter?${this.composeQueryString(userDto)}`
-    );
+  totalUsers() : Observable<number> {
+    return this.http.get<number>(this.baseUrl + '/Count');
   }
 
   composeQueryString(userDto: UserFilterDto): string {

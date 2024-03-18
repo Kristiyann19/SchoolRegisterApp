@@ -12,16 +12,18 @@ import { catchError, throwError } from "rxjs";
 export class AllUsersComponent {
   users: UserDto[] = [];
   userDto: UserFilterDto = new UserFilterDto();
-
+  pageSize = 5;
+  page = 1;
+  totalUsersCount = 0;
   constructor(public userService: UserService) {}
 
   ngOnInit() {
-    this.get();
+    this.get(this.userDto);
   }
 
-  get() {
+  get(userDto: UserFilterDto) {
     this.userService
-      .getAll()
+      .getAllwithFilter(userDto)
       .pipe(
         catchError((err) => {
           return throwError(() => err);
@@ -29,19 +31,31 @@ export class AllUsersComponent {
       )
       .subscribe((res) => {
         this.users = res;
+        this.totalItems();
       });
   }
 
-  getFiltered(userDto: UserFilterDto) {
-    this.userService
-      .getFiltered(userDto)
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res) => {
-        this.users = res;
-      });
-  }
+  totalItems() : void {
+    this.userService.totalUsers().subscribe((count: number) =>{
+        this.totalUsersCount = count;
+   })
+ }
+
+OnPageChange(newPage: number){
+  this.userDto.page = newPage;
+  this.get(this.userDto);
+ }
+
+  // getFiltered(userDto: UserFilterDto) {
+  //   this.userService
+  //     .getFiltered(userDto)
+  //     .pipe(
+  //       catchError((err) => {
+  //         return throwError(() => err);
+  //       })
+  //     )
+  //     .subscribe((res) => {
+  //       this.users = res;
+  //     });
+  // }
 }

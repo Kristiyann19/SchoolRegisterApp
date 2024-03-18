@@ -1,6 +1,6 @@
 <div class="container">
   <form #filterForm="ngForm"
-        (ngSubmit)="getFiltered(userDto)">
+        (ngSubmit)="get(userDto)">
     <div class="form-group">
       <label for="username"> Потребителско име: </label>
 
@@ -37,6 +37,18 @@
       Търси
     </button>
   </form>
+
+  <div class="row">
+    <div class="col">
+      <ngb-pagination [collectionSize]="this.totalUsersCount"
+                      [pageSize]="userDto.pageSize"
+                      [page]="page"
+                      (pageChange)="OnPageChange($event)"
+                      aria-label="Default pagination" />
+      <label for="card"> {{users.length}} обяви на {{page}} страница </label>
+
+    </div>
+  </div>
 
   <table class="table table-striped">
     <thead>
