@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SchoolRegisterApp.Models;
@@ -11,9 +12,11 @@ using SchoolRegisterApp.Models;
 namespace SchoolRegisterApp.Models.Migrations
 {
     [DbContext(typeof(SchoolRegisterDbContext))]
-    partial class SchoolRegisterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240318123719_AddForeignKeyFromPersonHistoriesToPerson")]
+    partial class AddForeignKeyFromPersonHistoriesToPerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +66,7 @@ namespace SchoolRegisterApp.Models.Migrations
 
                     b.HasIndex("SchoolId");
 
-                    b.ToTable("People", (string)null);
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("SchoolRegisterApp.Models.Entities.PersonHistory", b =>
@@ -95,7 +98,7 @@ namespace SchoolRegisterApp.Models.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PersonHistories", (string)null);
+                    b.ToTable("PersonHistories");
                 });
 
             modelBuilder.Entity("SchoolRegisterApp.Models.Entities.PersonSchool", b =>
@@ -127,7 +130,7 @@ namespace SchoolRegisterApp.Models.Migrations
 
                     b.HasIndex("SchoolId");
 
-                    b.ToTable("PersonSchools", (string)null);
+                    b.ToTable("PersonSchools");
                 });
 
             modelBuilder.Entity("SchoolRegisterApp.Models.Entities.School", b =>
@@ -161,7 +164,7 @@ namespace SchoolRegisterApp.Models.Migrations
 
                     b.HasIndex("SettlementId");
 
-                    b.ToTable("Schools", (string)null);
+                    b.ToTable("Schools");
                 });
 
             modelBuilder.Entity("SchoolRegisterApp.Models.Entities.Settlement", b =>
@@ -194,7 +197,7 @@ namespace SchoolRegisterApp.Models.Migrations
                     b.HasIndex("Ekatte")
                         .IsUnique();
 
-                    b.ToTable("Settlements", (string)null);
+                    b.ToTable("Settlements");
                 });
 
             modelBuilder.Entity("SchoolRegisterApp.Models.Entities.Users", b =>
@@ -239,7 +242,7 @@ namespace SchoolRegisterApp.Models.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("SchoolRegisterApp.Models.Entities.Person", b =>

@@ -27,12 +27,19 @@ namespace SchoolRegisterApp.Models.Entities
         public int? SchoolId { get; set; }
 
         public School School { get; set; }
+
+        public List<PersonHistory> PersonHistories = new List<PersonHistory>();
     }
 
     public class PersonConfiguration : IEntityTypeConfiguration<Person>
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {
+            builder
+                .HasMany(x => x.PersonHistories)
+                .WithOne(x => x.Person)
+                .HasForeignKey(x => x.PersonId);
+
             builder
                 .Property(x => x.FirstName)
                 .IsRequired();

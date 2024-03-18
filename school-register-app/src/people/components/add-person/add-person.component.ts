@@ -37,6 +37,7 @@ export class AddPersonComponent {
       )
       .subscribe((res) => {
         this.settlements = res;
+        console.log(this.settlements);
       });
   }
 

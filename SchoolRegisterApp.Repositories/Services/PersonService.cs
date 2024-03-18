@@ -24,68 +24,42 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext httpContext)
         {
-            using (var transaction = await context.Database.BeginTransactionAsync())
-            {
-                try
-                {
-                    var existingUserClaim = httpContext.User
+            var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
 
-                    var user = await context.Users
-                        .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            var user = await context.Users
+                .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
-                    if (existingUserClaim == null)
-                    {
-                        throw new Exception("Invalid user");
-                    }
 
-                    DecodeUic(personAddDto);
+            DecodeUic(personAddDto);
 
-                    var person = new Person
-                    {
-                        FirstName = personAddDto.FirstName,
-                        MiddleName = personAddDto.MiddleName,
-                        LastName = personAddDto.LastName,
-                        Uic = personAddDto.Uic,
-                        BirthDate = personAddDto.BirthDate,
-                        Gender = personAddDto.Gender,
-                        BirthPlaceId = personAddDto.BirthPlaceId
-                    };
+            var person = new Person
+            {
+                FirstName = personAddDto.FirstName,
+                MiddleName = personAddDto.MiddleName,
+                LastName = personAddDto.LastName,
+                Uic = personAddDto.Uic,
+                BirthDate = personAddDto.BirthDate,
+                Gender = personAddDto.Gender,
+                BirthPlaceId = personAddDto.BirthPlaceId
+            };
 
-                    await context.People.AddAsync(person);
-                    await context.SaveChangesAsync();
-
-                    var personHistory = new PersonHistory
-                    {
-                        PersonId = person.Id,
-                        UserId = user.Id,
-                        ActionDate = DateTime.UtcNow,
-                        DataModified = DataModified.Person,
-                        ModificationType = ModificationType.Created
-                    };
-
-                    await context.PersonHistories.AddAsync(personHistory);
-                    await context.SaveChangesAsync();
-
-                    await transaction.CommitAsync();
-                }
-                catch (Exception)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            }
+            person.PersonHistories.Add(new PersonHistory()
+            {
+                UserId = user.Id,
+                ActionDate = DateTime.UtcNow,
+                DataModified = DataModified.Person,
+                ModificationType = ModificationType.Created
+            });
+           
+            await context.People.AddAsync(person);
+            await context.SaveChangesAsync();
         }
 
         public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)
         {
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
-
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
 
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
@@ -126,11 +100,6 @@ namespace SchoolRegisterApp.Repositories.Services
             var existingUserClaim = httpContext.User
                 .FindFirst(ClaimTypes.Name);
 
-            if (existingUserClaim == null)
-            {
-                throw new Exception("Invalid user");
-            }
-
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
             int userId = user.Id;
 
@@ -153,7 +122,6 @@ namespace SchoolRegisterApp.Repositories.Services
 
             await context.AddAsync(personHistory);
             await context.SaveChangesAsync();
-
         }
 
 
