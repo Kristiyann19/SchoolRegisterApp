@@ -33,7 +33,8 @@ namespace SchoolRegisterApp.Repositories.Services
                     var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
 
-                    var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+                    var user = await context.Users
+                        .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
                     DecodeUic(personAddDto);
 

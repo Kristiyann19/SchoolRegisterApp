@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.PersonDtos;
+using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
-using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Controllers
 {
@@ -46,7 +44,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [AuthorizedAdmin]
+        [AuthorizedUser(RoleEnum.Admin)]
         public async Task<IActionResult> UpdatePerson([FromRoute] int id, [FromBody] PersonDetailsDto updatedPerson)
         {
             await personService
@@ -56,7 +54,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPost]
-        [AuthorizedAdmin]
+        [AuthorizedUser(RoleEnum.Admin)]
         public async Task<IActionResult> AddPersonAsync([FromBody] PersonDetailsDto personAddDto)
         {
             await personService

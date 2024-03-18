@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
+using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
 using SchoolRegisterApp.Repositories.CustomExceptions;
 
@@ -25,7 +26,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPost()]
-        [AuthorizedDirector]
+        [AuthorizedUser(RoleEnum.Director)]
         public async Task<IActionResult> AddPersonSchool([FromBody] PersonSchoolAddDto personSchoolAddDto)
         {
             try
@@ -42,7 +43,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPut()]
-        [AuthorizedDirector]
+        [AuthorizedUser(RoleEnum.Director)]
         public async Task<IActionResult> UpdatePersonSchool([FromBody] PersonSchoolUpdateDto personSchoolUpdateDto)
         {
             try

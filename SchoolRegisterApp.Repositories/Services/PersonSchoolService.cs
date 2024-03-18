@@ -32,7 +32,7 @@ namespace SchoolRegisterApp.Repositories.Services
                         .FindFirst(ClaimTypes.Name);
 
             var username = existingUserClaim.Value;
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == username);
 
             if (personSchoolAddDto.SchoolId != user.SchoolId)
             {
@@ -50,7 +50,7 @@ namespace SchoolRegisterApp.Repositories.Services
                     : null
             };
 
-            var updatedPerson = await context.People.FirstOrDefaultAsync(x => x.Id == personSchool.PersonId);
+            var updatedPerson = await context.People.SingleOrDefaultAsync(x => x.Id == personSchool.PersonId);
 
             await context.AddAsync(personSchool);
 
@@ -93,7 +93,7 @@ namespace SchoolRegisterApp.Repositories.Services
             }
 
             var personSchoolToUpdate = await context.PersonSchools
-                .FirstOrDefaultAsync(ps => ps.Id ==  personSchoolUpdateDto.Id);
+                .SingleOrDefaultAsync(ps => ps.Id ==  personSchoolUpdateDto.Id);
 
             if (personSchoolToUpdate == null)
             {

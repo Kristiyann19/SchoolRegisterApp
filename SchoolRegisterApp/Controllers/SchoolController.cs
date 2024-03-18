@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.SchoolDtos;
+using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Controllers
@@ -34,7 +35,7 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpPost]
-        [AuthorizedAdmin]
+        [AuthorizedUser(RoleEnum.Admin)]
         public async Task<IActionResult> AddSchool([FromBody] AddSchoolDto school)
         {
             await schoolService.AddSchoolAsync(HttpContext, school);
