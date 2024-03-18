@@ -1,0 +1,61 @@
+<div class="container">
+  <form #addForm="ngForm"
+        (ngSubmit)="add(addSchool)">
+    <div class="form-group">
+      <label for="name">Име: </label>
+
+      <input type="text"
+             name="name"
+             class="form-control"
+             id="name"
+             [(ngModel)]="addSchool.name" />
+    </div>
+
+    <div class="form-group">
+      <label for="nameAlt">Анг. Име: </label>
+
+      <input type="text"
+             name="nameAlt"
+             class="form-control"
+             id="nameAlt"
+             [(ngModel)]="addSchool.nameAlt" />
+    </div>
+
+    <div class="form-group">
+      <label for="type">Тип: </label>
+
+      <select [(ngModel)]="addSchool.type"
+              class="form-control"
+              name="type"
+              id="type">
+        <option></option>
+        <option [ngValue]="1">Държавно</option>
+        <option [ngValue]="2">Общинско</option>
+        <option [ngValue]="3">Частно</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="settlementId">Месторождение: </label>
+
+      <select [(ngModel)]="addSchool.settlementId"
+              class="form-control"
+              name="settlementId"
+              id="settlementId">
+        <option></option>
+        <option *ngFor="let settlement of settlements"
+                [ngValue]="settlement?.id">
+          {{ settlement.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-primary"
+              type="submit"
+              [disabled]="!addForm.valid">
+        Добави
+      </button>
+    </div>
+  </form>
+</div>

@@ -40,6 +40,7 @@ namespace SchoolRegisterApp.Repositories.Services
             }
 
             var schoolEntity = mapper.Map<School>(school);
+            schoolEntity.IsActive = true;
 
             await context.AddAsync(schoolEntity);
             await context.SaveChangesAsync();

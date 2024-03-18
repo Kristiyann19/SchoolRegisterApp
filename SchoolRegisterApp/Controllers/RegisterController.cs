@@ -25,6 +25,7 @@ namespace SchoolRegisterApp.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpGet("check-username/{username}")]
         public ActionResult UserNameValidation(string username)
         {
@@ -33,8 +34,9 @@ namespace SchoolRegisterApp.Controllers
             return Ok(isAvailable);
         }
 
+        [AllowAnonymous]
         [HttpGet("check-phone/{phone}")]
-        public ActionResult EmailValidation(string phone)
+        public ActionResult PhoneValidation(string phone)
         {
             var isAvailable = registerService.CheckPhoneAvailability(phone);
 
