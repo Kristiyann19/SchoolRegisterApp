@@ -38,11 +38,6 @@ namespace SchoolRegisterApp.Repositories.Services
 
                     var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
-                    if (user.Role != RoleEnum.Admin)
-                    {
-                        throw new Exception("You are not an admin");
-                    }
-
                     DecodeUic(personAddDto);
 
                     var person = new Person

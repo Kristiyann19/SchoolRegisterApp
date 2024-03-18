@@ -37,11 +37,6 @@ namespace SchoolRegisterApp.Repositories.Services
             var username = existingUserClaim.Value;
             var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
-            if (user.Role != RoleEnum.Director)
-            {
-                throw new Exception("You are not a director");
-            }
-
             if (personSchoolAddDto.SchoolId != user.SchoolId)
             {
                 throw new Exception("Invalid school");
@@ -99,11 +94,6 @@ namespace SchoolRegisterApp.Repositories.Services
 
             var username = existingUserClaim.Value;
             var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
-
-            if (user.Role != RoleEnum.Director)
-            {
-                throw new Exception("You are not a director");
-            }
 
             if (personSchoolUpdateDto.SchoolId != user.SchoolId)
             {
