@@ -5,4 +5,7 @@ export class SchoolFilterDto{
   nameAlt: string;
   type: SchoolTypeEnum;
   settlement: string;
+
+  page: number;
+  pageSize: number = 5;
 }

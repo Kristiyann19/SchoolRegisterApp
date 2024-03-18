@@ -71,7 +71,7 @@
   <div class="row">
     <div class="col">
       <ngb-pagination [collectionSize]="this.totalPeopleCount"
-                      [pageSize]="3"
+                      [pageSize]="personDto.pageSize"
                       [page]="page"
                       (pageChange)="OnPageChange($event)"
                       aria-label="Default pagination" />

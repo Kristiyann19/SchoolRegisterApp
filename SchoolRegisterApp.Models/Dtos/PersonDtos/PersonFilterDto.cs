@@ -16,6 +16,9 @@ namespace SchoolRegisterApp.Models.Dtos.PersonDtos
 
         public string BirthPlace { get; set; }
 
+        public int Page { get; set; } = 1;
+
+        public int PageSize { get; set; } = 3;
         //int page, int pageSize
 
         public IQueryable<Person> WhereBuilder(IQueryable<Person> query)

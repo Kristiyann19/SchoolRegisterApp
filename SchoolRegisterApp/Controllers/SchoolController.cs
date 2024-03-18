@@ -4,6 +4,7 @@ using SchoolRegisterApp.Attributes;
 using SchoolRegisterApp.Models.Dtos.SchoolDtos;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Repositories.Services;
 
 namespace SchoolRegisterApp.Controllers
 {
@@ -21,18 +22,20 @@ namespace SchoolRegisterApp.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllSchools()
+        public async Task<IActionResult> GetAllSchools([FromQuery] SchoolFilterDto filter)
         {
             return Ok(await schoolService
-                .GetAllSchoolsAsync());
+                .GetAllSchoolsWithFilterAsync(filter));
         }
 
-        [HttpGet("Search")]
-        public async Task<IActionResult> GetFilteredSchools([FromQuery] SchoolFilterDto schoolFilter)
+        [HttpGet]
+        [Route("Count")]
+        public async Task<IActionResult> TotalSchools()
         {
             return Ok(await schoolService
-                .GetFilteredSchoolsAsync(schoolFilter));
+                .GetSchoolsCount());
         }
+
 
         [HttpPost]
         [AuthorizedUser(RoleEnum.Admin)]

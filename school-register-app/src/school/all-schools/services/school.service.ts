@@ -13,18 +13,16 @@ export class SchoolService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<SchoolDto[]> {
-    return this.http.get<SchoolDto[]>(`${this.baseUrl}`);
+  getAllwithFilter(schoolDto: SchoolFilterDto): Observable<SchoolDto[]> {
+    return this.http.get<SchoolDto[]>(`${this.baseUrl}?${this.composeQueryString(schoolDto)}`);
   }
 
   addSchool(addSchool: AddSchoolDto): Observable<AddSchoolDto> {
     return this.http.post<AddSchoolDto>(this.baseUrl, addSchool);
   }
 
-  getFiltered(schoolDto: SchoolFilterDto): Observable<SchoolDto[]> {
-    return this.http.get<SchoolDto[]>(
-      `${this.baseUrl}/Search?${this.composeQueryString(schoolDto)}`
-    );
+  totalSchools() : Observable<number> {
+    return this.http.get<number>(this.baseUrl + '/Count');
   }
 
   composeQueryString(schoolDto: SchoolFilterDto): string {

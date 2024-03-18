@@ -1,6 +1,6 @@
 <div class="container">
   <form #filterForm="ngForm"
-        (ngSubmit)="getFiltered(school)">
+        (ngSubmit)="get(school)">
     <div class="form-group">
       <label for="name"> Име: </label>
 
@@ -50,6 +50,18 @@
     <i class="fa-solid fa-plus"></i>
     Добави
   </button>
+
+  <div class="row">
+    <div class="col">
+      <ngb-pagination [collectionSize]="this.totalSchoolsCount"
+                      [pageSize]="school.pageSize"
+                      [page]="page"
+                      (pageChange)="OnPageChange($event)"
+                      aria-label="Default pagination" />
+      <label for="card"> {{schools.length}} обяви на {{page}} страница </label>
+
+    </div>
+  </div>
 
   <table class="table table-striped">
     <thead>

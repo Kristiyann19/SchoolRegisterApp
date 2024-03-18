@@ -18,37 +18,39 @@ export class AllSchoolsComponent {
   school: SchoolFilterDto = new SchoolFilterDto();
 
   type = SchoolTypeEnum;
+
+  pageSize = 5;
+  page = 1;
+  totalSchoolsCount = 0;
   schoolTypeEnumLocalization = SchoolTypeEnumLocalization;
 
   constructor(public schoolService: SchoolService) {}
 
   ngOnInit() {
-    this.get();
+    this.get(this.school);
   }
 
-  get() {
-    this.schoolService
-      .getAll()
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res) => {
-        this.schools = res;
-      });
+  get(school: SchoolFilterDto) {
+    this.schoolService.getAllwithFilter(school).pipe(
+      catchError((err) => { 
+        return throwError(() => err);
+      })
+    )
+    .subscribe((res) => {
+      this.schools = res;
+      this.totalItems()
+    });
   }
 
-  getFiltered(school: SchoolFilterDto) {
-    this.schoolService
-      .getFiltered(school)
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res) => {
-        this.schools = res;
-      });
-  }
+  totalItems() : void {
+       this.schoolService.totalSchools().subscribe((count: number) =>{
+           this.totalSchoolsCount = count;
+      })
+    }
+
+   OnPageChange(newPage: number){
+     this.school.page = newPage;
+     this.get(this.school);
+    }
+
 }

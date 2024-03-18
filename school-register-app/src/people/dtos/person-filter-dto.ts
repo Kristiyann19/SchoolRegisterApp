@@ -4,4 +4,6 @@ export class PersonFilterDto {
   uic: string;
   gender: string;
   birthPlace: string;
+  page: number;
+  pageSize: number = 3;
 }

@@ -5,7 +5,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
 {
     public interface IPersonService
     {
-        Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter, int page, int pageSize);
+        Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter);
 
         Task<PersonDetailsDto> GetPersonDetailsAsync(int id);
 

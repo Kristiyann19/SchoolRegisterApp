@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Dtos.SchoolDtos;
+using SchoolRegisterApp.Models.Dtos.PersonDtos;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -35,24 +36,26 @@ namespace SchoolRegisterApp.Repositories.Services
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<SchoolDto>> GetAllSchoolsAsync()
+        public async Task<IEnumerable<SchoolDto>> GetAllSchoolsWithFilterAsync(SchoolFilterDto filter)
         {
-            var schools = await context.Schools
-               .ProjectTo<SchoolDto>(mapper.ConfigurationProvider)
-               .ToListAsync();
+            var schools = context.Schools.AsQueryable();
 
-            return schools;
+            if (filter != null)
+            {
+                schools = filter.WhereBuilder(schools);
+
+            }
+
+            var filteredSchools = await schools
+                  .ProjectTo<SchoolDto>(mapper.ConfigurationProvider)
+                  .Skip((filter.Page - 1) * filter.PageSize)
+                  .Take(filter.PageSize)
+                  .ToListAsync();
+
+            return filteredSchools;
         }
-        
 
-        public async Task<IEnumerable<SchoolDto>> GetFilteredSchoolsAsync(SchoolFilterDto schoolFilter)
-        {
-            var schools = await schoolFilter
-                .WhereBuilder(context.Schools.AsQueryable())
-                .ProjectTo<SchoolDto>(mapper.ConfigurationProvider)
-                .ToListAsync();
-
-            return schools;
-        }
+        public async Task<int> GetSchoolsCount()
+           => await context.Schools.CountAsync();
     }
 }

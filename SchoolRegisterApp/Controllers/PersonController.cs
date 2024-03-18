@@ -18,10 +18,10 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync([FromQuery] PersonFilterDto filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 3)
+        public async Task<IActionResult> GetAllAsync([FromQuery] PersonFilterDto filter)
         {
             return Ok(await personService
-                .GetAllPeopleWithFilterAsync(HttpContext, filter, page, pageSize));
+                .GetAllPeopleWithFilterAsync(HttpContext, filter));
         }
 
         [HttpGet]

@@ -15,7 +15,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class RegistrationComponent {
   schools: SchoolDto[] = [];
-
+  school: SchoolDto = new SchoolDto
   register: UserRegistrationDto = new UserRegistrationDto();
   form: FormGroup;
 
@@ -27,21 +27,21 @@ export class RegistrationComponent {
   ) {}
 
   ngOnInit() {
-    this.getSchools();
+    // this.getSchools();
   }
 
-  getSchools() {
-    this.schoolService
-      .getAll()
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res) => {
-        this.schools = res;
-      });
-  }
+  // getSchools() {
+  //   this.schoolService
+  //     .getAllwithFilter()
+  //     .pipe(
+  //       catchError((err) => {
+  //         return throwError(() => err);
+  //       })
+  //     )
+  //     .subscribe((res) => {
+  //       this.schools = res;
+  //     });
+  // }
 
   onRegister(): void {
     this.registerService.register(this.register).subscribe(

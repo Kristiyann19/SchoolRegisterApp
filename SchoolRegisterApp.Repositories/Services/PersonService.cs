@@ -8,8 +8,6 @@ using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
-using SchoolRegisterApp.Repositories.CustomExceptionMessages;
-using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -35,6 +33,11 @@ namespace SchoolRegisterApp.Repositories.Services
 
                     var user = await context.Users
                         .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+
+                    if (existingUserClaim == null)
+                    {
+                        throw new Exception("Invalid user");
+                    }
 
                     DecodeUic(personAddDto);
 
@@ -74,10 +77,15 @@ namespace SchoolRegisterApp.Repositories.Services
             }
         }
 
-        public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter, int page, int pageSize)
+        public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)
         {
             var existingUserClaim = httpContext.User
                         .FindFirst(ClaimTypes.Name);
+
+            if (existingUserClaim == null)
+            {
+                throw new Exception("Invalid user");
+            }
 
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
@@ -96,9 +104,9 @@ namespace SchoolRegisterApp.Repositories.Services
 
             var filteredPeople = await people
                   .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
-                  .Skip((page - 1) * pageSize)
-                  .Take(pageSize)
-                  .ToListAsync();
+                  .Skip((filter.Page - 1) * filter.PageSize)
+                  .Take(filter.PageSize)
+                  .ToListAsync();   
 
             return filteredPeople;
         }
@@ -118,8 +126,14 @@ namespace SchoolRegisterApp.Repositories.Services
             var existingUserClaim = httpContext.User
                 .FindFirst(ClaimTypes.Name);
 
+            if (existingUserClaim == null)
+            {
+                throw new Exception("Invalid user");
+            }
+
             var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
             int userId = user.Id;
+
 
             var existingPerson = await context.People
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -139,6 +153,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
             await context.AddAsync(personHistory);
             await context.SaveChangesAsync();
+
         }
 
 

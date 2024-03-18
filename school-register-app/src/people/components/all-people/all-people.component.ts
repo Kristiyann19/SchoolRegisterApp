@@ -31,7 +31,7 @@ export class AllPeopleComponent {
 
   get(personDto: PersonFilterDto) {
     this.personService
-      .getAllWithFilter(personDto, this.page, this.pageSize)
+      .getAllWithFilter(personDto)
       .pipe(
         catchError((err) => { 
           return throwError(() => err);
@@ -50,7 +50,7 @@ export class AllPeopleComponent {
   }
 
   OnPageChange(newPage: number){
-    this.page = newPage;
+    this.personDto.page = newPage;
     this.get(this.personDto);
    }
 

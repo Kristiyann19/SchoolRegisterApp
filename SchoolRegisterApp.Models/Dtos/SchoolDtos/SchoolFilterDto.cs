@@ -14,6 +14,11 @@ namespace SchoolRegisterApp.Models.Dtos.SchoolDtos
 
         public string Settlement { get; set; }
 
+        public int Page { get; set; } = 1;
+
+        public int PageSize { get; set; } = 5;
+
+
         public IQueryable<School> WhereBuilder(IQueryable<School> query)
         {
             if (!string.IsNullOrWhiteSpace(Name))
