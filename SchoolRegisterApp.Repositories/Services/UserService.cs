@@ -41,6 +41,7 @@ namespace SchoolRegisterApp.Repositories.Services
         }
 
 
+
         public async Task<IEnumerable<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter)
         {
             var users = context.Users.AsQueryable();

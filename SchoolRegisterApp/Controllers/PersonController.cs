@@ -28,10 +28,8 @@ namespace SchoolRegisterApp.Controllers
         [Route("Count")]
         public async Task<IActionResult> TotalPeople()
         {
-            var totalPeople = await personService
-                .GetPeopleCount();
-
-            return Ok(totalPeople);
+            return Ok(await personService
+                .GetPeopleCount());
         }
 
 

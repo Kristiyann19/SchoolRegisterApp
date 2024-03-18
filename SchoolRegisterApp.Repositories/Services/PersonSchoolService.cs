@@ -39,7 +39,7 @@ namespace SchoolRegisterApp.Repositories.Services
                 throw new NotFoundException(ExceptionMessages.InvalidSchool);
             }
 
-            PersonSchool personSchool = new PersonSchool()
+            var personSchool = new PersonSchool()
             {
                 Position = personSchoolAddDto.Position,
                 PersonId = personSchoolAddDto.PersonId,
@@ -54,9 +54,9 @@ namespace SchoolRegisterApp.Repositories.Services
 
             await context.AddAsync(personSchool);
 
-            updatedPerson.SchoolId = personSchool.SchoolId;
+            //updatedPerson.SchoolId = personSchool.SchoolId;
 
-            PersonHistory personHistory = new PersonHistory()
+            var personHistory = new PersonHistory()
             {
                 PersonId = personSchoolAddDto.PersonId,
                 UserId = user.Id,
@@ -69,15 +69,11 @@ namespace SchoolRegisterApp.Repositories.Services
             await context.SaveChangesAsync();
         }
 
-        public async Task<List<PersonSchoolDto>> GetPersonSchoolByPersonIdAsync(int id)
-        {
-            var personSchools = await context.PersonSchools
+        public async Task<List<PersonSchoolDto>> GetPersonSchoolByPersonIdAsync(int id) 
+            => await context.PersonSchools
                 .ProjectTo<PersonSchoolDto>(mapper.ConfigurationProvider)
                 .Where(x => x.PersonId == id)
                 .ToListAsync();
-
-            return personSchools;
-        }
 
         public async Task UpdatePersonSchoolAsync(PersonSchoolUpdateDto personSchoolUpdateDto, HttpContext httpContext)
         {
@@ -114,7 +110,7 @@ namespace SchoolRegisterApp.Repositories.Services
             personSchoolToUpdate.StartDate = personSchoolUpdateDto.StartDate;
             personSchoolToUpdate.EndDate = personSchoolUpdateDto.EndDate;
 
-            PersonHistory personHistory = new PersonHistory()
+            var personHistory = new PersonHistory()
             {
                 PersonId = personSchoolUpdateDto.PersonId,
                 UserId = user.Id,

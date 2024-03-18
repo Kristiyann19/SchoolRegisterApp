@@ -34,21 +34,18 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("check-username/{username}")]
-        public ActionResult UserNameValidation([FromBody] string username)
+        [HttpGet("check-username")]
+        public ActionResult UserNameValidation([FromQuery] string username)
         {
-            var isAvailable = registerService.CheckUserNameAvailability(username);
+            return Ok(registerService.CheckUserNameAvailability(username));
 
-            return Ok(isAvailable);
         }
 
         [AllowAnonymous]
-        [HttpGet("check-phone/{phone}")]
-        public ActionResult PhoneValidation([FromBody] string phone)
+        [HttpGet("check-phone")]
+        public ActionResult PhoneValidation([FromQuery] string phone)
         {
-            var isAvailable = registerService.CheckPhoneAvailability(phone);
-
-            return Ok(isAvailable);
+            return Ok(registerService.CheckPhoneAvailability(phone));
         }
     }
 }

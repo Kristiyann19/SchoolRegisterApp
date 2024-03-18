@@ -28,7 +28,8 @@ namespace SchoolRegisterApp
                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
                .ForMember(m => m.School, cfg => cfg.MapFrom(src => src.School))
                .ForMember(m => m.Username, cfg => cfg.MapFrom(src => src.Username))
-               .ForMember(m => m.Phone, cfg => cfg.MapFrom(src => src.Phone));
+               .ForMember(m => m.Phone, cfg => cfg.MapFrom(src => src.Phone))
+               .ForMember(m => m.Role, cfg => cfg.MapFrom(src => src.Role));
 
 
             CreateMap<School, SchoolDto>()

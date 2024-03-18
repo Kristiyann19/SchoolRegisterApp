@@ -10,6 +10,5 @@ namespace SchoolRegisterApp.Repositories.Contracts
         Task<IEnumerable<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter);
 
         Task<int> GetUsersCount();
-
     }
 }

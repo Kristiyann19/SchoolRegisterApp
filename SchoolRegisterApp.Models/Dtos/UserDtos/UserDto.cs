@@ -1,4 +1,5 @@
 ﻿using SchoolRegisterApp.Models.Entities;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Models.Dtos.UserDtos
 {
@@ -11,5 +12,7 @@ namespace SchoolRegisterApp.Models.Dtos.UserDtos
         public School School { get; set; }
 
         public string Phone { get; set; }
+
+        public RoleEnum Role { get; set; }
     }
 }
