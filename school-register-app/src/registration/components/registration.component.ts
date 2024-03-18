@@ -6,6 +6,7 @@ import { FormGroup } from "@angular/forms";
 import { SchoolDto } from "../../school/all-schools/dtos/school-dto";
 import { SchoolService } from "../../school/all-schools/services/school.service";
 import { catchError, throwError } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-registration",
@@ -21,7 +22,8 @@ export class RegistrationComponent {
   constructor(
     private registerService: RegistrationService,
     private schoolService: SchoolService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -37,36 +39,34 @@ export class RegistrationComponent {
         })
       )
       .subscribe((res) => {
-        debugger;
         this.schools = res;
       });
   }
 
   onRegister(): void {
-    debugger;
     this.registerService.register(this.register).subscribe(
       (form) => {
         form = form;
-        console.log("User registered successfuly");
+        this.toastr.success("Успешна регистрация");
         this.router.navigate(["/login"]);
       },
       (error) => {
-        console.error("Register failed.", error);
+        this.toastr.error("Неуспешна регистрация");
       }
     );
   }
 
-  checkUsernameAvailability(): void{
-    debugger;
-    if(this.register.username){
-      debugger;
-      this.registerService.checkUsernameAvailability(this.register.username).subscribe(available => {
-        if (!available){
-          //TODO:
-        }
-      });
+  checkUsernameAvailability(): void {
+    if (this.register.username) {
+      this.registerService
+        .checkUsernameAvailability(this.register.username)
+        .subscribe((available) => {
+          if (!available) {
+            //TODO:
+          }
+        });
+    }
   }
-}
 
   //  checkPhoneAvailability() : void {
   //   const email = this.form.get('email').value;
@@ -79,4 +79,4 @@ export class RegistrationComponent {
   //     });
   //   }
   //  }
-  }
+}

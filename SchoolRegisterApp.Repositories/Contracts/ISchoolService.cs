@@ -13,8 +13,6 @@ namespace SchoolRegisterApp.Repositories.Contracts
 
         Task<SchoolIdAndNameDto> GetSchoolByPersonAsync(int personId);
 
-        Task<string> GetSchoolNameById(int id);
-
         Task AddSchoolAsync(HttpContext httpContext, AddSchoolDto school);
     }
 }

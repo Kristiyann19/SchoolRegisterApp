@@ -18,6 +18,7 @@ namespace SchoolRegisterApp.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllSchools()
         {
             return Ok(await schoolService
