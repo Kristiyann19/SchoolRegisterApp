@@ -107,9 +107,7 @@ namespace SchoolRegisterApp.Repositories.Services
                   .Take(pageSize)
                   .ToListAsync();
 
-            var count =  filteredPeople.Count();
-
-            return (filteredPeople);
+            return filteredPeople;
         }
 
         public async Task<int> GetPeopleCount()

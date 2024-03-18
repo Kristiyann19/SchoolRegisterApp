@@ -27,7 +27,7 @@ namespace SchoolRegisterApp.Controllers
 
         [AllowAnonymous]
         [HttpGet("check-username/{username}")]
-        public ActionResult UserNameValidation(string username)
+        public ActionResult UserNameValidation([FromBody] string username)
         {
             var isAvailable = registerService.CheckUserNameAvailability(username);
 
@@ -36,7 +36,7 @@ namespace SchoolRegisterApp.Controllers
 
         [AllowAnonymous]
         [HttpGet("check-phone/{phone}")]
-        public ActionResult PhoneValidation(string phone)
+        public ActionResult PhoneValidation([FromBody] string phone)
         {
             var isAvailable = registerService.CheckPhoneAvailability(phone);
 
