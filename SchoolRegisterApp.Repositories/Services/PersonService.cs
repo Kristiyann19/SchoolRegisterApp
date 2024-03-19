@@ -30,30 +30,21 @@ namespace SchoolRegisterApp.Repositories.Services
             var user = await context.Users
                 .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
-
             DecodeUic(personAddDto);
+            var person = mapper.Map<Person>(personAddDto);
 
-            var person = new Person
-            {
-                FirstName = personAddDto.FirstName,
-                MiddleName = personAddDto.MiddleName,
-                LastName = personAddDto.LastName,
-                Uic = personAddDto.Uic,
-                BirthDate = personAddDto.BirthDate,
-                Gender = personAddDto.Gender,
-                BirthPlaceId = personAddDto.BirthPlaceId
-            };
+            person.SchoolId = null;
 
             person.PersonHistories.Add(new PersonHistory()
-            {
-                UserId = user.Id,
-                ActionDate = DateTime.UtcNow,
-                DataModified = DataModified.Person,
-                ModificationType = ModificationType.Created
-            });
-           
-            await context.People.AddAsync(person);
-            await context.SaveChangesAsync();
+                {
+                    UserId = user.Id,
+                    ActionDate = DateTime.UtcNow,
+                    DataModified = DataModified.Person,
+                    ModificationType = ModificationType.Created
+                });
+               
+                await context.People.AddAsync(person);
+                await context.SaveChangesAsync();
         }
 
         public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)

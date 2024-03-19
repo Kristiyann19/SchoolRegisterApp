@@ -40,14 +40,7 @@ namespace SchoolRegisterApp.Repositories.Services
                 throw new NotFoundException(ExceptionMessages.InvalidSchool);
             }
 
-            var personSchool = new PersonSchool()
-            {
-                Position = personSchoolAddDto.Position,
-                PersonId = personSchoolAddDto.PersonId,
-                SchoolId = personSchoolAddDto.SchoolId,
-                StartDate = personSchoolAddDto.StartDate,
-                EndDate = personSchoolAddDto.EndDate
-            };
+            var personSchool = mapper.Map<PersonSchool>(personSchoolAddDto);
 
             var updatedPerson = await context.People.SingleOrDefaultAsync(x => x.Id == personSchool.PersonId);
 

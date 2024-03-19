@@ -37,6 +37,14 @@ namespace SchoolRegisterApp
                .ForMember(m => m.Settlement, cfg => cfg.MapFrom(src => src.Settlement))
                .ForMember(m => m.IsActive, cfg => cfg.MapFrom(src => src.IsActive));
 
+            CreateMap<PersonAddDto, Person>()
+                .ForMember(m => m.FirstName, cfg => cfg.MapFrom(src => src.FirstName))
+                .ForMember(m => m.MiddleName, cfg => cfg.MapFrom(src => src.MiddleName))
+                .ForMember(m => m.LastName, cfg => cfg.MapFrom(src => src.LastName))
+                .ForMember(m => m.Uic, cfg => cfg.MapFrom(src => src.Uic))
+                .ForMember(m => m.BirthDate, cfg => cfg.MapFrom(src => src.BirthDate))
+                .ForMember(m => m.Gender, cfg => cfg.MapFrom(src => src.Gender))
+                .ForMember(m => m.BirthPlaceId, cfg => cfg.MapFrom(src => src.BirthPlaceId));
 
             CreateMap<Person, PersonDto>()
                 .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))
@@ -73,6 +81,14 @@ namespace SchoolRegisterApp
                 .ForMember(m => m.Position, cfg => cfg.MapFrom(src => src.Position))
                 .ForMember(m => m.StartDate, cfg => cfg.MapFrom(src => src.StartDate))
                 .ForMember(m => m.EndDate, cfg => cfg.MapFrom(src => src.EndDate));
+
+            CreateMap<PersonSchoolAddDto, PersonSchool>()
+                .ForMember(m => m.Position, cfg => cfg.MapFrom(src => src.Position))
+                .ForMember(m => m.PersonId, cfg => cfg.MapFrom(src => src.PersonId))
+                .ForMember(m => m.SchoolId, cfg => cfg.MapFrom(src => src.SchoolId))
+                .ForMember(m => m.StartDate, cfg => cfg.MapFrom(src => src.StartDate))
+                .ForMember(m => m.EndDate, cfg => cfg.MapFrom(src => src.EndDate));
+
 
             CreateMap<PersonDetailsDto, Person>()
                .ForMember(m => m.Id, cfg => cfg.MapFrom(src => src.Id))

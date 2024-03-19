@@ -42,7 +42,7 @@ namespace SchoolRegisterApp.Models.Entities
                 .IsRequired();
 
             builder
-                .Property(x => x.ModificationType)
+                .Property(x => x.ModificationType);
         }
     }
 }
