@@ -1,0 +1,18 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Училище</th>
+        <th scope="col">Длъжност</th>
+        <th scope="col">Брой</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>{{ report.school?.name }}</td>
+        <td>Преподавател по {{ positionEnumLocalization[report.position] }}</td>
+        <td>{{ report.peopleCount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

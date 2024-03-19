@@ -13,6 +13,7 @@ import { PersonHistoryComponent } from "../person-history/components/person-hist
 import { PersonSchoolComponent } from "../person-school/components/person-school.component";
 import { AddSchoolComponent } from "../school/add-school/components/add-school.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { ReportComponent } from "../report/components/report.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: "add-person", component: AddPersonComponent, canActivate: [AuthGuard] },
   { path: "person-history/:id", component: PersonHistoryComponent , canActivate: [AuthGuard]},
   { path: "person-school/:id", component: PersonSchoolComponent, canActivate: [AuthGuard] },
-  { path: "add-school", component: AddSchoolComponent, canActivate: [AuthGuard]}
+  { path: "add-school", component: AddSchoolComponent, canActivate: [AuthGuard]},
+  { path: "report", component: ReportComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
