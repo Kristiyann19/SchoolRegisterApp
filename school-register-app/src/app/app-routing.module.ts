@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: "add-person", component: AddPersonComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: "person-history/:id", component: PersonHistoryComponent , canActivate: [AuthGuard]},
   { path: "person-school/:id", component: PersonSchoolComponent, canActivate: [AuthGuard] },
-  { path: "add-school", component: AddSchoolComponent, canActivate: [AuthGuard]},
+  { path: "add-school", component: AddSchoolComponent, canActivate: [AuthGuard, [AdminGuard]]},
   { path: "report", component: ReportComponent, canActivate: [AuthGuard]}
 ];
 

@@ -8,6 +8,7 @@ using System.Security.Claims;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Dtos.SchoolDtos;
 using SchoolRegisterApp.Models.Dtos.PersonDtos;
+using SchoolRegisterApp.Models.Enums;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -15,19 +16,23 @@ namespace SchoolRegisterApp.Repositories.Services
     {
         private readonly SchoolRegisterDbContext context;
         private readonly IMapper mapper;
+        private readonly IUserService userService;
 
-        public SchoolService(SchoolRegisterDbContext _context, IMapper _mapper)
+        public SchoolService(SchoolRegisterDbContext _context, IMapper _mapper, IUserService _userService)
         {
             context = _context;
             mapper = _mapper;
+            userService = _userService;
         }
 
         public async Task AddSchoolAsync(HttpContext httpContext, AddSchoolDto school)
         {
-            var existingUserClaim = httpContext.User
-                        .FindFirst(ClaimTypes.Name);
+            var user = await userService.GetCurrentUserClaim(httpContext);
 
-            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            if (user.Role == RoleEnum.Director)
+            {
+                throw new Exception(); //todo
+            }
 
             var schoolEntity = mapper.Map<School>(school);
             schoolEntity.IsActive = true;

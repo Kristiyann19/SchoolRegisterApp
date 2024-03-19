@@ -1,10 +1,12 @@
-﻿using System.Security.Claims;
+﻿using System.Net.Http;
+using System.Security.Claims;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
+using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Repositories.Contracts;
 
 namespace SchoolRegisterApp.Repositories.Services
@@ -63,5 +65,13 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task<int> GetUsersCount()
            => await context.Users.CountAsync();
+
+        public async Task<Users> GetCurrentUserClaim(HttpContext httpContext)
+        {
+            var existingUserClaim = httpContext.User
+                        .FindFirst(ClaimTypes.Name);
+
+            return await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+        }
     }
 }

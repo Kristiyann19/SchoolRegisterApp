@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
+using SchoolRegisterApp.Models.Entities;
 
 namespace SchoolRegisterApp.Repositories.Contracts
 {
@@ -10,5 +11,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
         Task<List<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter);
 
         Task<int> GetUsersCount();
+
+        Task<Users> GetCurrentUserClaim(HttpContext httpContext);
     }
 }

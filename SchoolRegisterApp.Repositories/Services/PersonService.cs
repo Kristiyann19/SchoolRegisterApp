@@ -15,20 +15,18 @@ namespace SchoolRegisterApp.Repositories.Services
     {
         private readonly SchoolRegisterDbContext context;
         private readonly IMapper mapper;
+        private readonly IUserService userService;
 
-        public PersonService(SchoolRegisterDbContext _context, IMapper _mapper)
+        public PersonService(SchoolRegisterDbContext _context, IMapper _mapper, IUserService _userService)
         {
             context = _context;
             mapper = _mapper;
+            userService = _userService;
         }
 
         public async Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext httpContext)
         {
-            var existingUserClaim = httpContext.User
-                        .FindFirst(ClaimTypes.Name);
-
-            var user = await context.Users
-                .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            var user = await userService.GetCurrentUserClaim(httpContext);
 
             DecodeUic(personAddDto);
 
@@ -50,10 +48,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)
         {
-            var existingUserClaim = httpContext.User
-                        .FindFirst(ClaimTypes.Name);
-
-            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            var user = await userService.GetCurrentUserClaim(httpContext);
 
             var people = context.People.AsQueryable();
 
@@ -79,11 +74,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task<int> GetPeopleCount(HttpContext httpContext)
         {
-
-            var existingUserClaim = httpContext.User
-                       .FindFirst(ClaimTypes.Name);
-
-            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            var user = await userService.GetCurrentUserClaim(httpContext);
 
             var people = context.People.AsQueryable(); ;
 
@@ -105,12 +96,9 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson, HttpContext httpContext)
         {
-            var existingUserClaim = httpContext.User
-                .FindFirst(ClaimTypes.Name);
+            var user = await userService.GetCurrentUserClaim(httpContext);
 
-            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
             int userId = user.Id;
-
 
             var existingPerson = await context.People
                 .FirstOrDefaultAsync(x => x.Id == id);

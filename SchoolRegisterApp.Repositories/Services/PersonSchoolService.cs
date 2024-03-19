@@ -17,22 +17,18 @@ namespace SchoolRegisterApp.Repositories.Services
     {
         private readonly SchoolRegisterDbContext context;
         private readonly IMapper mapper;
+        private readonly IUserService userService;
 
-        public PersonSchoolService(SchoolRegisterDbContext _context, IMapper _mapper)
+        public PersonSchoolService(SchoolRegisterDbContext _context, IMapper _mapper, IUserService _userService)
         {
             context = _context;
             mapper = _mapper;
+            userService = _userService;
         }
 
         public async Task AddPersonSchoolAsync(PersonSchoolAddDto personSchoolAddDto, HttpContext httpContext)
         {
-            var existingUserClaim = httpContext.User
-                        .FindFirst(ClaimTypes.Name);
-
-            var username = existingUserClaim.Value;
-
-            var user = await context.Users
-                .SingleOrDefaultAsync(u => u.Username == username);
+            var user = await userService.GetCurrentUserClaim(httpContext);
 
             if (personSchoolAddDto.SchoolId != user.SchoolId)
             {
@@ -68,12 +64,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task UpdatePersonSchoolAsync(PersonSchoolUpdateDto personSchoolUpdateDto, HttpContext httpContext)
         {
-            var existingUserClaim = httpContext.User
-                        .FindFirst(ClaimTypes.Name);
-
-            var username = existingUserClaim.Value;
-
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await userService.GetCurrentUserClaim(httpContext);
 
             if (personSchoolUpdateDto.SchoolId != user.SchoolId)
             {
