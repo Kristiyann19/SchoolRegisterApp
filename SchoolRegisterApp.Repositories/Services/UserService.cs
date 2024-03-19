@@ -42,7 +42,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
 
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter)
+        public async Task<List<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter)
         {
             var users = context.Users.AsQueryable();
 

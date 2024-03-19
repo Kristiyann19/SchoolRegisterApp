@@ -1,5 +1,5 @@
-import { SchoolTypeEnum } from "../../../enums/school-type.enum";
-import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
+import { SchoolTypeEnum } from "../../enums/school-type.enum";
+import { SettlementDto } from "../../settlement/dtos/settlement-dto";
 
 export class SchoolDto{
   id: number;

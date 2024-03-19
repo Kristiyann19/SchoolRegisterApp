@@ -6,7 +6,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
-using Microsoft.AspNetCore.Http;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Repositories.CustomExceptions;
 using SchoolRegisterApp.Repositories.CustomExceptionMessages;

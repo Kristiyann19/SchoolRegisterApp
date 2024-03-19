@@ -1,4 +1,4 @@
-import { SchoolIdAndNameDto } from "../../school/all-schools/dtos/school-id-and-name-dto";
+import { SchoolIdAndNameDto } from "../../school/dtos/school-id-and-name-dto";
 import { SettlementDto } from "../../settlement/dtos/settlement-dto";
 
 export class PersonDto {

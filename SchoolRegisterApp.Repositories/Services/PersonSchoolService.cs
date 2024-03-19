@@ -3,7 +3,6 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-
 using SchoolRegisterApp.Models;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
@@ -23,7 +22,6 @@ namespace SchoolRegisterApp.Repositories.Services
         {
             context = _context;
             mapper = _mapper;
-
         }
 
         public async Task AddPersonSchoolAsync(PersonSchoolAddDto personSchoolAddDto, HttpContext httpContext)
@@ -32,6 +30,7 @@ namespace SchoolRegisterApp.Repositories.Services
                         .FindFirst(ClaimTypes.Name);
 
             var username = existingUserClaim.Value;
+
             var user = await context.Users
                 .SingleOrDefaultAsync(u => u.Username == username);
 
@@ -73,6 +72,7 @@ namespace SchoolRegisterApp.Repositories.Services
                         .FindFirst(ClaimTypes.Name);
 
             var username = existingUserClaim.Value;
+
             var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
             if (personSchoolUpdateDto.SchoolId != user.SchoolId)

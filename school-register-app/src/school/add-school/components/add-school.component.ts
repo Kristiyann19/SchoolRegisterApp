@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { catchError, throwError } from "rxjs";
-import { SchoolService } from "../../all-schools/services/school.service";
-import { AddSchoolDto } from "../../all-schools/dtos/school-add";
+import { SchoolService } from "../../services/school.service";
+import { AddSchoolDto } from "../../dtos/school-add";
 import { SchoolTypeEnumLocalization } from "../../../enums/school-type.enum";
 import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { SettlementService } from "../../../settlement/services/settlement.service";

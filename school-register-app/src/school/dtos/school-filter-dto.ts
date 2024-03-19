@@ -1,4 +1,4 @@
-import { SchoolTypeEnum } from "../../../enums/school-type.enum";
+import { SchoolTypeEnum } from "../../enums/school-type.enum";
 
 export class SchoolFilterDto{
   name: string;

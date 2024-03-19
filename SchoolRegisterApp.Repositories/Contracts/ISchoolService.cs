@@ -5,10 +5,12 @@ namespace SchoolRegisterApp.Repositories.Contracts
 {
     public interface ISchoolService
     {
-        Task<IEnumerable<SchoolDto>> GetAllSchoolsWithFilterAsync(SchoolFilterDto schoolFilter);
+        Task<List<SchoolDto>> GetAllSchoolsWithFilterAsync(SchoolFilterDto schoolFilter);
 
         Task AddSchoolAsync(HttpContext httpContext, AddSchoolDto school);
 
         Task<int> GetSchoolsCount();
+
+        Task<List<SchoolDto>> GetAllSchools();
     }
 }

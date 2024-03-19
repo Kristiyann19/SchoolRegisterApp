@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
@@ -32,20 +31,21 @@ namespace SchoolRegisterApp.Repositories.Services
                 .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
 
             DecodeUic(personAddDto);
+
             var person = mapper.Map<Person>(personAddDto);
 
             person.SchoolId = null;
 
             person.PersonHistories.Add(new PersonHistory()
-                {
-                    UserId = user.Id,
-                    ActionDate = DateTime.UtcNow,
-                    DataModified = DataModified.Person,
-                    ModificationType = ModificationType.Created
-                });
-               
-                await context.People.AddAsync(person);
-                await context.SaveChangesAsync();
+            {
+                UserId = user.Id,
+                ActionDate = DateTime.UtcNow,
+                DataModified = DataModified.Person,
+                ModificationType = ModificationType.Created
+            });
+
+            await context.People.AddAsync(person);
+            await context.SaveChangesAsync();
         }
 
         public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)

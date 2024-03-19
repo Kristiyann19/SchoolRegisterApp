@@ -14,6 +14,7 @@ import { PersonSchoolComponent } from "../person-school/components/person-school
 import { AddSchoolComponent } from "../school/add-school/components/add-school.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { ReportComponent } from "../report/components/report.component";
+import { AdminGuard } from "./guards/admin.guard";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: "all-schools", component: AllSchoolsComponent, canActivate: [AuthGuard] },
   { path: "all-people", component: AllPeopleComponent, canActivate: [AuthGuard] },
   { path: "person/:id", component: DetailsPersonComponent, canActivate: [AuthGuard] },
-  { path: "add-person", component: AddPersonComponent, canActivate: [AuthGuard] },
+  { path: "add-person", component: AddPersonComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: "person-history/:id", component: PersonHistoryComponent , canActivate: [AuthGuard]},
   { path: "person-school/:id", component: PersonSchoolComponent, canActivate: [AuthGuard] },
   { path: "add-school", component: AddSchoolComponent, canActivate: [AuthGuard]},

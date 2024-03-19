@@ -25,7 +25,6 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAllUsers([FromQuery] UserFilterDto filter)
         {
             return Ok(await userService

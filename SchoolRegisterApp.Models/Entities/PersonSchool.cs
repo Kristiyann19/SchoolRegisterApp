@@ -22,11 +22,11 @@ namespace SchoolRegisterApp.Models.Entities
 
         public DateTime? EndDate { get; set; }
     }
+
     public class PersonSchoolConfiguration : IEntityTypeConfiguration<PersonSchool>
     {
         public void Configure(EntityTypeBuilder<PersonSchool> builder)
         {
-            //builder.HasKey(b => new { b.PersonId, b.SchoolId });
 
             builder
                 .HasKey(b => b.Id);

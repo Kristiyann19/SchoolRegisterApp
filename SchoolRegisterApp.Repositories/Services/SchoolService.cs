@@ -36,7 +36,7 @@ namespace SchoolRegisterApp.Repositories.Services
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<SchoolDto>> GetAllSchoolsWithFilterAsync(SchoolFilterDto filter)
+        public async Task<List<SchoolDto>> GetAllSchoolsWithFilterAsync(SchoolFilterDto filter)
         {
             var schools = context.Schools.AsQueryable();
 
@@ -57,5 +57,11 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task<int> GetSchoolsCount()
            => await context.Schools.CountAsync();
+
+
+        public async Task<List<SchoolDto>> GetAllSchools()
+            => await context.Schools
+            .ProjectTo<SchoolDto>(mapper.ConfigurationProvider)
+            .ToListAsync();    
     }
 }

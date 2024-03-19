@@ -3,10 +3,11 @@ import { UserRegistrationDto } from "../../user/dtos/user-registration-dto";
 import { Router } from "@angular/router";
 import { RegistrationService } from "../services/registration.service";
 import { FormGroup } from "@angular/forms";
-import { SchoolDto } from "../../school/all-schools/dtos/school-dto";
-import { SchoolService } from "../../school/all-schools/services/school.service";
+import { SchoolDto } from "../../school/dtos/school-dto";
+import { SchoolService } from "../../school/services/school.service";
 import { catchError, throwError } from "rxjs";
 import { ToastrService } from "ngx-toastr";
+import { SchoolFilterDto } from "../../school/dtos/school-filter-dto";
 
 @Component({
   selector: "app-registration",
@@ -15,7 +16,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class RegistrationComponent {
   schools: SchoolDto[] = [];
-  school: SchoolDto = new SchoolDto
+  school: SchoolFilterDto = new SchoolFilterDto
   register: UserRegistrationDto = new UserRegistrationDto();
   form: FormGroup;
 
@@ -27,21 +28,21 @@ export class RegistrationComponent {
   ) {}
 
   ngOnInit() {
-    // this.getSchools();
+     this.getSchools();
   }
 
-  // getSchools() {
-  //   this.schoolService
-  //     .getAllwithFilter()
-  //     .pipe(
-  //       catchError((err) => {
-  //         return throwError(() => err);
-  //       })
-  //     )
-  //     .subscribe((res) => {
-  //       this.schools = res;
-  //     });
-  // }
+  getSchools() {
+    this.schoolService
+      .allSchools()
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      )
+      .subscribe((res) => {
+        this.schools = res;
+      });
+  }
 
   onRegister(): void {
     this.registerService.register(this.register).subscribe(

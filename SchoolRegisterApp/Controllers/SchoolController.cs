@@ -21,7 +21,6 @@ namespace SchoolRegisterApp.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAllSchools([FromQuery] SchoolFilterDto filter)
         {
             return Ok(await schoolService
@@ -41,9 +40,18 @@ namespace SchoolRegisterApp.Controllers
         [AuthorizedUser(RoleEnum.Admin)]
         public async Task<IActionResult> AddSchool([FromBody] AddSchoolDto school)
         {
-            await schoolService.AddSchoolAsync(HttpContext, school);
+            await schoolService
+                .AddSchoolAsync(HttpContext, school);
 
             return Ok();
+        }
+
+        [HttpGet("All")]
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            return Ok(await schoolService
+                .GetAllSchools());
         }
     }
 }

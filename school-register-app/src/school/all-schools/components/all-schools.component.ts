@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { catchError, throwError } from "rxjs";
-import { SchoolDto } from "../dtos/school-dto";
-import { SchoolFilterDto } from "../dtos/school-filter-dto";
-import { SchoolService } from "../services/school.service";
+import { SchoolDto } from "../../dtos/school-dto";
+import { SchoolFilterDto } from "../../dtos/school-filter-dto";
+import { SchoolService } from "../../services/school.service";
 import {
   SchoolTypeEnum,
   SchoolTypeEnumLocalization,

@@ -6,8 +6,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { catchError, throwError } from "rxjs";
 import { SettlementService } from "../../../settlement/services/settlement.service";
-import { SchoolService } from "../../../school/all-schools/services/school.service";
-import { SchoolDto } from "../../../school/all-schools/dtos/school-dto";
+import { SchoolService } from "../../../school/services/school.service";
+import { SchoolDto } from "../../../school/dtos/school-dto";
 
 @Component({
   selector: "app-details-person",

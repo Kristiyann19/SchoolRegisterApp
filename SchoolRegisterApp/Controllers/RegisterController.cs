@@ -37,7 +37,8 @@ namespace SchoolRegisterApp.Controllers
         [HttpGet("check-username")]
         public ActionResult UserNameValidation([FromQuery] string username)
         {
-            return Ok(registerService.CheckUserNameAvailability(username));
+            return Ok(registerService
+                .CheckUserNameAvailability(username));
 
         }
 
@@ -45,7 +46,8 @@ namespace SchoolRegisterApp.Controllers
         [HttpGet("check-phone")]
         public ActionResult PhoneValidation([FromQuery] string phone)
         {
-            return Ok(registerService.CheckPhoneAvailability(phone));
+            return Ok(registerService
+                .CheckPhoneAvailability(phone));
         }
     }
 }

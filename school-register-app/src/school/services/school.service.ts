@@ -21,6 +21,9 @@ export class SchoolService {
     return this.http.post<AddSchoolDto>(this.baseUrl, addSchool);
   }
 
+  allSchools() : Observable<SchoolDto[]>{
+    return this.http.get<SchoolDto[]>(this.baseUrl + "/All")
+  }
   totalSchools() : Observable<number> {
     return this.http.get<number>(this.baseUrl + '/Count');
   }

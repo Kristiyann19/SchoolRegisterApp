@@ -4,7 +4,7 @@ import { PersonFilterDto } from "../../dtos/person-filter-dto";
 import { PersonService } from "../../services/person.service";
 import { catchError, throwError } from "rxjs";
 import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
-import { SchoolService } from "../../../school/all-schools/services/school.service";
+import { SchoolService } from "../../../school/services/school.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

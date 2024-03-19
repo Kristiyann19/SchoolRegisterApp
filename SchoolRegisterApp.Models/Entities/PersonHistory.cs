@@ -27,11 +27,9 @@ namespace SchoolRegisterApp.Models.Entities
     {
         public void Configure(EntityTypeBuilder<PersonHistory> builder)
         {
-            //builder.HasKey(x => new { x.UserId, x.PersonId });
-
- 
-
-            builder.HasKey(x => x.Id);
+           
+            builder
+                .HasKey(x => x.Id);
 
             builder
                 .Property(x => x.ActionDate)
