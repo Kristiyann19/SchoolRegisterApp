@@ -10,3 +10,7 @@ button {
   display: block;
   margin: 2rem auto;
 }
+
+.row {
+  margin-top: 40px;
+}

@@ -18,7 +18,6 @@ export class AdminGuard implements CanActivate {
 
     } else {
 
-      this.router.navigate([''])
       return false;
 
     }

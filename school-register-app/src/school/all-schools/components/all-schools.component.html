@@ -44,12 +44,22 @@
         <option value="3">Частно</option>
       </select>
     </div>
+
+    <div class="buttons">
+      <button class="btn btn-primary"
+              type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Търси
+      </button>
+      <button *ngIf="userService.currentUser?.role === 1"
+              class="btn btn-outline-primary"
+              routerLink="/add-school">
+        <i class="fa-solid fa-plus"></i>
+        Добави
+      </button>
+    </div>
   </form>
-  <button class="btn btn-outline-primary"
-          routerLink="/add-school">
-    <i class="fa-solid fa-plus"></i>
-    Добави
-  </button>
+
 
   <div class="row">
     <div class="col">

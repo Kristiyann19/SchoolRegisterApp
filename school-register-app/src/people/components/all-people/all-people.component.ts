@@ -6,6 +6,7 @@ import { catchError, throwError } from "rxjs";
 import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { SchoolService } from "../../../school/services/school.service";
 import { ActivatedRoute } from "@angular/router";
+import { UserService } from "../../../user/services/user.service";
 
 @Component({
   selector: "app-all-people",
@@ -23,7 +24,7 @@ export class AllPeopleComponent {
   page = 1;
   totalPeopleCount = 0;
 
-  constructor(public personService: PersonService, public schoolService: SchoolService, private route: ActivatedRoute) {}
+  constructor(public personService: PersonService, public schoolService: SchoolService, private route: ActivatedRoute, public userService: UserService) {}
 
   ngOnInit() {
     this.get(this.personDto);

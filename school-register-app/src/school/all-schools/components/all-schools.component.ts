@@ -7,6 +7,7 @@ import {
   SchoolTypeEnum,
   SchoolTypeEnumLocalization,
 } from "../../../enums/school-type.enum";
+import { UserService } from "../../../user/services/user.service";
 
 @Component({
   selector: "app-schools",
@@ -24,7 +25,7 @@ export class AllSchoolsComponent {
   totalSchoolsCount = 0;
   schoolTypeEnumLocalization = SchoolTypeEnumLocalization;
 
-  constructor(public schoolService: SchoolService) {}
+  constructor(public schoolService: SchoolService, public userService: UserService) {}
 
   ngOnInit() {
     this.get(this.school);
