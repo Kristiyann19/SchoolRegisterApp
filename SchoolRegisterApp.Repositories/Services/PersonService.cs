@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Net.Http;
+using System.Security.Claims;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
@@ -76,8 +77,24 @@ namespace SchoolRegisterApp.Repositories.Services
             return filteredPeople;
         }
 
-        public async Task<int> GetPeopleCount()
-            => await context.People.CountAsync();
+        public async Task<int> GetPeopleCount(HttpContext httpContext)
+        {
+
+            var existingUserClaim = httpContext.User
+                       .FindFirst(ClaimTypes.Name);
+
+            var user = await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+
+            var people = context.People.AsQueryable(); ;
+
+            if (user.Role == RoleEnum.Director)
+            {
+                people = people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null);
+            }
+
+            return people.Count();
+        }
+            
 
 
         public async Task<PersonDetailsDto> GetPersonDetailsAsync(int id)

@@ -29,7 +29,7 @@ namespace SchoolRegisterApp.Controllers
         public async Task<IActionResult> TotalPeople()
         {
             return Ok(await personService
-                .GetPeopleCount());
+                .GetPeopleCount(HttpContext));
         }
 
 

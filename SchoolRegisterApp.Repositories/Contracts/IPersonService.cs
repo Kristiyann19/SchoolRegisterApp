@@ -13,7 +13,7 @@ namespace SchoolRegisterApp.Repositories.Contracts
 
         Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext htppContext);
 
-        Task<int> GetPeopleCount();
+        Task<int> GetPeopleCount(HttpContext httpContext);
 
     }
 }

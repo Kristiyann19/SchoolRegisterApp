@@ -7,15 +7,12 @@ namespace SchoolRegisterApp.Repositories.Services
 {
     public class ReportService : IReportService
     {
-        private readonly ISchoolService schoolService;
         private readonly SchoolRegisterDbContext context;
 
-        public ReportService(ISchoolService _schoolService, SchoolRegisterDbContext _context)
+        public ReportService(SchoolRegisterDbContext _context)
         {
-            schoolService = _schoolService;
             context = _context;
         }
-
 
         public async Task<List<ReportDto>> GetPersonCountGroupedBySchooAndPosition()
             => await context.PersonSchools
@@ -29,6 +26,5 @@ namespace SchoolRegisterApp.Repositories.Services
 
                 })
                 .ToListAsync();
-        
     }
 }

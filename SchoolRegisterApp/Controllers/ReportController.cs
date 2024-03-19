@@ -16,7 +16,6 @@ namespace SchoolRegisterApp.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous] //REMOVE
         public async Task<IActionResult> GetReport()
         {
             return Ok(await reportService
