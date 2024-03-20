@@ -21,16 +21,9 @@ namespace SchoolRegisterApp.Controllers
         [AllowAnonymous]
         public ActionResult Register([FromBody] RegisterDto register)
         {
-            try
-            {
-                registerService.Register(register);
+            registerService.Register(register);
 
-                return Ok();
-            }
-            catch (BadRequestException bre)
-            {
-                return NotFound(bre.Message);
-            }
+            return Ok();
         }
 
         [AllowAnonymous]

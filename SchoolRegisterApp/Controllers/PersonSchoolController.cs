@@ -29,38 +29,20 @@ namespace SchoolRegisterApp.Controllers
         [AuthorizedUser(RoleEnum.Director)]
         public async Task<IActionResult> AddPersonSchool([FromBody] PersonSchoolAddDto personSchoolAddDto)
         {
-            try
-            {
-                await personSchoolService
+            await personSchoolService
                 .AddPersonSchoolAsync(personSchoolAddDto, HttpContext);
 
-                return Ok();
-            }
-            catch (NotFoundException nfe)
-            {
-                return NotFound(nfe.Message);
-            }
+            return Ok();
         }
 
         [HttpPut()]
         [AuthorizedUser(RoleEnum.Director)]
         public async Task<IActionResult> UpdatePersonSchool([FromBody] PersonSchoolUpdateDto personSchoolUpdateDto)
         {
-            try
-            {
-                await personSchoolService
+            await personSchoolService
                 .UpdatePersonSchoolAsync(personSchoolUpdateDto, HttpContext);
 
-                return Ok();
-            }
-            catch (NotFoundException nfe)
-            {
-                return NotFound(nfe.Message);
-            }
-            catch (BadRequestException bre)
-            {
-                return NotFound(bre.Message);
-            }
+            return Ok();
         }
     }
 }

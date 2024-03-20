@@ -8,6 +8,7 @@ using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
+using SchoolRegisterApp.Repositories.CustomExceptionMessages;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -98,10 +99,13 @@ namespace SchoolRegisterApp.Repositories.Services
         {
             var user = await userService.GetCurrentUserClaim(httpContext);
 
-            int userId = user.Id;
-
             var existingPerson = await context.People
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            if (existingPerson == null)
+            {
+                throw new DirectoryNotFoundException(ExceptionMessages.InvalidPerson);
+            }
 
             DecodeUic(updatedPerson);
 
@@ -110,7 +114,7 @@ namespace SchoolRegisterApp.Repositories.Services
             var personHistory = new PersonHistory
             {
                 PersonId = updatedPerson.Id,
-                UserId = userId,
+                UserId = user.Id,
                 ActionDate = DateTime.UtcNow,
                 DataModified = DataModified.Person,
                 ModificationType = ModificationType.Updated

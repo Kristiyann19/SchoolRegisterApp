@@ -21,21 +21,14 @@ namespace SchoolRegisterApp.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
-            try
-            {
-                var token = loginService.Login(loginDto);
+            var token = loginService.Login(loginDto);
 
-                if (!string.IsNullOrEmpty(token))
-                {
-                    return Ok(new { Token = token });
-                }
-
-                return Unauthorized("Invalid credentials");
-            }
-            catch (NotFoundException nfe)
+            if (!string.IsNullOrEmpty(token))
             {
-                return NotFound(nfe.Message);
+                return Ok(new { Token = token });
             }
+
+            return Unauthorized("Invalid credentials");
         }
     }
 }

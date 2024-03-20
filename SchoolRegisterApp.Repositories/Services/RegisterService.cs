@@ -54,8 +54,6 @@ namespace SchoolRegisterApp.Repositories.Services
             context.Users.Add(user);
             context.SaveChanges();
         }
-
-        
     }
 }
 

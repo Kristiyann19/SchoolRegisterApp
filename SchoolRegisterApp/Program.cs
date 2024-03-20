@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp;
+using SchoolRegisterApp.Middlewares;
 using SchoolRegisterApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,8 @@ builder.Services.ConfigureJwtAuthenticationServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

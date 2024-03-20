@@ -19,10 +19,13 @@ namespace SchoolRegisterApp.Repositories.Services
         }
 
         public async Task<List<PersonHistoryDto>> GetPersonHistoryByPersonIdAsync(int id)
-            => await context.PersonHistories
-                .ProjectTo<PersonHistoryDto>(mapper.ConfigurationProvider)
-                .Where(x => x.PersonId == id)
-                .ToListAsync();
-        
+        {
+            var personHistories = await context.PersonHistories
+               .ProjectTo<PersonHistoryDto>(mapper.ConfigurationProvider)
+               .Where(x => x.PersonId == id)
+               .ToListAsync();
+
+            return personHistories;
+        }
     }
 }

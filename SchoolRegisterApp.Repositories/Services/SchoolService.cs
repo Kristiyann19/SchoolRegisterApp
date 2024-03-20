@@ -29,11 +29,6 @@ namespace SchoolRegisterApp.Repositories.Services
         {
             var user = await userService.GetCurrentUserClaim(httpContext);
 
-            if (user.Role == RoleEnum.Director)
-            {
-                throw new Exception(); //todo
-            }
-
             var schoolEntity = mapper.Map<School>(school);
             schoolEntity.IsActive = true;
 

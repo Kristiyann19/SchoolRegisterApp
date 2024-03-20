@@ -69,9 +69,10 @@ namespace SchoolRegisterApp.Repositories.Services
         public async Task<Users> GetCurrentUserClaim(HttpContext httpContext)
         {
             var existingUserClaim = httpContext.User
-                        .FindFirst(ClaimTypes.Name);
+                .FindFirst(ClaimTypes.Name);
 
-            return await context.Users.SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
+            return await context.Users
+                .SingleOrDefaultAsync(u => u.Username == existingUserClaim.Value);
         }
     }
 }
