@@ -22,6 +22,9 @@ export class RegistrationService {
   }
 
   checkPhoneAvailability(phone: string): Observable<void> {
-    return this.http.get<void>(`${this.baseUrl}/check-phone?phone=${phone}`);
+    const params = { phone: phone };
+    return this.http.get<void>(`${this.baseUrl}/check-phone`, {
+      params: params,
+    });
   }
 }

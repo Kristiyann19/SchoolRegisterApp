@@ -70,15 +70,16 @@ export class RegistrationComponent {
     }
   }
 
-  //  checkPhoneAvailability() : void {
-  //   const email = this.form.get('email').value;
-
-  //   if (email) {
-  //     this.registerService.checkEmailAvailability(email).subscribe(available => {
-  //       if(!available){
-  //         this.form.get('email').setErrors({'alreadyTaken' : true});
-  //       }
-  //     });
-  //   }
-  //  }
+  checkPhoneAvailability(): void {
+    if (this.register.phone) {
+      this.registerService
+        .checkPhoneAvailability(this.register.phone)
+        .pipe(
+          catchError((err) => {
+            return throwError(() => err);
+          })
+        )
+        .subscribe();
+    }
+  }
 }

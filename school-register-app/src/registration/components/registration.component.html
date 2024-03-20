@@ -18,6 +18,7 @@
         placeholder="Телефонен номер"
         class="form-control"
         name="phone"
+        (blur)="checkPhoneAvailability()"
         required
         [(ngModel)]="register.phone"
       />
