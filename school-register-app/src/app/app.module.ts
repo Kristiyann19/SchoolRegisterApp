@@ -26,6 +26,7 @@ import { AllUsersComponent } from "../user/components/all-users/all-users.compon
 import { PersonSchoolAddModalComponent } from "../person-school/modals/person-school-add-modal/person-school-add-modal.component";
 import { AddSchoolComponent } from "../school/add-school/components/add-school.component";
 import { ReportComponent } from "../report/components/report.component";
+import { ErrorInterceptor } from "./interceptors/error.interceptor";
 
 export function appInitializer(userService: UserService) {
   return () => userService.initializeUser();
@@ -46,7 +47,7 @@ export function appInitializer(userService: UserService) {
     PersonSchoolComponent,
     PersonSchoolAddModalComponent,
     AddSchoolComponent,
-    ReportComponent
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +70,11 @@ export function appInitializer(userService: UserService) {
       useFactory: appInitializer,
       multi: true,
       deps: [UserService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
     },
     LoginService,
     RegistrationService,
