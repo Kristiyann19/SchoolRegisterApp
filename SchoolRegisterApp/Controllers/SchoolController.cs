@@ -27,14 +27,6 @@ namespace SchoolRegisterApp.Controllers
                 .GetAllSchoolsWithFilterAsync(filter));
         }
 
-        [HttpGet]
-        [Route("Count")]
-        public async Task<IActionResult> TotalSchools()
-        {
-            return Ok(await schoolService
-                .GetSchoolsCount());
-        }
-
 
         [HttpPost]
         [AuthorizedUser(RoleEnum.Admin)]

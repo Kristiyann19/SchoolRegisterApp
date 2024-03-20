@@ -8,6 +8,7 @@ import {
   SchoolTypeEnumLocalization,
 } from "../../../enums/school-type.enum";
 import { UserService } from "../../../user/services/user.service";
+import { SearchResultDto } from "../../../app/generic/search-result-dto";
 
 @Component({
   selector: "app-schools",
@@ -17,7 +18,7 @@ import { UserService } from "../../../user/services/user.service";
 export class AllSchoolsComponent {
   schools: SchoolDto[] = [];
   school: SchoolFilterDto = new SchoolFilterDto();
-
+  searchResult: SearchResultDto<SchoolDto> = new SearchResultDto<SchoolDto>();
   type = SchoolTypeEnum;
 
   pageSize = 5;
@@ -35,27 +36,22 @@ export class AllSchoolsComponent {
   }
 
   get(school: SchoolFilterDto) {
-    this.schoolService
-      .getAllwithFilter(school)
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res) => {
-        this.schools = res;
-        this.totalItems();
-      });
-  }
 
-  totalItems(): void {
-    this.schoolService.totalSchools().subscribe((count: number) => {
-      this.totalSchoolsCount = count;
+    this.schoolService.getAllwithFilter(school).pipe(
+      catchError((err) => { 
+        return throwError(() => err);
+      })
+    )
+    .subscribe((res) => {
+      this.searchResult = res;
+      this.totalSchoolsCount = this.searchResult.totalCount;
     });
   }
 
-  OnPageChange(newPage: number) {
-    this.school.page = newPage;
-    this.get(this.school);
-  }
+   OnPageChange(newPage: number){
+     this.school.page = newPage;
+     this.get(this.school);
+    }
+
+
 }

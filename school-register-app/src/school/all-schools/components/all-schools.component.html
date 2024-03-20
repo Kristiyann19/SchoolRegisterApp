@@ -68,7 +68,7 @@
                       [page]="page"
                       (pageChange)="OnPageChange($event)"
                       aria-label="Default pagination" />
-      <label for="card"> {{schools.length}} обяви на {{page}} страница </label>
+      <label for="card"> {{searchResult.items?.length}} обяви на {{page}} страница </label>
 
     </div>
   </div>
@@ -83,7 +83,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let school of schools">
+      <tr *ngFor="let school of searchResult.items">
         <td>{{ school.name }}</td>
         <td>{{ school.nameAlt }}</td>
         <td>{{ school.settlement.name }}</td>

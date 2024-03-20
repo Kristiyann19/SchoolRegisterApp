@@ -30,13 +30,5 @@ namespace SchoolRegisterApp.Controllers
             return Ok(await userService
                 .GetAllUsersWithFilterAsync(filter));
         }
-
-        [HttpGet]
-        [Route("Count")]
-        public async Task<IActionResult> TotalUsers()
-        {
-            return Ok(await userService
-                .GetUsersCount());
-        }
     }
 }

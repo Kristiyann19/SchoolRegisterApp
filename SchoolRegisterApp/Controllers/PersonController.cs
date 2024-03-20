@@ -24,15 +24,6 @@ namespace SchoolRegisterApp.Controllers
                 .GetAllPeopleWithFilterAsync(HttpContext, filter));
         }
 
-        [HttpGet]
-        [Route("Count")]
-        public async Task<IActionResult> TotalPeople()
-        {
-            return Ok(await personService
-                .GetPeopleCount(HttpContext));
-        }
-
-
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetDetailsById([FromRoute] int id)

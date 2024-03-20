@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { SchoolDto } from "../dtos/school-dto";
 import { SchoolFilterDto } from "../dtos/school-filter-dto";
 import { AddSchoolDto } from "../dtos/school-add";
+import { SearchResultDto } from "../../app/generic/search-result-dto";
 
 @Injectable({
   providedIn: "root",
@@ -13,8 +14,8 @@ export class SchoolService {
 
   constructor(private http: HttpClient) {}
 
-  getAllwithFilter(schoolDto: SchoolFilterDto): Observable<SchoolDto[]> {
-    return this.http.get<SchoolDto[]>(`${this.baseUrl}?${this.composeQueryString(schoolDto)}`);
+  getAllwithFilter(schoolDto: SchoolFilterDto): Observable<SearchResultDto<SchoolDto>> {
+    return this.http.get<SearchResultDto<SchoolDto>>(`${this.baseUrl}?${this.composeQueryString(schoolDto)}`);
   }
 
   addSchool(addSchool: AddSchoolDto): Observable<AddSchoolDto> {
@@ -23,9 +24,6 @@ export class SchoolService {
 
   allSchools() : Observable<SchoolDto[]>{
     return this.http.get<SchoolDto[]>(this.baseUrl + "/All")
-  }
-  totalSchools() : Observable<number> {
-    return this.http.get<number>(this.baseUrl + '/Count');
   }
 
   composeQueryString(schoolDto: SchoolFilterDto): string {

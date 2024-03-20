@@ -7,6 +7,7 @@ import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { SchoolService } from "../../../school/services/school.service";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../user/services/user.service";
+import { SearchResultDto } from "../../../app/generic/search-result-dto";
 
 @Component({
   selector: "app-all-people",
@@ -14,12 +15,8 @@ import { UserService } from "../../../user/services/user.service";
   styleUrl: "./all-people.component.css",
 })
 export class AllPeopleComponent {
-  people: PersonDto[] = [];
   personDto: PersonFilterDto = new PersonFilterDto();
-  schoolId: number;
-  settlement: SettlementDto = new SettlementDto();
-  schoolName: string;
-
+  searchResult: SearchResultDto<PersonDto> = new SearchResultDto<PersonDto>();
   pageSize = 3;
   page = 1;
   totalPeopleCount = 0;
@@ -39,15 +36,9 @@ export class AllPeopleComponent {
         })
       )
       .subscribe((res) => {
-        this.people = res;
-        this.totalItems()
+        this.searchResult = res;
+        this.totalPeopleCount = this.searchResult.totalCount;
       });
-  }
-
-  totalItems() : void {
-    this.personService.totalPeople().subscribe((count: number) =>{
-        this.totalPeopleCount = count;
-    })
   }
 
   OnPageChange(newPage: number){

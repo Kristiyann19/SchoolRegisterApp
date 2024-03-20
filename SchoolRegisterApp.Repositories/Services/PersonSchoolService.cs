@@ -28,7 +28,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task AddPersonSchoolAsync(PersonSchoolAddDto personSchoolAddDto, HttpContext httpContext)
         {
-            var user = await userService.GetCurrentUserClaim(httpContext);
+            var user = await userService.GetCurrentUser(httpContext);
 
             if (personSchoolAddDto.SchoolId != user.SchoolId)
             {
@@ -64,7 +64,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task UpdatePersonSchoolAsync(PersonSchoolUpdateDto personSchoolUpdateDto, HttpContext httpContext)
         {
-            var user = await userService.GetCurrentUserClaim(httpContext);
+            var user = await userService.GetCurrentUser(httpContext);
 
             if (personSchoolUpdateDto.SchoolId != user.SchoolId)
             {

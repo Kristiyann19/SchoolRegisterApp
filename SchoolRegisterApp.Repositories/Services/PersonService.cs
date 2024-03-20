@@ -4,6 +4,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
+using SchoolRegisterApp.Models.Dtos;
 using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
@@ -27,7 +28,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext httpContext)
         {
-            var user = await userService.GetCurrentUserClaim(httpContext);
+            var user = await userService.GetCurrentUser(httpContext);
 
             DecodeUic(personAddDto);
 
@@ -47,9 +48,9 @@ namespace SchoolRegisterApp.Repositories.Services
             await context.SaveChangesAsync();
         }
 
-        public async Task<List<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)
+        public async Task<SearchResultDto<PersonDto>> GetAllPeopleWithFilterAsync(HttpContext httpContext, PersonFilterDto filter)
         {
-            var user = await userService.GetCurrentUserClaim(httpContext);
+            var user = await userService.GetCurrentUser(httpContext);
 
             var people = context.People.AsQueryable();
 
@@ -61,33 +62,23 @@ namespace SchoolRegisterApp.Repositories.Services
             if (filter != null)
             {
                 people = filter.WhereBuilder(people);
-         
+
             }
+
+            var count = await people.CountAsync();
 
             var filteredPeople = await people
                   .ProjectTo<PersonDto>(mapper.ConfigurationProvider)
                   .Skip((filter.Page - 1) * filter.PageSize)
                   .Take(filter.PageSize)
-                  .ToListAsync();   
+                  .ToListAsync();
 
-            return filteredPeople;
-        }
-
-        public async Task<int> GetPeopleCount(HttpContext httpContext)
-        {
-            var user = await userService.GetCurrentUserClaim(httpContext);
-
-            var people = context.People.AsQueryable(); ;
-
-            if (user.Role == RoleEnum.Director)
+            return new SearchResultDto<PersonDto>
             {
-                people = people.Where(x => x.SchoolId == user.SchoolId || x.SchoolId == null);
-            }
-
-            return people.Count();
+                Items = filteredPeople,
+                TotalCount = count
+            };
         }
-            
-
 
         public async Task<PersonDetailsDto> GetPersonDetailsAsync(int id)
             => await context.People
@@ -97,7 +88,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task UpdatePersonAsync(int id, PersonDetailsDto updatedPerson, HttpContext httpContext)
         {
-            var user = await userService.GetCurrentUserClaim(httpContext);
+            var user = await userService.GetCurrentUser(httpContext);
 
             var existingPerson = await context.People
                 .SingleOrDefaultAsync(x => x.Id == id);

@@ -9,6 +9,7 @@ using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Dtos.SchoolDtos;
 using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Enums;
+using SchoolRegisterApp.Models.Dtos;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -27,7 +28,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
         public async Task AddSchoolAsync(HttpContext httpContext, AddSchoolDto school)
         {
-            var user = await userService.GetCurrentUserClaim(httpContext);
+            var user = await userService.GetCurrentUser(httpContext);
 
             var schoolEntity = mapper.Map<School>(school);
             schoolEntity.IsActive = true;
@@ -36,7 +37,7 @@ namespace SchoolRegisterApp.Repositories.Services
             await context.SaveChangesAsync();
         }
 
-        public async Task<List<SchoolDto>> GetAllSchoolsWithFilterAsync(SchoolFilterDto filter)
+        public async Task<SearchResultDto<SchoolDto>> GetAllSchoolsWithFilterAsync(SchoolFilterDto filter)
         {
             var schools = context.Schools.AsQueryable();
 
@@ -46,17 +47,20 @@ namespace SchoolRegisterApp.Repositories.Services
 
             }
 
+            var count = await schools.CountAsync();
+
             var filteredSchools = await schools
                   .ProjectTo<SchoolDto>(mapper.ConfigurationProvider)
                   .Skip((filter.Page - 1) * filter.PageSize)
                   .Take(filter.PageSize)
                   .ToListAsync();
 
-            return filteredSchools;
+            return new SearchResultDto<SchoolDto>
+            {
+                Items = filteredSchools,
+                TotalCount = count
+            };
         }
-
-        public async Task<int> GetSchoolsCount()
-           => await context.Schools.CountAsync();
 
 
         public async Task<List<SchoolDto>> GetAllSchools()

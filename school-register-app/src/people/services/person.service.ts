@@ -3,11 +3,10 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PersonFilterDto } from "../dtos/person-filter-dto";
 import { PersonDto } from "../dtos/person-dto";
-
 import { PersonDetailsDto } from "../dtos/person-details-dto";
-
 import { PersonAddDto } from "../dtos/person-add-dto";
 import { GenderEnum } from "../../enums/gender.enum";
+import { SearchResultDto } from "../../app/generic/search-result-dto";
 
 @Injectable({
   providedIn: "root",
@@ -17,8 +16,8 @@ export class PersonService {
 
   constructor(private http: HttpClient) {}
 
-  getAllWithFilter(personDto: PersonFilterDto): Observable<PersonDto[]> {
-    return this.http.get<PersonDto[]>(`${this.baseUrl}?${this.composeQueryString(personDto)}` );
+  getAllWithFilter(personDto: PersonFilterDto): Observable<SearchResultDto<PersonDto>> {
+    return this.http.get<SearchResultDto<PersonDto>>(`${this.baseUrl}?${this.composeQueryString(personDto)}` );
   }
 
   updatePerson(id: number, updatedPerson: PersonDetailsDto): Observable<any> {
@@ -30,10 +29,6 @@ export class PersonService {
 
   add(personAddDto: PersonAddDto): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}`, personAddDto);
-  }
-
-  totalPeople() : Observable<number> {
-    return this.http.get<number>(this.baseUrl + '/Count');
   }
 
   composeQueryString(personDto: PersonFilterDto): string {

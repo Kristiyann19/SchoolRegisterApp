@@ -5,6 +5,8 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp.Models;
+using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Repositories.Contracts;
@@ -42,9 +44,7 @@ namespace SchoolRegisterApp.Repositories.Services
             return null;
         }
 
-
-
-        public async Task<List<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter)
+        public async Task<SearchResultDto<UserDto>> GetAllUsersWithFilterAsync(UserFilterDto filter)
         {
             var users = context.Users.AsQueryable();
 
@@ -54,19 +54,22 @@ namespace SchoolRegisterApp.Repositories.Services
 
             }
 
+            var count = await users.CountAsync();
+
             var filteredUsers = await users
                   .ProjectTo<UserDto>(mapper.ConfigurationProvider)
                   .Skip((filter.Page - 1) * filter.PageSize)
                   .Take(filter.PageSize)
                   .ToListAsync();
 
-            return filteredUsers;
+            return new SearchResultDto<UserDto>
+            {
+                Items = filteredUsers,
+                TotalCount = count
+            };
         }
 
-        public async Task<int> GetUsersCount()
-           => await context.Users.CountAsync();
-
-        public async Task<Users> GetCurrentUserClaim(HttpContext httpContext)
+        public async Task<Users> GetCurrentUser(HttpContext httpContext)
         {
             var existingUserClaim = httpContext.User
                 .FindFirst(ClaimTypes.Name);

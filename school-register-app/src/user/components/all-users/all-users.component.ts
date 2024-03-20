@@ -3,6 +3,7 @@ import { UserDto } from "../../dtos/user-dto";
 import { UserFilterDto } from "../../dtos/user-filter-dto";
 import { UserService } from "../../services/user.service";
 import { catchError, throwError } from "rxjs";
+import { SearchResultDto } from "../../../app/generic/search-result-dto";
 
 @Component({
   selector: "app-user",
@@ -12,6 +13,7 @@ import { catchError, throwError } from "rxjs";
 export class AllUsersComponent {
   users: UserDto[] = [];
   userDto: UserFilterDto = new UserFilterDto();
+  searchResult: SearchResultDto<UserDto> = new SearchResultDto<UserDto>();
   pageSize = 5;
   page = 1;
   totalUsersCount = 0;
@@ -30,32 +32,13 @@ export class AllUsersComponent {
         })
       )
       .subscribe((res) => {
-        this.users = res;
-        this.totalItems();
+        this.searchResult = res;
+        this.totalUsersCount = this.searchResult.totalCount
       });
   }
-
-  totalItems() : void {
-    this.userService.totalUsers().subscribe((count: number) =>{
-        this.totalUsersCount = count;
-   })
- }
 
 OnPageChange(newPage: number){
   this.userDto.page = newPage;
   this.get(this.userDto);
  }
-
-  // getFiltered(userDto: UserFilterDto) {
-  //   this.userService
-  //     .getFiltered(userDto)
-  //     .pipe(
-  //       catchError((err) => {
-  //         return throwError(() => err);
-  //       })
-  //     )
-  //     .subscribe((res) => {
-  //       this.users = res;
-  //     });
-  // }
 }
