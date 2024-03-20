@@ -9,6 +9,7 @@ using SchoolRegisterApp.Models.Entities;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
 using SchoolRegisterApp.Repositories.CustomExceptionMessages;
+using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -94,7 +95,7 @@ namespace SchoolRegisterApp.Repositories.Services
 
             if (existingPerson == null)
             {
-                throw new DirectoryNotFoundException(ExceptionMessages.InvalidPerson);
+                throw new NotFoundException(ExceptionMessages.InvalidPerson);
             }
 
             DecodeUic(updatedPerson);
