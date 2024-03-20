@@ -46,7 +46,7 @@
                       [page]="page"
                       (pageChange)="OnPageChange($event)"
                       aria-label="Default pagination" />
-      <label for="card"> {{searchResult.items?.length}} обяви на {{page}} страница </label>
+      <label for="card"> {{searchResult.items?.length}} обяви на {{page}} страница</label>
 
 
     </div>
@@ -64,7 +64,7 @@
       <tr *ngFor="let user of searchResult.items">
         <td>{{ user.username }}</td>
         <td>{{ user.phone }}</td>
-        <td>{{ user.school.name }}</td>
+        <td>{{ user.school?.name }}</td>
       </tr>
     </tbody>
   </table>

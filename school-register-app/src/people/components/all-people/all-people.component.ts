@@ -3,11 +3,11 @@ import { PersonDto } from "../../dtos/person-dto";
 import { PersonFilterDto } from "../../dtos/person-filter-dto";
 import { PersonService } from "../../services/person.service";
 import { catchError, throwError } from "rxjs";
-import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { SchoolService } from "../../../school/services/school.service";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../user/services/user.service";
 import { SearchResultDto } from "../../../app/generic/search-result-dto";
+import { RoleEnum, RoleEnumLocalization } from "../../../enums/role.enum";
 
 @Component({
   selector: "app-all-people",
@@ -20,8 +20,8 @@ export class AllPeopleComponent {
   pageSize = 3;
   page = 1;
   totalPeopleCount = 0;
-
-  constructor(public personService: PersonService, public schoolService: SchoolService, private route: ActivatedRoute, public userService: UserService) {}
+  userRole: RoleEnum;
+  constructor(public personService: PersonService, public schoolService: SchoolService, public userService: UserService) {}
 
   ngOnInit() {
     this.get(this.personDto);

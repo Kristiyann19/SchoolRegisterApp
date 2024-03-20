@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Repositories.Contracts;
-using SchoolRegisterApp.Repositories.CustomExceptions;
 
 namespace SchoolRegisterApp.Controllers
 {
