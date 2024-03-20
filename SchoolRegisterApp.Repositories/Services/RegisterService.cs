@@ -18,27 +18,30 @@ namespace SchoolRegisterApp.Repositories.Services
         }
 
 
-        public bool CheckUserNameAvailability(string username)
-             => !context.Users.Any(u => u.Username == username);
-
-        public bool CheckPhoneAvailability(string phone)
-                => !context.Users.Any(u => u.Phone == phone);
-
-        public void Register(RegisterDto register)
+        public void CheckUserNameAvailability(string username)
         {
-            var isUsernameAvailable = CheckUserNameAvailability(register.Username);
-            var isPhoneAvailable = CheckPhoneAvailability(register.Phone);
+            var userNameExists = context.Users.Any(u => u.Username == username);
 
-
-            if (!isUsernameAvailable)
+            if (userNameExists)
             {
                 throw new BadRequestException(ExceptionMessages.AlreadyUsedUsername);
             }
+        }
 
-            if (!isPhoneAvailable)
+        public void CheckPhoneAvailability(string phone)
+        {
+            var phoneExists = context.Users.Any(u => u.Phone == phone);
+
+            if (phoneExists)
             {
                 throw new BadRequestException(ExceptionMessages.AlreadyUsedPhone);
             }
+        }
+
+        public void Register(RegisterDto register)
+        {
+            CheckUserNameAvailability(register.Username);
+            CheckPhoneAvailability(register.Phone);
 
             var user = new Users
             {

@@ -21,7 +21,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        debugger;
         let errorMessage = "Възникна грешка";
         if (error.error instanceof ErrorEvent) {
           // Client-side error

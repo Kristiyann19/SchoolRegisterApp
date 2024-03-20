@@ -10,6 +10,7 @@ import { UserService } from "../../user/services/user.service";
 import { PersonSchoolAddModalComponent } from "../modals/person-school-add-modal/person-school-add-modal.component";
 import { PersonSchoolUpdateDto } from "../dtos/person-school-update-dto";
 import { catchError, throwError } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-person-school",
@@ -27,10 +28,15 @@ export class PersonSchoolComponent {
     private route: ActivatedRoute,
     private personService: PersonService,
     private modalService: NgbModal,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
+    this.getPersonSchools();
+  }
+
+  getPersonSchools(): void {
     const id = parseInt(this.route.snapshot.paramMap.get("id")!);
     this.personSchoolService
       .getPersonSchoolById(id)
@@ -73,6 +79,8 @@ export class PersonSchoolComponent {
           return throwError(() => err);
         })
       )
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        this.toastr.success("Променено");
+      });
   }
 }

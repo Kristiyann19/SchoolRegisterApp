@@ -33,12 +33,12 @@ export class AllUsersComponent {
       )
       .subscribe((res) => {
         this.searchResult = res;
-        this.totalUsersCount = this.searchResult.totalCount
+        this.totalUsersCount = this.searchResult.totalCount;
       });
   }
 
-OnPageChange(newPage: number){
-  this.userDto.page = newPage;
-  this.get(this.userDto);
- }
+  OnPageChange(newPage: number) {
+    this.userDto.page = newPage;
+    this.get(this.userDto);
+  }
 }

@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { UserRegistrationDto } from "../../user/dtos/user-registration-dto";
-import { Router } from "@angular/router";
-
 @Injectable({
   providedIn: "root",
 })
@@ -16,11 +14,14 @@ export class RegistrationService {
     return this.http.post<void>(`${this.baseUrl}`, userDto);
   }
 
-  checkUsernameAvailability(username: string) : Observable<boolean>{
-    return this.http.get<boolean>(`${this.baseUrl}/check-username/${username}`);
-}
+  checkUsernameAvailability(username: string): Observable<void> {
+    const params = { username: username };
+    return this.http.get<void>(`${this.baseUrl}/check-username?`, {
+      params: params,
+    });
+  }
 
-  checkPhoneAvailability(phone: string) : Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/check-phone/${phone}`)
-}
+  checkPhoneAvailability(phone: string): Observable<void> {
+    return this.http.get<void>(`${this.baseUrl}/check-phone?phone=${phone}`);
+  }
 }

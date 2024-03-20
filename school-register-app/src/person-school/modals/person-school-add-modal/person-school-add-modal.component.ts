@@ -3,6 +3,8 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { PersonSchoolAddDto } from "../../dtos/person-school-add-dto";
 import { PersonSchoolService } from "../../service/person-school.service";
 import { catchError, throwError } from "rxjs";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-person-school-add-modal",
@@ -20,7 +22,9 @@ export class PersonSchoolAddModalComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public personSchoolService: PersonSchoolService
+    public personSchoolService: PersonSchoolService,
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   add() {
@@ -36,6 +40,7 @@ export class PersonSchoolAddModalComponent {
       )
       .subscribe((res) => {
         this.activeModal.close();
+        this.toastr.success("Успешно добавена длъжност");
       });
   }
 }

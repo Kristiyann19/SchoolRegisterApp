@@ -16,7 +16,7 @@ import { SchoolFilterDto } from "../../school/dtos/school-filter-dto";
 })
 export class RegistrationComponent {
   schools: SchoolDto[] = [];
-  school: SchoolFilterDto = new SchoolFilterDto
+  school: SchoolFilterDto = new SchoolFilterDto();
   register: UserRegistrationDto = new UserRegistrationDto();
   form: FormGroup;
 
@@ -28,7 +28,7 @@ export class RegistrationComponent {
   ) {}
 
   ngOnInit() {
-     this.getSchools();
+    this.getSchools();
   }
 
   getSchools() {
@@ -61,11 +61,12 @@ export class RegistrationComponent {
     if (this.register.username) {
       this.registerService
         .checkUsernameAvailability(this.register.username)
-        .subscribe((available) => {
-          if (!available) {
-            //TODO:
-          }
-        });
+        .pipe(
+          catchError((err) => {
+            return throwError(() => err);
+          })
+        )
+        .subscribe();
     }
   }
 
