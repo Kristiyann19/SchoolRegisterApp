@@ -9,7 +9,5 @@ export class PersonDetailsDto {
   uic: string;
   birthDate: Date;
   gender: GenderEnum;
-  schoolId: number;
-  school: SchoolDto;
   birthPlaceId: number;
 }

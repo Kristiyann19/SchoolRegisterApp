@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolRegisterApp;
 using SchoolRegisterApp.Middlewares;
 using SchoolRegisterApp.Models;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddSwaggerGen();
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddSchoolRegisterServices();
 builder.Services.ConfigureJwtAuthenticationServices(builder.Configuration);
 

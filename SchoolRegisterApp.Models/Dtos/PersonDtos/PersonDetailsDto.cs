@@ -17,10 +17,6 @@ namespace SchoolRegisterApp.Models.Dtos.PersonDtos
 
         public DateTime BirthDate { get; set; }
 
-        public int SchoolId { get; set; }
-
-        public School School { get; set; }
-
         public GenderEnum Gender { get; set; }
 
         public int BirthPlaceId { get; set; }
