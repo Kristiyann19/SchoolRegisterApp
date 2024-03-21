@@ -10,6 +10,8 @@ using SchoolRegisterApp.Models.Dtos.SchoolDtos;
 using SchoolRegisterApp.Models.Dtos.PersonDtos;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Models.Dtos;
+using SchoolRegisterApp.Repositories.CustomExceptions;
+using SchoolRegisterApp.Repositories.Validations;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -29,6 +31,22 @@ namespace SchoolRegisterApp.Repositories.Services
         public async Task AddSchoolAsync(HttpContext httpContext, AddSchoolDto school)
         {
             var user = await userService.GetCurrentUser(httpContext);
+
+            if (user.Role != RoleEnum.Admin)
+            {
+                throw new Exception();
+            }
+
+            SchoolValidator validator = new SchoolValidator();
+            var result = validator.Validate(school);
+
+            foreach (var failure in result.Errors)
+            {
+                if (failure.CustomState is BadRequestException bre)
+                {
+                    throw bre;
+                }
+            }
 
             var schoolEntity = mapper.Map<School>(school);
             schoolEntity.IsActive = true;

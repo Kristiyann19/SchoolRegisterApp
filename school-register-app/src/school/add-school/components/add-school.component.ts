@@ -7,6 +7,7 @@ import { SettlementDto } from "../../../settlement/dtos/settlement-dto";
 import { SettlementService } from "../../../settlement/services/settlement.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { InputLengthMax, InputLengthMin, NameRegex } from "../../../app/common/validation-consts";
 
 @Component({
   selector: "app-add-school",
@@ -17,6 +18,9 @@ export class AddSchoolComponent {
   settlements: SettlementDto[] = [];
   addSchool: AddSchoolDto = new AddSchoolDto();
   schoolTypeEnumLocalization = SchoolTypeEnumLocalization;
+  nameMinLength = InputLengthMin;
+  nameMaxLength = InputLengthMax;
+  nameRegex = NameRegex;
   constructor(
     public schoolService: SchoolService,
     private settlementService: SettlementService,

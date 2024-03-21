@@ -5,34 +5,76 @@
       <label for="name">Име: </label>
 
       <input type="text"
+             #nameInput="ngModel"
              name="name"
              class="form-control"
              id="name"
-             [(ngModel)]="addSchool.name" />
+             [(ngModel)]="addSchool.name"
+             required
+             [minlength]="nameMinLength"
+             [maxlength]="nameMaxLength"
+             [pattern]="nameRegex"
+             [ngClass]="{
+          'is-invalid': nameInput.touched && nameInput.invalid
+        }" />
+      <div class="invalid-feedback"
+           *ngIf="nameInput.touched && nameInput.errors">
+        <div *ngIf="nameInput.errors.required">Полето е задължителено</div>
+        <div *ngIf="nameInput.errors.pattern">
+          Името трябва да бъде написано на кирилица
+        </div>
+        <div *ngIf="nameInput.errors.minlength">
+          Името не трябва да бъде по-малко от 2 символа
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="nameAlt">Анг. Име: </label>
 
       <input type="text"
+             #nameAltInput="ngModel"
              name="nameAlt"
              class="form-control"
              id="nameAlt"
-             [(ngModel)]="addSchool.nameAlt" />
+             [(ngModel)]="addSchool.nameAlt"
+             required
+             [minlength]="nameMinLength"
+             [maxlength]="nameMaxLength"
+             [ngClass]="{
+          'is-invalid': nameAltInput.touched && nameAltInput.invalid
+        }" />
+      <div class="invalid-feedback"
+           *ngIf="nameAltInput.touched && nameAltInput.errors">
+        <div *ngIf="nameAltInput.errors.required">Полето е задължителено</div>
+
+        <div *ngIf="nameAltInput.errors.minlength">
+          Името не трябва да бъде по-малко от 2 символа
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="type">Тип: </label>
 
       <select [(ngModel)]="addSchool.type"
+              #typeInput="ngModel"
               class="form-control"
               name="type"
-              id="type">
+              required
+              id="type"
+              [ngClass]="{
+                'is-invalid': typeInput.touched && typeInput.invalid
+              }">
         <option></option>
         <option [ngValue]="1">Държавно</option>
         <option [ngValue]="2">Общинско</option>
         <option [ngValue]="3">Частно</option>
       </select>
+      <div class="invalid-feedback"
+           *ngIf="typeInput.touched && typeInput.errors">
+        <div *ngIf="typeInput.errors.required">Полето е задължителено</div>
+      </div>
     </div>
 
     <div class="form-group">
@@ -40,14 +82,23 @@
 
       <select [(ngModel)]="addSchool.settlementId"
               class="form-control"
+              #settlementInput="ngModel"
+              required
               name="settlementId"
-              id="settlementId">
+              id="settlementId"
+              [ngClass]="{
+                'is-invalid': settlementInput.touched && settlementInput.invalid
+              }">
         <option></option>
         <option *ngFor="let settlement of settlements"
                 [ngValue]="settlement?.id">
           {{ settlement.name }}
         </option>
       </select>
+      <div class="invalid-feedback"
+           *ngIf="settlementInput.touched && settlementInput.errors">
+        <div *ngIf="settlementInput.errors.required">Полето е задължителено</div>
+      </div>
     </div>
 
     <div class="buttons">
