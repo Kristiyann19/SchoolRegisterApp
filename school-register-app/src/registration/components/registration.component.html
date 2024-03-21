@@ -2,68 +2,95 @@
   <div class="card card-body p-5">
     <h2 class="text-uppercase text-center mb-5">Създайте акаунт</h2>
 
-    <form class="text-center" #registerForm="ngForm" (ngSubmit)="onRegister()">
-      <input
-        type="text"
-        placeholder="Потребителско име"
-        class="form-control"
-        (blur)="checkUsernameAvailability()"
-        name="username"
-        required
-        [(ngModel)]="register.username"
-      />
+    <form class="text-center"
+          #registerForm="ngForm"
+          (ngSubmit)="onRegister()">
+      <input type="text"
+             #usernameInput="ngModel"
+             placeholder="Потребителско име"
+             class="form-control"
+             (blur)="checkUsernameAvailability()"
+             name="username"
+             required
+             [minlength]="nameMinLength"
+             [maxlength]="nameMaxLength"
+             [ngClass]="{
+          'is-invalid': usernameInput.touched && usernameInput.invalid
+        }"
+             [(ngModel)]="register.username" />
+      <div class="invalid-feedback"
+           *ngIf="usernameInput.touched && usernameInput.errors">
+        <div *ngIf="usernameInput.errors.required">Полето е задължителено</div>
+        <div *ngIf="usernameInput.errors.minlength">
+          Името не трябва да бъде по-дълго от 2 символа
+        </div>
+        <div *ngIf="usernameInput.errors.minlength">
+          Името трябва да е по-кратко от 30 символа
+        </div>
+      </div>
 
-      <input
-        type="text"
-        placeholder="Телефонен номер"
-        class="form-control"
-        name="phone"
-        (blur)="checkPhoneAvailability()"
-        required
-        [(ngModel)]="register.phone"
-      />
 
-      <input
-        type="password"
-        placeholder="Парола"
-        class="form-control"
-        name="password"
-        required
-        [(ngModel)]="register.password"
-      />
+      <input type="text"
+             #phoneInput="ngModel"
+             placeholder="Телефонен номер"
+             class="form-control"
+             name="phone"
+             (blur)="checkPhoneAvailability()"
+             required
+             [(ngModel)]="register.phone"
+             [pattern]="phoneRegex"
+             [ngClass]="{
+          'is-invalid': phoneInput.touched && phoneInput.invalid
+        }" />
+      <div class="invalid-feedback"
+           *ngIf="phoneInput.touched && phoneInput.errors">
+        <div *ngIf="phoneInput.errors.required">Полето е задължителено</div>
+        <div *ngIf="phoneInput.errors.pattern">
+          Невалиден телефонен номер
+        </div>
+      </div>
 
-      <input
-        type="password"
-        placeholder="Потвърждение на парола"
-        class="form-control"
-        required
-        name="confirmPassword"
-        [(ngModel)]="register.confirmPassword"
-      />
+      <input type="password"
+             #passwordInput="ngModel"
+             placeholder="Парола"
+             class="form-control"
+             name="password"
+             required
+             [(ngModel)]="register.password"
+             [ngClass]="{
+              'is-invalid': passwordInput.touched && passwordInput.invalid
+            }" />
+      <div class="invalid-feedback"
+           *ngIf="passwordInput.touched && passwordInput.errors">
+        <div *ngIf="passwordInput.errors.required">Полето е задължителено</div>
 
-      <div
-        *ngIf="register.password !== register.confirmPassword"
-        class="text-danger"
-      >
+      </div>
+
+      <input type="password"
+             placeholder="Потвърждение на парола"
+             class="form-control"
+             required
+             name="confirmPassword"
+             [(ngModel)]="register.confirmPassword" />
+
+      <div *ngIf="register.password !== register.confirmPassword"
+           class="text-danger">
         Паролите не съвпадат.
       </div>
 
-      <select
-        [(ngModel)]="register.schoolId"
-        class="form-control"
-        name="schoolId"
-        id="schoolId"
-      >
-        <option *ngFor="let school of schools" [ngValue]="school.id">
+      <select [(ngModel)]="register.schoolId"
+              class="form-control"
+              name="schoolId"
+              id="schoolId">
+        <option *ngFor="let school of schools"
+                [ngValue]="school.id">
           {{ school.name }}
         </option>
       </select>
 
-      <button
-        type="submit"
-        class="btn btn-primary registration-btn"
-        [disabled]="!registerForm.valid"
-      >
+      <button type="submit"
+              class="btn btn-primary registration-btn"
+              [disabled]="!registerForm.valid">
         Регистриране
       </button>
     </form>

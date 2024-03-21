@@ -8,6 +8,7 @@ import { SchoolService } from "../../school/services/school.service";
 import { catchError, throwError } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { SchoolFilterDto } from "../../school/dtos/school-filter-dto";
+import { InputLengthMax, InputLengthMin, PhoneRegex } from "../../app/common/validation-consts";
 
 @Component({
   selector: "app-registration",
@@ -20,6 +21,10 @@ export class RegistrationComponent {
   register: UserRegistrationDto = new UserRegistrationDto();
   form: FormGroup;
 
+  nameMinLength = InputLengthMin;
+  nameMaxLength = InputLengthMax;
+  phoneRegex = PhoneRegex;
+  
   constructor(
     private registerService: RegistrationService,
     private schoolService: SchoolService,

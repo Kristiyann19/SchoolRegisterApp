@@ -7,7 +7,7 @@ namespace SchoolRegisterApp.Models.Validations
     public class RegisterValidator : AbstractValidator<RegisterDto>
     {
         public const int InputLengthMax = 30;
-        public const int InputLengthMin = 3;
+        public const int InputLengthMin = 2;
         public const string PhoneRegEx = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
 
         public RegisterValidator()
@@ -26,7 +26,7 @@ namespace SchoolRegisterApp.Models.Validations
                 .NotNull().WithState(a => new BadRequestException("Паролата е задължителна"))
                 .MaximumLength(InputLengthMax)
                 .MinimumLength(InputLengthMin)
-                .Equal(x => x.Password);
+                .Equal(x => x.Password).WithState(a => new BadRequestException("Паролите не съвпадат"));
 
             RuleFor(x => x.Phone)
                 .NotEmpty().WithState(a => new BadRequestException("Телефонът е задължителен"))

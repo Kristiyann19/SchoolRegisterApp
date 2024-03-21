@@ -5,6 +5,8 @@ using SchoolRegisterApp.Models.Dtos.UserDtos;
 using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.CustomExceptions;
 using SchoolRegisterApp.Repositories.CustomExceptionMessages;
+using SchoolRegisterApp.Repositories.Validations;
+using SchoolRegisterApp.Models.Validations;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -42,6 +44,17 @@ namespace SchoolRegisterApp.Repositories.Services
         {
             CheckUserNameAvailability(register.Username);
             CheckPhoneAvailability(register.Phone);
+
+            RegisterValidator validator = new RegisterValidator();
+            var result = validator.Validate(register);
+
+            foreach (var failure in result.Errors)
+            {
+                if (failure.CustomState is BadRequestException bre)
+                {
+                    throw bre;
+                }
+            }
 
             var user = new Users
             {
