@@ -2,27 +2,30 @@
   <nav>
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
-        <button class="btn btn-hover"
-                [routerLink]="['/person',person.id]"> Основни данни</button>
+        <button class="btn btn-hover" [routerLink]="['/person', person.id]">
+          Основни данни
+        </button>
 
-        <button [routerLink]="['/person-history', person.id]"
-                class="btn btn-hover"
-                type="button">
+        <button
+          [routerLink]="['/person-history', person.id]"
+          class="btn btn-hover"
+          type="button"
+        >
           История на промени
         </button>
 
-        <button [routerLink]="['/person-school', person.id]"
-                class="btn btn-hover"
-                type="button">
+        <button
+          [routerLink]="['/person-school', person.id]"
+          class="btn btn-hover"
+          type="button"
+        >
           Преподавателски длъжности
         </button>
-
       </li>
     </ul>
   </nav>
-  <hr>
-  <form (ngSubmit)="updatePerson()"
-        #updateForm="ngForm">
+  <hr />
+  <form (ngSubmit)="updatePerson()" #updateForm="ngForm">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -38,66 +41,189 @@
       <tbody>
         <tr>
           <td>
-            <input type="text"
-                   id="uic"
-                   [(ngModel)]="person.uic"
-                   name="uic"
-                   class="form-control"
-                   (ngModelChange)="personService.decodeUic(person)"
-                   required>
+            <input
+              #uicInput="ngModel"
+              type="text"
+              id="uic"
+              [(ngModel)]="person.uic"
+              name="uic"
+              class="form-control"
+              (ngModelChange)="personService.decodeUic(person)"
+              required
+              [pattern]="uicRegex"
+              [ngClass]="{
+                'is-invalid': uicInput.touched && uicInput.invalid
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="uicInput.touched && uicInput.errors"
+            >
+              <div *ngIf="uicInput.errors.required">Полето е задължителено</div>
+              <div *ngIf="uicInput.errors.pattern">
+                Неправилен формат на ЕГН
+              </div>
+            </div>
           </td>
-          <td><input type="text"
-                   id="firstName"
-                   [(ngModel)]="person.firstName"
-                   name="firstName"
-                   class="form-control"
-                   required></td>
+          <td>
+            <input
+              #firstNameInput="ngModel"
+              type="text"
+              id="firstName"
+              [(ngModel)]="person.firstName"
+              name="firstName"
+              class="form-control"
+              required
+              [minlength]="nameMinLength"
+              [maxlength]="nameMaxLength"
+              [pattern]="nameRegex"
+              [ngClass]="{
+                'is-invalid': firstNameInput.touched && firstNameInput.invalid
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="firstNameInput.touched && firstNameInput.errors"
+            >
+              <div *ngIf="firstNameInput.errors.required">
+                Полето е задължителено
+              </div>
+              <div *ngIf="firstNameInput.errors.pattern">
+                Името трябва да бъде написано на кирилица
+              </div>
+              <div *ngIf="firstNameInput.errors.minlength">
+                Името не трябва да бъде по-малко от 2 символа
+              </div>
+            </div>
+          </td>
 
-          <td><input type="text"
-                   id="middleName"
-                   [(ngModel)]="person.middleName"
-                   name="middleName"
-                   class="form-control"
-                   required></td>
+          <td>
+            <input
+              #middleNameInput="ngModel"
+              type="text"
+              id="middleName"
+              [(ngModel)]="person.middleName"
+              name="middleName"
+              class="form-control"
+              required
+              [minlength]="nameMinLength"
+              [maxlength]="nameMaxLength"
+              [pattern]="nameRegex"
+              [ngClass]="{
+                'is-invalid': middleNameInput.touched && middleNameInput.invalid
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="middleNameInput.touched && middleNameInput.errors"
+            >
+              <div *ngIf="middleNameInput.errors.required">
+                Полето е задължителено
+              </div>
+              <div *ngIf="middleNameInput.errors.pattern">
+                Презимето трябва да бъде написано на кирилица
+              </div>
+              <div *ngIf="middleNameInput.errors.minlength">
+                Презимето не трябва да бъде по-малко от 2 символа
+              </div>
+            </div>
+          </td>
 
-          <td><input type="text"
-                   id="lastName"
-                   [(ngModel)]="person.lastName"
-                   name="lastName"
-                   class="form-control"
-                   required></td>
+          <td>
+            <input
+              #lastNameInput="ngModel"
+              type="text"
+              id="lastName"
+              [(ngModel)]="person.lastName"
+              name="lastName"
+              class="form-control"
+              required
+              [minlength]="nameMinLength"
+              [maxlength]="nameMaxLength"
+              [pattern]="nameRegex"
+              [ngClass]="{
+                'is-invalid': lastNameInput.touched && lastNameInput.invalid
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="lastNameInput.touched && lastNameInput.errors"
+            >
+              <div *ngIf="lastNameInput.errors.required">
+                Полето е задължителено
+              </div>
+              <div *ngIf="lastNameInput.errors.pattern">
+                Фамилията трябва да бъде написано на кирилица
+              </div>
+              <div *ngIf="lastNameInput.errors.minlength">
+                Фамилията не трябва да бъде по-малко от 2 символа
+              </div>
+            </div>
+          </td>
 
-          <td><input type="text"
-                   id="birthDate"
-                   value="{{ person.birthDate | date }}"
-                   name="birthDate"
-                   class="form-control"
-                   disabled="disabled"
-                   required></td>
+          <td>
+            <input
+              type="text"
+              id="birthDate"
+              value="{{ person.birthDate | date }}"
+              name="birthDate"
+              class="form-control"
+              disabled="disabled"
+              required
+            />
+          </td>
 
-          <td> <select id="gender"
-                    [(ngModel)]="person.gender"
-                    name="gender"
-                    disabled="disabled"
-                    class="form-select">
+          <td>
+            <select
+              id="gender"
+              [(ngModel)]="person.gender"
+              name="gender"
+              disabled="disabled"
+              class="form-select"
+            >
               <option [ngValue]="1">Мъж</option>
               <option [ngValue]="2">Жена</option>
-            </select></td>
+            </select>
+          </td>
 
-          <td><select [(ngModel)]="person.birthPlaceId"
-                    class="form-control"
-                    name="birthPlace"
-                    id="birthPlace">
+          <td>
+            <select
+              #birthPlaceInput="ngModel"
+              [(ngModel)]="person.birthPlaceId"
+              class="form-control"
+              name="birthPlace"
+              id="birthPlace"
+              required
+              [ngClass]="{
+                'is-invalid': birthPlaceInput.touched && birthPlaceInput.invalid
+              }"
+            >
               <option></option>
-              <option *ngFor="let settlement of settlements"
-                      [ngValue]="settlement.id">
+              <option
+                *ngFor="let settlement of settlements"
+                [ngValue]="settlement.id"
+              >
                 {{ settlement.name }}
               </option>
             </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="birthPlaceInput.touched && birthPlaceInput.errors"
+            >
+              <div *ngIf="uicInput.errors.required">
+                Месторождението е задължителено
+              </div>
+            </div>
+          </td>
         </tr>
-        <button type="submit"
-                class="btn btn-primary"
-                [disabled]="!updateForm.valid">Редактирай</button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!updateForm.valid"
+        >
+          Редактирай
+        </button>
       </tbody>
     </table>
   </form>

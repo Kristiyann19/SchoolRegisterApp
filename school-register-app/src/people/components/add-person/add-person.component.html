@@ -4,36 +4,98 @@
       <label for="firstName">Първо име: </label>
 
       <input
+        #firstNameInput="ngModel"
         type="text"
         name="firstName"
         class="form-control"
         id="firstName"
         [(ngModel)]="personAddDto.firstName"
+        required
+        [minlength]="nameMinLength"
+        [maxlength]="nameMaxLength"
+        [pattern]="nameRegex"
+        [ngClass]="{
+          'is-invalid': firstNameInput.touched && firstNameInput.invalid
+        }"
       />
+      <div
+        class="invalid-feedback"
+        *ngIf="firstNameInput.touched && firstNameInput.errors"
+      >
+        <div *ngIf="firstNameInput.errors.required">Полето е задължителено</div>
+        <div *ngIf="firstNameInput.errors.pattern">
+          Името трябва да бъде написано на кирилица
+        </div>
+        <div *ngIf="firstNameInput.errors.minlength">
+          Името не трябва да бъде по-малко от 2 символа
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="middleName">Презиме: </label>
 
       <input
+        #middleNameInput="ngModel"
         type="text"
         name="middleName"
         class="form-control"
         id="middleName"
         [(ngModel)]="personAddDto.middleName"
+        required
+        [minlength]="nameMinLength"
+        [maxlength]="nameMaxLength"
+        [pattern]="nameRegex"
+        [ngClass]="{
+          'is-invalid': middleNameInput.touched && middleNameInput.invalid
+        }"
       />
+      <div
+        class="invalid-feedback"
+        *ngIf="middleNameInput.touched && middleNameInput.errors"
+      >
+        <div *ngIf="middleNameInput.errors.required">
+          Полето е задължителено
+        </div>
+        <div *ngIf="middleNameInput.errors.pattern">
+          Презимето трябва да бъде написано на кирилица
+        </div>
+        <div *ngIf="middleNameInput.errors.minlength">
+          Презимето не трябва да бъде по-малко от 2 символа
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="lastName">Фамилия: </label>
 
       <input
+        #lastNameInput="ngModel"
         type="text"
         name="lastName"
         class="form-control"
         id="lastName"
         [(ngModel)]="personAddDto.lastName"
+        required
+        [minlength]="nameMinLength"
+        [maxlength]="nameMaxLength"
+        [pattern]="nameRegex"
+        [ngClass]="{
+          'is-invalid': lastNameInput.touched && lastNameInput.invalid
+        }"
       />
+      <div
+        class="invalid-feedback"
+        *ngIf="lastNameInput.touched && lastNameInput.errors"
+      >
+        <div *ngIf="lastNameInput.errors.required">Полето е задължителено</div>
+        <div *ngIf="lastNameInput.errors.pattern">
+          Фамилията трябва да бъде написано на кирилица
+        </div>
+        <div *ngIf="lastNameInput.errors.minlength">
+          Фамилията не трябва да бъде по-малко от 2 символа
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
@@ -47,7 +109,16 @@
         id="uic"
         [(ngModel)]="personAddDto.uic"
         (ngModelChange)="personService.decodeUic(personAddDto)"
+        required
+        [pattern]="uicRegex"
+        [ngClass]="{
+          'is-invalid': uicInput.touched && uicInput.invalid
+        }"
       />
+      <div class="invalid-feedback" *ngIf="uicInput.touched && uicInput.errors">
+        <div *ngIf="uicInput.errors.required">Полето е задължителено</div>
+        <div *ngIf="uicInput.errors.pattern">Неправилен формат на ЕГН</div>
+      </div>
     </div>
 
     <div class="form-group">
@@ -84,10 +155,15 @@
       <label for="birthPlaceId">Месторождение: </label>
 
       <select
+        #birthPlaceInput="ngModel"
         [(ngModel)]="personAddDto.birthPlaceId"
         class="form-control"
         name="birthPlaceId"
         id="birthPlaceId"
+        required
+        [ngClass]="{
+          'is-invalid': birthPlaceInput.touched && birthPlaceInput.invalid
+        }"
       >
         <option
           *ngFor="let settlement of settlements"
@@ -96,6 +172,15 @@
           {{ settlement.name }}
         </option>
       </select>
+
+      <div
+        class="invalid-feedback"
+        *ngIf="birthPlaceInput.touched && birthPlaceInput.errors"
+      >
+        <div *ngIf="uicInput.errors.required">
+          Месторождението е задължителено
+        </div>
+      </div>
     </div>
 
     <div class="buttons">

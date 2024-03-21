@@ -10,6 +10,8 @@ using SchoolRegisterApp.Models.Enums;
 using SchoolRegisterApp.Repositories.Contracts;
 using SchoolRegisterApp.Repositories.CustomExceptionMessages;
 using SchoolRegisterApp.Repositories.CustomExceptions;
+using SchoolRegisterApp.Repositories.Validations;
+using System.Net;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -29,6 +31,17 @@ namespace SchoolRegisterApp.Repositories.Services
         public async Task AddPersonAsync(PersonDetailsDto personAddDto, HttpContext httpContext)
         {
             var user = await userService.GetCurrentUser(httpContext);
+
+            PersonValidator validator = new PersonValidator();
+            var result = validator.Validate(personAddDto);
+
+            foreach (var failure in result.Errors)
+            {
+                if (failure.CustomState is BadRequestException bre)
+                {
+                    throw bre;
+                }
+            }
 
             DecodeUic(personAddDto);
 
@@ -98,10 +111,21 @@ namespace SchoolRegisterApp.Repositories.Services
                 throw new NotFoundException(ExceptionMessages.InvalidPerson);
             }
 
+            PersonValidator validator = new PersonValidator();
+            var result = validator.Validate(updatedPerson);
+
+            foreach (var failure in result.Errors)
+            {
+                if (failure.CustomState is BadRequestException bre)
+                {
+                    throw bre;
+                }
+            }
+
             DecodeUic(updatedPerson);
 
             mapper.Map(updatedPerson, existingPerson);
-
+            
             var personHistory = new PersonHistory
             {
                 PersonId = updatedPerson.Id,

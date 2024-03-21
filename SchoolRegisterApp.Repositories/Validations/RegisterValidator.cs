@@ -14,13 +14,13 @@ namespace SchoolRegisterApp.Models.Validations
         {
             RuleFor(x => x.Username)
                  .NotNull().WithState(a => new BadRequestException("Името е задължително"))
-                 .MaximumLength(InputLengthMax)
-                 .MinimumLength(InputLengthMin);
+                 .MaximumLength(InputLengthMax).WithState(a => new BadRequestException($"Името не трябва да бъде повече от {InputLengthMax} символа"))
+                 .MinimumLength(InputLengthMin).WithState(a => new BadRequestException($"Името не трябва да бъде по-малко от {InputLengthMin} символа"));
 
             RuleFor(x => x.Password)
                  .NotNull().WithState(a => new BadRequestException("Паролата е задължителна"))
-                 .MaximumLength(InputLengthMax)
-                 .MinimumLength(InputLengthMin);
+                 .MaximumLength(InputLengthMax).WithState(a => new BadRequestException($"Паролата не трябва да бъде повече от {InputLengthMax} символа"))
+                 .MinimumLength(InputLengthMin).WithState(a => new BadRequestException($"Паролата не трябва да бъде по-малко от {InputLengthMin} символа"));
 
             RuleFor(x => x.ConfirmPassword)
                 .NotNull().WithState(a => new BadRequestException("Паролата е задължителна"))

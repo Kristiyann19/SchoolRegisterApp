@@ -6,6 +6,12 @@ import { PersonAddDto } from "../../dtos/person-add-dto";
 import { PersonService } from "../../services/person.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import {
+  InputLengthMax,
+  InputLengthMin,
+  NameRegex,
+  UicRegex,
+} from "../../../app/common/validation-consts";
 
 @Component({
   selector: "app-add-person",
@@ -15,6 +21,11 @@ import { ToastrService } from "ngx-toastr";
 export class AddPersonComponent {
   settlements: SettlementDto[] = [];
   personAddDto: PersonAddDto = new PersonAddDto();
+
+  nameMinLength = InputLengthMin;
+  nameMaxLength = InputLengthMax;
+  nameRegex = NameRegex;
+  uicRegex = UicRegex;
 
   constructor(
     private settlementService: SettlementService,

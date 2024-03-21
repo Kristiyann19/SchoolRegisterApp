@@ -8,6 +8,12 @@ import { catchError, throwError } from "rxjs";
 import { SettlementService } from "../../../settlement/services/settlement.service";
 import { SchoolService } from "../../../school/services/school.service";
 import { SchoolDto } from "../../../school/dtos/school-dto";
+import {
+  InputLengthMax,
+  InputLengthMin,
+  NameRegex,
+  UicRegex,
+} from "../../../app/common/validation-consts";
 
 @Component({
   selector: "app-details-person",
@@ -21,6 +27,11 @@ export class DetailsPersonComponent {
   personId: number;
 
   school: SchoolDto;
+
+  nameMinLength = InputLengthMin;
+  nameMaxLength = InputLengthMax;
+  nameRegex = NameRegex;
+  uicRegex = UicRegex;
 
   constructor(
     private route: ActivatedRoute,
