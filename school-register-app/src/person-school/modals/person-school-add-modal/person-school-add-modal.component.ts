@@ -5,6 +5,7 @@ import { PersonSchoolService } from "../../service/person-school.service";
 import { catchError, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { NgModel } from "@angular/forms";
 
 @Component({
   selector: "app-person-school-add-modal",
@@ -19,6 +20,8 @@ export class PersonSchoolAddModalComponent {
   @Input() schoolName: string;
   @Input() schoolId: number;
   @Input() personId: number;
+
+  today = new Date();
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -42,5 +45,25 @@ export class PersonSchoolAddModalComponent {
         this.activeModal.close();
         this.toastr.success("Успешно добавена длъжност");
       });
+  }
+
+  isDateValid(chosenDateInput: NgModel): boolean {
+    const chosenDate: Date = new Date(chosenDateInput.value);
+
+    // Check if the date is a valid Date object
+    if (isNaN(chosenDate.getTime())) {
+      return false;
+    }
+
+    // Check if the chosen date is after the current date
+    const isAfterToday = chosenDate > this.today;
+
+    // Additional check for expiration date to be after the start date
+    if (chosenDateInput.name === "expirationDateInput") {
+      const startDate: Date = new Date(this.personSchoolAddDto.startDate);
+      return isAfterToday && chosenDate > startDate;
+    }
+
+    return isAfterToday;
   }
 }

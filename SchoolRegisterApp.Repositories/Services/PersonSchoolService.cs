@@ -10,6 +10,8 @@ using SchoolRegisterApp.Repositories.Contracts;
 using SchoolRegisterApp.Models.Dtos.PersonSchoolDtos;
 using SchoolRegisterApp.Repositories.CustomExceptions;
 using SchoolRegisterApp.Repositories.CustomExceptionMessages;
+using SchoolRegisterApp.Repositories.Validations;
+using FluentValidation;
 
 namespace SchoolRegisterApp.Repositories.Services
 {
@@ -33,6 +35,22 @@ namespace SchoolRegisterApp.Repositories.Services
             if (personSchoolAddDto.SchoolId != user.SchoolId)
             {
                 throw new NotFoundException(ExceptionMessages.InvalidSchool);
+            }
+
+            PersonSchoolAddValidator validator = new PersonSchoolAddValidator();
+            var result = validator.Validate(personSchoolAddDto);
+
+            foreach (var failure in result.Errors)
+            {
+                if (failure.CustomState is BadRequestException bre)
+                {
+                    throw bre;
+                }
+            }
+
+            if (personSchoolAddDto.StartDate > personSchoolAddDto.EndDate)
+            {
+                throw new BadRequestException("Началната дата не може да бъде след крайната дата");
             }
 
             var personSchool = mapper.Map<PersonSchool>(personSchoolAddDto);
@@ -69,6 +87,22 @@ namespace SchoolRegisterApp.Repositories.Services
             if (personSchoolUpdateDto.SchoolId != user.SchoolId)
             {
                 throw new NotFoundException(ExceptionMessages.InvalidSchool);
+            }
+
+            PersonSchoolUpdateValidator validator = new PersonSchoolUpdateValidator();
+            var result = validator.Validate(personSchoolUpdateDto);
+
+            foreach (var failure in result.Errors)
+            {
+                if (failure.CustomState is BadRequestException bre)
+                {
+                    throw bre;
+                }
+            }
+
+            if (personSchoolUpdateDto.StartDate > personSchoolUpdateDto.EndDate)
+            {
+                throw new BadRequestException("Началната дата не може да бъде след крайната дата");
             }
 
             var personSchoolToUpdate = await context.PersonSchools

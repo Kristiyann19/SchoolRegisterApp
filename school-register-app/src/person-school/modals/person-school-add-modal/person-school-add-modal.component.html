@@ -47,10 +47,15 @@
   <div class="form-group">
     <label for="position"> Позиция: </label>
     <select
+      #positionInput="ngModel"
       [(ngModel)]="personSchoolAddDto.position"
       class="form-control"
       name="position"
       id="position"
+      required
+      [ngClass]="{
+        'is-invalid': positionInput.touched && positionInput.invalid
+      }"
     >
       <option [ngValue]="1">Математика</option>
       <option [ngValue]="2">География</option>
@@ -60,28 +65,60 @@
       <option [ngValue]="6">Литература</option>
       <option [ngValue]="7">Английски</option>
     </select>
+    <div
+      class="invalid-feedback"
+      *ngIf="positionInput.touched && positionInput.errors"
+    >
+      <div *ngIf="firstNameInput.errors.required">Полето е задължителено</div>
+    </div>
   </div>
   <div class="form-group">
     <label for="startDate"> От дата: </label>
     <input
+      #startDateInput="ngModel"
       type="date"
       id="startDate"
       [(ngModel)]="personSchoolAddDto.startDate"
       name="startDate"
       class="form-control"
       required
+      [ngClass]="{
+        'is-invalid': startDateInput.touched && !isDateValid(startDateInput)
+      }"
     />
+    <div
+      class="invalid-feedback"
+      *ngIf="startDateInput.touched && !isDateValid(startDateInput)"
+    >
+      <div *ngIf="startDateInput?.errors?.required">Полето е задължителено</div>
+      <div *ngIf="!isDateValid(startDateInput)">
+        Началната трябва да бъде след текущата дата
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <label for="endDate"> До дата: </label>
     <input
+      #endDateInput="ngModel"
       type="date"
       id="endDate"
       [(ngModel)]="personSchoolAddDto.endDate"
       name="endDate"
       class="form-control"
       required
+      [ngClass]="{
+        'is-invalid': endDateInput.touched && !isDateValid(endDateInput)
+      }"
     />
+    <div
+      class="invalid-feedback"
+      *ngIf="endDateInput.touched && !isDateValid(endDateInput)"
+    >
+      <div *ngIf="endDateInput?.errors?.required">Полето е задължителено</div>
+      <div *ngIf="!isDateValid(endDateInput)">
+        Крайната трябва да бъде след текущата дата
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="add()">
